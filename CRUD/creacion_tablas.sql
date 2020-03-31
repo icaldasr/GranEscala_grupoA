@@ -41,8 +41,8 @@ create table consultorios(
     descripcion varchar(30),
     id_medico int references medicos(nro_documento),
     id_Ips int references ips(id_ips),
-    fecha_inicial date not null,
-    fecha_final date not null
+    fecha_inicial date,
+    fecha_final date
 );
 
 create table horarios(
