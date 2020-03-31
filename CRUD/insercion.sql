@@ -93,7 +93,6 @@ begin
 end; //
 delimiter ;
 
-
 --funcion agregar consultorio 
 -- (funcion para una sola eps en la base de datos)
 --  retorna 1 si se ejecuta con exito
@@ -128,3 +127,15 @@ begin
     end if;
 END; //
 delimiter ;
+
+
+
+
+
+
+
+delimiter //
+create function agendar_cita (_fecha date, _medico int, _ips varchar(50), id_paciente int)
+    returns int
+begin
+    
