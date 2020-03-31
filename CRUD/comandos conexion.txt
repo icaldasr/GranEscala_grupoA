@@ -3,3 +3,6 @@
 
 -- base de datos
 	mysql -h mysql-historiasclinicas.alwaysdata.net -u  203256 -p historiasclinicas_bd
+
+-- contraseña para todo
+	juancamilo99
