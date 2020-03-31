@@ -41,13 +41,13 @@ create table consultorios(
     descripcion varchar(30),
     id_medico int references medicos(nro_documento),
     id_Ips int references ips(id_ips),
-    fecha_inicial date,
-    fecha_final date
+    fecha_inicial datetime,
+    fecha_final datetime
 );
 
 create table horarios(
     nro_cita int primary key,
-    fecha date not null,
+    fecha datetime not null,
     id_consultorio int references consultorios(nro_consultorio),
     documento_paciente int not null
 );
