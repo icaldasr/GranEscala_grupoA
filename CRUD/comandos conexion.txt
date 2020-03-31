@@ -1,0 +1,5 @@
+-- servidor
+	ssh historiasclinicas@ssh-historiasclinicas.alwaysdata.net
+
+-- base de datos
+	mysql -h mysql-historiasclinicas.alwaysdata.net -u  203256 -p historiasclinicas_bd
