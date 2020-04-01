@@ -146,6 +146,11 @@ delimiter ;
 
 
 
+
+
+
+--FUNCIONES PARA AGENDAR CITAS
+
 -- funcion cita maxima
 --  retorna el numero maximo + 1 de las citas de un consultorio
 delimiter //
@@ -164,9 +169,11 @@ END; //
 delimiter ;
 
 
-
-
-
+-- funcion agendar citas 
+--  retorna 1 si la transaccion se realizo correctamente
+--  retorna 0 si el medico con esta en l ips indicada o el consultorio no esta atendiendo
+--  retorna 2 si el medico no existe
+--  retorna 3 si la ips no existe
 delimiter //
 create function agendar_cita (_fecha date, _medico int, _ips varchar(50), id_paciente int)
     returns int
@@ -175,6 +182,7 @@ begin
     declare id_med int;
     declare med_ips int;
     declare nro_cons int;
+    declare cita_max int;
     select id_ips into _id_ips from ips where nombre = _ips;
     if _id_ips is not Null then
         select nro_documento into id_med from medicos where nro_documento = _medico;
@@ -183,5 +191,19 @@ begin
             inner join medicos on (consultorios.id_medico = medicos.nro_documento) 
             where medicos.nro_documento = _medico and consultorio.fecha_inicial is not Null;
             if nro_cons is not Null then
-
+                select cita_maximo(nro_cons) into cita_max;
+                insert into horarios (nro_cita, fecha, id_consultorio, documento_paciente)
+                values (cita_max, _fecha, nro_cons, id_paciente);
+                return 1;
+            else
+                return 0;
+            end if;
+        else
+            return 2;
+        end if;
+    else
+        return 3;
+    end if;
+END; //
+delimiter ;
 
