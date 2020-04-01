@@ -36,6 +36,11 @@ delimiter ;
 
 
 
+
+
+
+
+
 --funcion agregar ips
 --  retorna 1 si se realizo el registro 
 --  retorna 2 si la ips ya existe
@@ -68,6 +73,14 @@ begin
     end if;
 END; //
 delimiter ;
+
+
+
+
+
+
+
+
 
 
 
@@ -133,9 +146,42 @@ delimiter ;
 
 
 
+-- funcion cita maxima
+--  retorna el numero maximo + 1 de las citas de un consultorio
+delimiter //
+create function cita_maximo(_id_cons int)
+    returns int
+begin
+    declare cita int;
+    select max(nro_cita) into cita from horarios where id_consultorio = _id_cons;
+    if cita is Null then
+        return 1;
+    else
+        set cita = cita + 1;
+        return cita;
+    end if;
+END; //
+delimiter ;
+
+
+
+
 
 delimiter //
 create function agendar_cita (_fecha date, _medico int, _ips varchar(50), id_paciente int)
     returns int
 begin
-    
+    declare _id_ips int;
+    declare id_med int;
+    declare med_ips int;
+    declare nro_cons int;
+    select id_ips into _id_ips from ips where nombre = _ips;
+    if _id_ips is not Null then
+        select nro_documento into id_med from medicos where nro_documento = _medico;
+        if id_med is NOT Null then
+            select nro_consultorio into nro_cons from consultorios inner join ips on (consultorios.id_Ips = ips.id_ips) 
+            inner join medicos on (consultorios.id_medico = medicos.nro_documento) 
+            where medicos.nro_documento = _medico and consultorio.fecha_inicial is not Null;
+            if nro_cons is not Null then
+
+
