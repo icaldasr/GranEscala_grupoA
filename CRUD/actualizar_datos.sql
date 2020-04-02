@@ -37,3 +37,8 @@ begin
         else
             return 0;
         end if;
+    else
+        return 0;
+    end if;
+end; //
+delimiter ;
