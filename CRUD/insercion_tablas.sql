@@ -4,12 +4,13 @@
 --  retorna 0 si la eps o la especializacion no existen 
 delimiter //
 create function ingresar_medico (_nro_documento int, _eps varchar(50), _nombre varchar(50), 
-                                 _apellido varchar(50), _espc varchar(50))
+                                 _apellido varchar(50), _espc varchar(50), _contra varchar(10), _correo varchar(100))
     returns int
 begin
     declare _id_eps int;
     declare espc int;
     declare id_med int;
+    declare corre varchar(100);
     
     select id_eps into _id_eps from eps where nombre = _eps;
     select id_especializacion into espc from especializaciones where nombre = _espc;
@@ -17,9 +18,17 @@ begin
         if espc IS NOT Null then
             select nro_documento into id_med from medicos where nro_documento = _nro_documento;
             if id_med IS Null then
-                insert into medicos (nro_documento, id_Eps, nombres, apellido, id_espc) 
-                values (_nro_documento, _id_eps, _nombre, _apellido, espc);
-                return 1;
+                select correo into corre from login where correo = _correo;
+                if corre IS Null then
+                    insert into medicos (nro_documento, id_Eps, nombres, apellido, id_espc) 
+                    values (_nro_documento, _id_eps, _nombre, _apellido, espc);
+
+                    insert into login (correo, contrasena, id_medico)
+                    values (_correo, _contra, _nro_documento);
+                    return 1;
+                else
+                    return 3;
+                end if;
             else
                 return 2;
             end if;
