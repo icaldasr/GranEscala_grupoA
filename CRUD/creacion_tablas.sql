@@ -51,3 +51,9 @@ create table horarios(
     id_consultorio int references consultorios(nro_consultorio),
     documento_paciente int not null
 );
+
+create table login(
+    correo varchar(100) primary key,
+    contrasena varchar(10),
+    id_medico int references medicos(nro_documento)
+);
