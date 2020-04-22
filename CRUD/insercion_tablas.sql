@@ -18,17 +18,22 @@ begin
         if espc IS NOT Null then
             select nro_documento into id_med from medicos where nro_documento = _nro_documento;
             if id_med IS Null then
-                select correo into corre from login where correo = _correo;
-                if corre IS Null then
-                    insert into login (correo, contrasena, tipo)
-                    values (_correo, _contra, 'medico');
+                select nro_documento into id_med from administrador where nro_documento = _nro_documento;
+                if id_med IS Null then
+                    select correo into corre from login where correo = _correo;
+                    if corre IS Null then
+                        insert into login (correo, contrasena, tipo)
+                        values (_correo, _contra, 'medico');
 
-                    insert into medicos (nro_documento, id_Eps, nombres, apellido, id_espc, Correo) 
-                    values (_nro_documento, _id_eps, _nombre, _apellido, espc, _correo);
+                        insert into medicos (nro_documento, id_Eps, nombres, apellido, id_espc, Correo) 
+                        values (_nro_documento, _id_eps, _nombre, _apellido, espc, _correo);
 
-                    return 1;
+                        return 1;
+                    else
+                        return 3;
+                    end if;
                 else
-                    return 3;
+                    return 2;
                 end if;
             else
                 return 2;
@@ -213,6 +218,53 @@ begin
         end if;
     else
         return 3;
+    end if;
+END; //
+delimiter ;
+
+
+
+
+
+
+
+
+
+
+--funcion ingresar administrador
+--retorna 1 si la insercion fue realizada
+--retorna 0 si el correo ya existe
+--retorna 2 si el admin ya existe (nro de documento)
+
+delimiter //
+create function ingresar_admin (_id_admin int, _nombre varchar(20), _apellido varchar(20), _contra varchar(10), 
+                                _correo varchar(100))
+    returns int
+begin
+    declare id_adm int;
+    declare corre varchar(100);
+
+    select nro_documento into id_adm from administrador where nro_documento = _id_admin;
+    if id_adm IS Null then
+        select nro_documento into id_adm from medicos where nro_documento = _id_admin;
+        if id_adm IS Null then
+            select correo into corre from login where correo = _correo;
+            if corre IS Null then
+                insert into login (correo, contrasena, tipo)
+                values (_correo, _contra, 'administrador');
+
+                insert into administrador (nro_documento, nombres, apellido, Correo)
+                values (_id_admin, _nombre, _apellido, _correo);
+
+                return 1;
+            else
+                return 0;
+            end if;
+        else
+            return 2;
+        end if;
+    else
+        return 2;
     end if;
 END; //
 delimiter ;
