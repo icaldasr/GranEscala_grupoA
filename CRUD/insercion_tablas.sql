@@ -20,11 +20,12 @@ begin
             if id_med IS Null then
                 select correo into corre from login where correo = _correo;
                 if corre IS Null then
-                    insert into medicos (nro_documento, id_Eps, nombres, apellido, id_espc) 
-                    values (_nro_documento, _id_eps, _nombre, _apellido, espc);
+                    insert into login (correo, contrasena, tipo)
+                    values (_correo, _contra, 'medico');
 
-                    insert into login (correo, contrasena, id_medico)
-                    values (_correo, _contra, _nro_documento);
+                    insert into medicos (nro_documento, id_Eps, nombres, apellido, id_espc, Correo) 
+                    values (_nro_documento, _id_eps, _nombre, _apellido, espc, _correo);
+
                     return 1;
                 else
                     return 3;
