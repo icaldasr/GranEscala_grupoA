@@ -25,7 +25,15 @@ create table medicos(
     id_Eps int references eps(id_eps),
     nombres varchar(20),
     apellido varchar(30),
-    id_espc int references especializaciones(id_especializacion)
+    id_espc int references especializaciones(id_especializacion),
+    Correo varchar(100) references login(correo)
+);
+
+create table administrador(
+    nro_documento int primary key,
+    nombres varchar(20),
+    apellido varchar(30),
+    Correo varchar(100) references login(correo)
 );
 
 create table ips(
@@ -55,5 +63,5 @@ create table horarios(
 create table login(
     correo varchar(100) primary key,
     contrasena varchar(10),
-    id_medico int references medicos(nro_documento)
+    tipo varchar(30) Not null
 );

@@ -4,5 +4,8 @@
 -- base de datos
 	mysql -h mysql-historiasclinicas.alwaysdata.net -u  203256 -p historiasclinicas_bd
 
+-- conexion local
+	sudo mysql -u root -p
+
 -- contraseña para todo
 	juancamilo99
