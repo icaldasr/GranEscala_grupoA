@@ -24,16 +24,43 @@ class Sistema():
             self.citas = []
             self.solicitudes = []
             self.dataBase = Gestor()
+            self.ensesion = []
+            
 
 
     def login(self, nomusr, psw):
         ##verificar con base de datos si existe 
-        if nomusr == "otoya":
-            return 1
-        elif nomusr == "oviedo": 
-            return 2
+        if (nomusr != None) and (psw != None):
+            rol = None
+            tipoDoc = None
+            doc = None
+            temp = self.dataBase.getLoginInfo()  ## join entre admins(1) y doctores(2)
+            if temp != None:
+                for i in temp:
+                    if i[1] == nomusr and i[2] == psw:  #i[0] nombre i[1] correo i[2] psw i[3] tipousr
+                        rol = i[3]
+                        break
+                
+                if rol == "administrador":
+                    for x in self.administradores:
+                        if x.getUsuario() == nomusr and x.getClave() == psw:
+                            self.ensesion.append(x)
+                    return 1
+                elif rol == "medico": 
+                    for x in self.doctores:
+                        if x.getUsuario() == nomusr and x.getClave() == psw:
+                            self.ensesion.append(x)
+                    return 2
+                else: 
+                    return -1
+            else:
+                return -1
         else:
             return -1
+
+
+        
+        
 
     def agregarDoctor(self, doctor):
         self.doctores.append(doctor)
