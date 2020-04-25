@@ -186,11 +186,11 @@ delimiter ;
 
 -- funcion agendar citas 
 --  retorna 1 si la transaccion se realizo correctamente
---  retorna 0 si el medico con esta en l ips indicada o el consultorio no esta atendiendo
+--  retorna 0 si el medico no con esta en la ips indicada o el consultorio no esta atendiendo
 --  retorna 2 si el medico no existe
 --  retorna 3 si la ips no existe
 delimiter //
-create function agendar_cita (_fecha date, _medico int, _ips varchar(50), id_paciente int)
+create function agendar_cita (_fecha datetime, _medico int, _ips varchar(50), id_paciente int)
     returns int
 begin
     declare _id_ips int;
@@ -204,7 +204,7 @@ begin
         if id_med is NOT Null then
             select nro_consultorio into nro_cons from consultorios inner join ips on (consultorios.id_Ips = ips.id_ips) 
             inner join medicos on (consultorios.id_medico = medicos.nro_documento) 
-            where medicos.nro_documento = _medico and consultorio.fecha_inicial is not Null;
+            where medicos.nro_documento = _medico and consultorios.fecha_inicial is not Null;
             if nro_cons is not Null then
                 select cita_maximo(nro_cons) into cita_max;
                 insert into horarios (nro_cita, fecha, id_consultorio, documento_paciente)
