@@ -71,10 +71,10 @@ begin
     select id_ips into _id_eps from ips where id_ips = _id_eps;
     if _idips IS Null then
         select id_eps into _id_eps from eps where nombre = _eps;
-        select codigo_postal into _id_ciudad from ciudades where nombre = _ciudad;
+        select codigo_postal into _id_ciudad from ciudad where nombre = _ciudad;
         if _id_ciudad IS NOT Null then
             if _id_eps IS NOT Null then
-                insert into ips (id_ips, nombre, direccion, _id_ciudad, id_Eps)
+                insert into ips (id_ips, nombre, direccion, id_ciudad, id_Eps)
                 values (_id_ips, _nombre, _direccion, _id_ciudad, _id_eps);
                 return 1;
             else
@@ -128,21 +128,22 @@ delimiter ;
 --  retorna 2 si la ips no existe
 --  retorna 3 si el medico ya posee consultorio
 delimiter //
-create function ingresar_consultorio (_descrip varchar(50), _medico int, _ips varchar(50))
+create function ingresar_consultorio (_descrip varchar(50), _medico int, _ips varchar(50), _fecha_inicial datetime, _fecha_final datetime)
     returns int
 begin
     declare _id_ips int;
     declare _id_cons int;
     declare id_med int;
+    declare id_med2 int;
     select id_ips into _id_ips from ips where nombre = _ips;
     if _id_ips is NOT Null then
         select consultorio_maximo(_id_ips) into _id_cons;
         select nro_documento into id_med from medicos where nro_documento = _medico;
         if id_med is NOT Null then
-            select id_medico into id_med from consultorios where id_medico = _medico;
-            if id_med is Null then
+            select id_medico into id_med2 from consultorios where id_medico = _medico;
+            if id_med2 is Null then
                 insert into consultorios (nro_consultorio, descripcion, id_medico, id_Ips, fecha_inicial, fecha_final)
-                values (_id_cons, _descrip, _medico, _id_ips, Null, Null);
+                values (_id_cons, _descrip, _medico, _id_ips, _fecha_inicial, _fecha_final);
                 return 1;
             else
                 return 3;
