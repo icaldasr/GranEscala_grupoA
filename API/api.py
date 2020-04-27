@@ -11,6 +11,11 @@ cursor = conexion.cursor()
 app = Flask(__name__)
 
 
+
+
+
+
+
 @app.route('/horarios/<string:ips>/<string:espc>')
 def obtener_horarios(ips, espc):
     global cursor
@@ -31,6 +36,39 @@ def obtener_horarios(ips, espc):
         return json.dumps(horarios)
     else:
         return json.dumps({"mensaje":"no se encontraron resultados"})
+
+
+
+
+
+@app.route('/ips')
+def obtener_ips():
+    global cursor
+    cursor.execute(
+        """
+        select id_ips, nombre, direccion from ips
+        """
+    )
+    consulta = cursor.fetchall()
+    if len(consulta) != 0:
+        temp = list()
+        ips = {}
+        contador = 0
+        while contador < len(consulta):
+            plantilla = {
+                'id ips': None,
+                'nombre': None,
+                'direccion': None
+            }
+            plantilla['nombre'] = consulta[contador][1]
+            plantilla['direccion'] = consulta[contador][2]
+            plantilla['id ips'] = consulta[contador][0]
+            temp.append(plantilla)
+            contador = contador + 1
+        ips['ips'] = temp
+        return json.dumps(ips)
+    else:
+        return json.dumps({'mensaje':"no hay ips en la base de datos"})
 
 
 
