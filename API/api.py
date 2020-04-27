@@ -16,6 +16,9 @@ app = Flask(__name__)
 
 
 
+
+
+
 @app.route('/horarios/<string:ips>/<string:espc>')
 def obtener_horarios(ips, espc):
     global cursor
@@ -36,6 +39,13 @@ def obtener_horarios(ips, espc):
         return json.dumps(horarios)
     else:
         return json.dumps({"mensaje":"no se encontraron resultados"})
+
+
+
+
+
+
+
 
 
 
@@ -69,6 +79,10 @@ def obtener_ips():
         return json.dumps(ips)
     else:
         return json.dumps({'mensaje':"no hay ips en la base de datos"})
+
+
+
+
 
 
 
@@ -120,6 +134,10 @@ def horarios_paciente(documento):
 
 
 
+
+
+
+
 @app.route('/horarios/<int:nro_cita>', methods=['DELETE'])
 def eliminar_cita(nro_cita):
     global cursor, conexion
@@ -141,10 +159,6 @@ def eliminar_cita(nro_cita):
         return json.dumps({'mensaje': 'cita eliminada'})
     else:
         return json.dumps({'mensaje': 'la cita solicitada no exite'})
-
-
-
-
 
 
 if __name__ == '__main__':
