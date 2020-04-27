@@ -1,9 +1,7 @@
 import pymysql
 import json
 from flask import Flask
-from datetime import datetime
-from datetime import timedelta
-from obtener_horarios import obtener_consultorios
+from obtener_horarios import obtener_consultorios, generar_horarios
 
 #conexion base de datos
 conexion = pymysql.Connect(host='mysql-historiasclinicas.alwaysdata.net', 
@@ -27,18 +25,10 @@ def obtener_horarios(ips, espc):
     )
     consulta = cursor.fetchall()
     if len(consulta) != 0:
-        #variables obtencion de consultorios
         consultorios = obtener_consultorios(consulta)
-        #variables resultado final
-        horarios = {}
-        contador2 = 0
-        contador = 0
-        print(consultorios)
-        # while contador < len(consultorios):
-        #     while contador2 < len(consulta):
-        #         if consulta[contador2][0] == consultorios[contador]:
+        horarios = generar_horarios(consultorios, consulta)
 
-        return 'a'      
+        return json.dumps(horarios)
     else:
         return json.dumps({"mensaje":"no se encontraron resultados"})
 
