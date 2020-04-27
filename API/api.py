@@ -75,6 +75,43 @@ def obtener_ips():
 
 
 
+@app.route('/horarios/<int:documento>')
+def horarios_paciente(documento):
+    global cursor
+    cursor.execute(
+        """
+        select nro_cita, nro_consultorio, horarios.fecha, ips.nombre, ips.direccion, medicos.nombres, especializaciones.nombre from horarios
+        inner join consultorios on (horarios.id_consultorio = consultorios.nro_consultorio) 
+        inner join ips on (consultorios.id_Ips = ips.id_ips) inner join medicos on (consultorios.id_medico = medicos.nro_documento)
+        inner join especializaciones on (especializaciones.id_especializacion = medicos.id_espc)
+        where horarios.documento_paciente = %s order by horarios.fecha
+        """,
+        (documento)
+    )
+    consulta = cursor.fetchall()
+    if len(consulta) != 0:
+        citas = {}
+        contador = 0
+        while contador < len(consulta):
+            plantilla = {
+                'fecha': consulta[contador][2].strftime("%d-%b-%Y (%H:%M:%S)"),
+                'ips': consulta[contador][3],
+                'direccion': consulta[contador][4],
+                'medico': consulta[contador][5],
+                'especializacion': consulta[contador][6]
+            }
+            citas[consulta[contador][0]] = plantilla
+            contador = contador + 1
+        return json.dumps(citas)
+
+    else:
+        return json.dumps({'mensaje': 'no hay citas para este paciente'})
+
+
+
+
+
+
 
 
 
