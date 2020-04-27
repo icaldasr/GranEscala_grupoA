@@ -75,6 +75,9 @@ def obtener_ips():
 
 
 
+
+
+
 @app.route('/horarios/<int:documento>')
 def horarios_paciente(documento):
     global cursor
@@ -109,6 +112,35 @@ def horarios_paciente(documento):
 
 
 
+
+
+
+
+
+
+
+
+@app.route('/horarios/<int:nro_cita>', methods=['DELETE'])
+def eliminar_cita(nro_cita):
+    global cursor, conexion
+    cursor.execute(
+        """
+        select nro_cita from horarios where nro_cita = %s
+        """,
+        (nro_cita)
+    )
+    verificar = cursor.fetchall()
+    if len(verificar) != 0:
+        cursor.execute(
+            """
+            delete from horarios where nro_cita = %s
+            """,
+            (nro_cita)
+        )
+        conexion.commit()
+        return json.dumps({'mensaje': 'cita eliminada'})
+    else:
+        return json.dumps({'mensaje': 'la cita solicitada no exite'})
 
 
 
