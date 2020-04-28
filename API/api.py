@@ -35,8 +35,10 @@ def obtener_horarios(ips, espc):
     if len(consulta) != 0:
         consultorios = obtener_consultorios(consulta)
         horarios = generar_horarios(consultorios, consulta)
-
-        return json.dumps(horarios)
+        if len(horarios) != 0:
+            return json.dumps(horarios)
+        else:
+            return json.dumps({"mensaje": "no hay horarios disponibles"})
     else:
         return json.dumps({"mensaje":"no se encontraron resultados"})
 

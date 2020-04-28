@@ -64,18 +64,19 @@ def generar_horarios(_consultorios, _consulta):
                 if verificar_fecha(_consulta[contador2][3], temp) == True:
                     temp.remove(_consulta[contador2][3])
             contador2 = contador2 + 1
-        _info = info_consultorio(_consultorios[contador1], _consulta)
-        contador3 = 0
-        h_temp = list()
-        while contador3 < len(temp):
-            plantilla = {
-                'nombre doctor': _info[2], 
-                'documento doctor': _info[1], 
-                'fecha cita': temp[contador3].strftime("%d-%b-%Y %H:%M:%S")
-            }
-            h_temp.append(plantilla)
-            contador3 = contador3 + 1
-        _horarios[_info[0]] = h_temp
+        if len(temp) != 0:
+            _info = info_consultorio(_consultorios[contador1], _consulta)
+            contador3 = 0
+            h_temp = list()
+            while contador3 < len(temp):
+                plantilla = {
+                    'nombre doctor': _info[2], 
+                    'documento doctor': _info[1], 
+                    'fecha cita': temp[contador3].strftime("%d-%b-%Y %H:%M:%S")
+                }
+                h_temp.append(plantilla)
+                contador3 = contador3 + 1
+            _horarios[_info[0]] = h_temp
         contador1 = contador1 + 1
     return _horarios
 
