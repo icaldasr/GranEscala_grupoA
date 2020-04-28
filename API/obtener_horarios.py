@@ -71,10 +71,8 @@ def generar_horarios(_consultorios, _consulta):
             plantilla = {
                 'nombre doctor': _info[2], 
                 'documento doctor': _info[1], 
-                'fecha cita': None
+                'fecha cita': temp[contador3].strftime("%d-%b-%Y %H:%M:%S")
             }
-            fech = temp[contador3].strftime("%d-%b-%Y (%H:%M:%S)")
-            plantilla['fecha cita'] = fech
             h_temp.append(plantilla)
             contador3 = contador3 + 1
         _horarios[_info[0]] = h_temp

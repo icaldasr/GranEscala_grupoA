@@ -66,16 +66,11 @@ def obtener_ips():
         contador = 0
         while contador < len(consulta):
             plantilla = {
-                'id ips': None,
-                'nombre': None,
-                'direccion': None
+                'nombre': consulta[contador][1],
+                'direccion': consulta[contador][2]
             }
-            plantilla['nombre'] = consulta[contador][1]
-            plantilla['direccion'] = consulta[contador][2]
-            plantilla['id ips'] = consulta[contador][0]
-            temp.append(plantilla)
+            ips[consulta[contador][0]] = plantilla
             contador = contador + 1
-        ips['ips'] = temp
         return json.dumps(ips)
     else:
         return json.dumps({'mensaje':"no hay ips en la base de datos"})
