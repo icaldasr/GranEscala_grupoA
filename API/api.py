@@ -1,6 +1,7 @@
 import pymysql
 import json
-from flask import Flask
+from datetime import datetime
+from flask import Flask, request
 from obtener_horarios import obtener_consultorios, generar_horarios
 
 #conexion base de datos
@@ -191,6 +192,55 @@ def eliminar_cita(nro_cita):
         return json.dumps({'mensaje': 'cita eliminada'})
     else:
         return json.dumps({'mensaje': 'la cita solicitada no exite'})
+
+
+
+
+
+
+
+
+
+
+
+
+@app.route('/horarios', methods=['POST'])
+def agendar_cita():
+    global cursor, conexion
+    datos = request.json
+    temp = list(datos.keys())
+    id_paciente = int(temp[0])
+    temp = datos[temp[0]]
+    fecha = temp["fecha"]
+    fecha = datetime.strptime(fecha, '%m/%d/%y %H:%M:%S')
+    id_medico = int(temp["medico"])
+    cursor.execute(
+        """
+        select agendar_cita(%s, %s, %s, %s)
+        """,
+        (fecha, id_medico, temp["ips"], id_paciente)
+    )
+    consulta = cursor.fetchall()
+    consulta = consulta[0][0]
+    conexion.commit()
+    if consulta == 1:
+        return json.dumps({"mensaje": "cita agendada correctamente"})
+    elif consulta == 0:
+        return json.dumps({"mensaje": "el medico no se encuentra en la ips"})
+    elif consulta == 2:
+        return json.dumps({"mensaje": "el medico no existe"})
+    else:
+        return json.dumps({"mensaje": "la ips no existe"})
+
+
+
+
+
+
+
+
+
+
 
 
 if __name__ == '__main__':
