@@ -101,10 +101,27 @@
         entradas: recive un json con el siguiente formato
             {
                 documento paciente: {
-                    fecha: "dia-mes-año hora-minuto-segundo",
-                    documento medico: "documento",
-                    nombre ips: "ips 1",
+                    fecha: "mes/dia/año hora:minuto:segundo",
+                    medico: "documento",
+                    ips: "ips 1",
                 }
             }
         ruta: http://dominio.com/cita
         salidas: retorna un mensaje de confirmacion o de error
+
+
+
+
+
+    * obtener especializaciones por ips:
+        metodo: GET
+        entradas: recive el nombre de la ips como string
+        ruta: http://dominio.com/ips/<string:nombre_ips>
+        salidas: retorna un json con el siguiente formato
+
+            {
+                "nombre ips": [
+                    especializacion 1,
+                    especializacion 2
+                ]
+            }
