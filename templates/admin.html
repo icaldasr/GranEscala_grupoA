@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>  
+	<meta charset="utf-8">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+	<link rel="stylesheet"  type= "text/css" href= "{{ url_for('static',filename='styles/registrar.css') }}">
+	<link rel="stylesheet"  type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
+    
+	<link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+
+
+
+
+<!-- borrar: -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="CustomStyles.css" rel="stylesheet" />
+
+<!--   hasta aqui -->
+
+
+</head>
+<body>
+	<title>Admin</title>
+
+	<header>
+
+		<nav>
+			<ul class="no-lista margen-abajo">
+
+				<li class="col-md-2 inline-block espacio-arriba espacio-izq"><h1 align="left">BIENVENIDO:</h1></li>
+				<li class=" col-md-7 inline-block espacio-arriba agregarEspacioizq "><h1 align="left">EPS SURA</h1></li>
+            	<li class="col-md-2 inline-block "><a href="/logout"><p style="color:black" align="right">Cerrar Sesion</p></a></li>
+
+
+			</ul>
+
+		</nav>
+
+        
+	</header>
+
+	&ensp;
+
+
+	<div class="agregarEspacioizq espacio-arriba2 " >
+		<p class="inline-block">NOMBRE:</p>
+		<p class="inline-block espacio-texto2" >Andres Felipe Salazar</p>
+
+	</div>
+    &ensp;
+
+
+    <div class="agregarEspacioizq" >
+
+		<p class="inline-block">CORREO:</p>
+		<p class="inline-block espacio-texto2" >elmo@epsSura.com</p>
+
+	</div>
+
+	<a href="/Buscar"><button type="submit" class="btn btn-outline-primary agregarEspacioizq espacio-arriba2" value="call_flask_funtion">Buscar usuario</button></a>
+	<a href="/registrarDoctor"><button type="submit" class="btn btn-outline-primary espacio-botones espacio-arriba2" value="call_flask_funtion">Registrar doctor</button></a>
+	<a href="/registrarPaciente"><button type="submit" class="btn btn-outline-primary espacio-botones espacio-arriba2" value="call_flask_funtion">Registrar paciente</button></a>
+
+
+
+</body>
+
+</html>

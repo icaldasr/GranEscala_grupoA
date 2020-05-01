@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <link rel="stylesheet" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
+    crossorigin="anonymous">
+    <link rel="stylesheet"  type= "text/css" href= "{{ url_for('static',filename='styles/registrar.css') }}">
+	<link rel="stylesheet"  type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+
+
+
+
+<!-- borrar: -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="CustomStyles.css" rel="stylesheet" />
+<title>Buscar</title>
+
+</head>
+<body>
+    <header>
+        <nav >
+            <ul class="no-lista margen-abajo">
+    
+    <!--             <div class="col-md-5 inline-block "><a href="index.html"><img src="logo_infree1.png" width="10px" height="50%px" align="left" padding = "0px 0px 0px 0px"></a></div> -->
+                
+                <li class="col-md-11 inline-block espacio-arriba espacio-izq"><h1 align="left">BUSCAR:</h1></li>
+    
+                <!-- <li class="col-md-1 inline-block pacifico margen "><a href="index.html" class="terracota">INICIO</a></li> -->
+            <!-- 	<li class="col-md-1 inline-block margen"><a href="contacto.html">NOSOTROS </a></li>
+                <li class="col-md-1 inline-block margen"><a href="menu.html">PORTAFOLIO</a></li>
+                <li class="col-md-1 inline-block margen"><a href="menu.html">SERVICIOS</a></li>
+                <li class="col-md-1 inline-block margen"><a href="menu.html">ESCRIBENOS</a></li> -->
+         
+                <li class="inline-block"><a href="#"><p style="color:black" align="right">Volver</p></a></li>
+    <!-- 			<li class="col-md-1 inline-block margen"><a href="menu.html">BLOG</a></li>
+     -->
+    
+            </ul>
+    
+        </nav>
+    </header>
+    &ensp;
+    <div class="agregarEspacioizq espacio-arriba2">
+        
+        DOCUMENTO ID:  &emsp; <input type="text" name="DocumentoIdentidad" class=" inline-block espacio-texto2 ">
+        
+    </div>
+    &ensp;
+
+    <div class="agregarEspacioizq" >
+
+        CODIGO:  &emsp; <input type="text" name="Codigo" class=" inline-block espacio-texto3">
+        
+    </div>
+
+    &ensp;
+
+    <div class="agregarEspacioizq">
+
+        CORREO:  &emsp; <input type="text" name="Correo" class="inline-block espacio-texto3">
+        
+    </div>
+
+    
+
+
+    <button type="button" class="btn btn-outline-primary agregarEspacioizq espacio-arriba2">Buscar</button>
+    <button type="button" class="btn btn-outline-primary espacio-botones espacio-arriba2">MostrarHC</button>
+    <button type="button" class="btn btn-outline-primary espacio-botones espacio-arriba2">Eliminar</button>
+    <button type="button" class="btn btn-outline-primary espacio-botones espacio-arriba2">Atras</button>
+
+
+
+
+
+    
+</body>
+
+</html>
