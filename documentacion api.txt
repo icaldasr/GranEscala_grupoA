@@ -125,3 +125,21 @@
                     especializacion 2
                 ]
             }
+
+
+
+
+
+    * solicitud cambio de cita:
+    metodo: POST
+    entradas: recive un json con el siguiente formato
+        {
+            documento paciente: {
+                fecha: "mes/dia/año hora:minuto:segundo",
+                medico: "documento",
+                ips: "ips 1",
+            }
+        }
+    ruta: http://thawing-stream-48846.herokuapp.com/solicitud
+    salidas: retorna un mensaje de erro en el caso de que el cambio solicitado no sea posible, o un 
+    mensaje de confirmacion 
