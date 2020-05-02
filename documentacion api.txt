@@ -95,7 +95,6 @@
 
 
 
-
     * agendar cita:
         metodo: POST
         entradas: recive un json con el siguiente formato
