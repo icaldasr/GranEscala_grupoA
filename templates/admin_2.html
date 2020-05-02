@@ -7,8 +7,12 @@
     href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
     crossorigin="anonymous">
+    
+
     <link rel="stylesheet"  type= "text/css" href= "{{ url_for('static',filename='styles/registrar.css') }}">
-	<link rel="stylesheet"  type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
+    <link rel="stylesheet"  type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
+
+
     <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
@@ -21,10 +25,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="CustomStyles.css" rel="stylesheet" />
-<title>Buscar</title>
+
 
 </head>
 <body>
+
+    <title>Buscar</title>
     <header>
         <nav >
             <ul class="no-lista margen-abajo">
@@ -39,7 +45,6 @@
                 <li class="col-md-1 inline-block margen"><a href="menu.html">SERVICIOS</a></li>
                 <li class="col-md-1 inline-block margen"><a href="menu.html">ESCRIBENOS</a></li> -->
          
-                <li class="inline-block"><a href="#"><p style="color:black" align="right">Volver</p></a></li>
     <!-- 			<li class="col-md-1 inline-block margen"><a href="menu.html">BLOG</a></li>
      -->
     
@@ -69,13 +74,13 @@
         
     </div>
 
-    
 
 
-    <button type="button" class="btn btn-outline-primary agregarEspacioizq espacio-arriba2">Buscar</button>
-    <button type="button" class="btn btn-outline-primary espacio-botones espacio-arriba2">MostrarHC</button>
-    <button type="button" class="btn btn-outline-primary espacio-botones espacio-arriba2">Eliminar</button>
-    <button type="button" class="btn btn-outline-primary espacio-botones espacio-arriba2">Atras</button>
+
+    <a href="/Buscar"><button type="submit" class="btn btn-outline-primary agregarEspacioizq espacio-arriba2" value="call_flask_funtion">Buscar</button></a>
+    <a href="/MostrarHC"><button type="submit" class="btn btn-outline-primary espacio-botones espacio-arriba2" value="call_flask_funtion">MostrarHC</button></a>
+    <a href="/Eliminar"><button type="submit" class="btn btn-outline-primary agregarEspacioizq espacio-arriba2" value="call_flask_funtion">Eliminar</button></a>
+    <a href="/Atras"><button type="submit" class="btn btn-outline-primary espacio-botones espacio-arriba2" value="call_flask_funtion">Atras</button></a>
 
 
 

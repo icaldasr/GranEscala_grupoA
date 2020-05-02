@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>  
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet"  type= "text/css" href= "{{ url_for('static',filename='styles/registrar.css') }}">
+    <link rel="stylesheet"  type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
+    
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+
+
+<!-- borrar: -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="CustomStyles.css" rel="stylesheet" />
+
+
+    
+
+</head>
+<body>
+  <title>REGISTRO</title>
+ 
+    <header>
+        <nav>
+          <ul class="no-lista margen-abajo">
+
+            <li class="col-md-6 inline-block espacio-arriba espacio-izq"><h1 align="left"><b><u>Registrar Médico:</u></b></h1></li>
+            
+          </ul>
+	       </nav>
+    </header>
+
+    &ensp;
+
+
+    <div class="agregarEspacioizq " >
+
+      <p class="inline-block">Nombre y Apellido:</p>
+      <input type="text" name="nombreyapellido" class=" espacioi2 inline-block ">
+
+    </div>
+
+
+    <div class="agregarEspacioizq " >
+
+      <p class="inline-block">DNI:</p>
+      <input type="text" name="dni" class=" center2 inline-block ">
+
+    </div>
+
+    <div class="agregarEspacioizq " >
+
+      <label class="inline-block" for="start">Fecha de Nacimiento:</label>
+
+      <input class="inline-block espacioi" type="date" id="start" name="trip-start" value="2020-07-22" min="2020-01-01" max="2020-12-31">
+
+    </div>
+
+
+    &ensp;
+
+
+    <div class="agregarEspacioizq " >
+
+      <p class="inline-block">Telefono:</p>
+      <input type="text" name="tel" class=" espacio-tel inline-block ">
+
+    </div>
+
+
+
+
+    <!-- <div >
+
+        NUMERO DE DOCUMENTO:  &emsp; <input type="text" name="numeroDocumento" class=" center4 ">
+        
+    </div>
+
+    &ensp;
+
+    <div >
+        DEPARTAMENTO:  &emsp; <input type="text" name="departamento" class=" center5 ">
+        
+    </div>
+
+    &ensp;
+
+    <div >
+        CIUDAD:  &emsp; <input type="text" name="ciudad" class=" center6 ">
+        
+    </div>
+
+    &ensp;
+
+    <div >
+        BARRIO:  &emsp; <input type="text" name="barrio" class=" center7 ">
+        
+    </div>
+
+    &ensp;
+
+    <div >
+        TELEFONO:  &emsp; <input type="text" name="telefono" class=" center8 ">
+        
+    </div>
+
+    &ensp;
+
+    <div >
+        EDAD:  &emsp; <input type="text" name="edad" class=" center9 ">
+        
+    </div>
+
+    &ensp;
+
+    <div >
+        GENERO:  &emsp; <input type="text" name="genero" class=" center10 ">
+        
+    </div>
+
+    &ensp;
+
+    <div >
+        CORREO ELECTRONICO:  &emsp; <input type="text" name="correo" class=" center11 ">
+        
+    </div>
+
+    &ensp;
+
+    <div >
+        CONTRASEÑA:  &emsp; <input type="text" name="contrasena" class=" center12 ">
+        
+    </div>
+
+    &ensp;
+
+    <div >
+        VERIFICAR CONTRASEÑA:  &emsp; <input type="text" name="contrasenaVerificada" class=" center13 ">
+        
+    </div>
+
+    &ensp;
+
+    <div style="height:180px;width:400px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;" >
+    
+1. Compartir información con aliados estratégicos, reaseguradores e intermediarios de seguros para la contratación de productos y servicios, gestión de riesgos, atención de reclamaciones y gestión comercial.
+
+
+2. Compartir y consultar datos del comportamiento crediticio y financiero con centrales de información y riesgos, aseguradoras y prestadores para prevenir, controlar fraudes y seleccionar riesgos.
+
+
+3. Consultar y obtener copia de la historia clínica o datos clínicos, que son datos sensibles, con la finalidad de evaluar y suscribir las pólizas, así como gestionar los riesgos que puedan afectar la salud, bienestar y calidad de vida, y el desempeño ocupacional. (Esta finalidad aplica sólo para el uso de soluciones de salud y vida contratadas con LAS COMPAÑÍAS).
+
+
+4. Transmitir y/o transferir datos personales con la finalidad de atraer, valorar, fidelizar, captar y/o estudiar comportamientos del mercado y de atención al cliente; así como para la ejecución de aquellos contratos que sean necesarios para soportar la operación de LAS COMPAÑÍAS y/o el logro de la estrategia corporativa.
+
+
+5. Prestar el servicio de salud y realizar auditoría de calidad y cuentas médicas, integrando la información clínica disponible en distintos prestadores. (Esta finalidad aplica sólo para el uso de soluciones de salud y vida contratadas con LAS COMPAÑÍAS).
+
+ 
+
+6. Realizar investigaciones científicas, comprometiéndose a divulgar los resultados de forma anónima.
+
+
+7. Tratar los datos para la atención de cualquier reclamación que se efectúe sobre el producto contratado o atención proactiva del mismo, así como para realizar el cobro de primas o aportes adeudados.
+
+
+8. Compartir información con los prestadores o proveedores autorizados por LAS COMPAÑÍAS, para la coordinación de un servicio o solicitud, con las limitaciones y reglas de la presente política.
+
+
+9. Ejercer la defensa de LAS COMPAÑÍAS en procesos judiciales que se adelanten contra ellas.
+  
+
+Otras finalidades 
+
+ 
+
+1. Entregar o recibir información con entidades como FASECOLDA, INVERFAS, ACEMI u otras, con la finalidad de adelantar actividades y proyectos del sector asegurador y de salud.
+
+
+2. Facilitar el conocimiento integral y elaboración de propuestas de valor a partir del uso de bases de datos que contengan tanto datos privados como sensibles.
+
+
+3. Ser contactado para la entrega de ofertas comerciales e información publicitaria.
+
+
+4. Estudiar el comportamiento digital (redes sociales, páginas web, aplicaciones), para realizar una asesoría integral de productos y servicios, y elaborar un perfilamiento de los intereses y hábitos de consumo.
+
+
+5. Obtener datos sobre la conducción y movilidad para el desarrollo y contratación de productos y servicios, gestión de riesgos, atención de reclamaciones y gestión comercial.
+
+    </div>
+
+    &ensp;
+
+    <div>
+
+     <input type="checkbox" name="terminos" value="term"> He leido y acepto los terminos y condiciones<br>
+
+    </div>
+
+    &ensp; -->
+
+    <div class="agregarEspacioizq espacio-arriba">
+
+        <a href="/Registrar"><button type="submit" class="btn btn-outline-primary " value="call_flask_funtion">Registrar</button></a>
+
+    </div>
+
+    &ensp;
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+    
+
+</body>
+</html>
