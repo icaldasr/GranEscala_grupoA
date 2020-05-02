@@ -4,7 +4,7 @@
         metodo: GET
         entradas: recive dos strings en la ruta, uno para el nombre de la ips y otro para la especializacion de la cita 
                   como por ejemplo general, oftalmologo
-        ruta: http://dominio.com/horarios/<string:ips>/<string:espc>
+        ruta: http://thawing-stream-48846.herokuapp.com/horarios/<string:ips>/<string:espc>
         salidas: retorna un json con el nro de consultorio, nombre del doctor, documento de doctor, y la fecha disponible
         el formato de json es:
 
@@ -37,7 +37,7 @@
     *obtener todas las ips disponibles:
         metodo: GET
         entradas: ninguna
-        ruta: http://dominio.com/ips
+        ruta: http://thawing-stream-48846.herokuapp.com/ips
         salidas: retorna un json con el id de la ips, el nombre de la ips, direccion de la ips
 
         {
@@ -61,7 +61,7 @@
     *obtener citas de un paciente:
         metodo: GET
         entradas: recive el numero de documento del paciente (entero)
-        ruta: http://dominio.com/horarios/<int:documento>
+        ruta: http://thawing-stream-48846.herokuapp.com/horarios/<int:documento>
         salidas: retorna un json con el nro de cita, la fecha, la ips, la direccion, medico, y la especializacion
 
         {
@@ -87,7 +87,7 @@
     * eliminar cita:
         metodo: DELETE
         entradas: recive el numero de cita (entero)
-        ruta: http://dominio.com/horarios/<int:nro_cita>
+        ruta: http://thawing-stream-48846.herokuapp.com/horarios/<int:nro_cita>
         salidas: retorna un mensaje de confirmacion o uno de error en caso de que el numero de cita no exista
 
         {'mensaje': 'la cita solicitada no exite'}
@@ -106,7 +106,7 @@
                     ips: "ips 1",
                 }
             }
-        ruta: http://dominio.com/cita
+        ruta: http://thawing-stream-48846.herokuapp.com/cita
         salidas: retorna un mensaje de confirmacion o de error
 
 
@@ -116,7 +116,7 @@
     * obtener especializaciones por ips:
         metodo: GET
         entradas: recive el nombre de la ips como string
-        ruta: http://dominio.com/ips/<string:nombre_ips>
+        ruta: http://thawing-stream-48846.herokuapp.com/ips/<string:nombre_ips>
         salidas: retorna un json con el siguiente formato
 
             {
