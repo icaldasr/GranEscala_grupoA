@@ -17,7 +17,7 @@
 
 .center4 {
 	position: relative;
-	left: 66px;
+	left: 126px;
 }
 
 .center5 {
@@ -25,6 +25,29 @@
 	left: 133px;
 }
 
+.centertipo{
+	position: relative;
+	left: 138px;
+}
+
+.centercorreo{
+	position: relative;
+	left: 202px;
+}
+
+.centerfecha{
+	position: relative;
+	left: 101px;
+}
+
+.centerciudad{
+	position: relative;
+	left: 203px;
+}
+.centerbarrio{
+	position: relative;
+	left: 209px;
+}
 .center6 {
 	position: relative;
 	left: 194px;
@@ -37,7 +60,7 @@
 
 .center8 {
 	position: relative;
-	left: 172px;
+	left: 204px;
 }
 
 .center9 {
@@ -69,11 +92,17 @@
   margin-left: 130px;
 }
 .espacio-sexo{
-  margin-left: 138px;
+  margin-left: 220px;
 }
-.espacio-tel{
-  margin-left:110px;
+.espacio-telm{
+	position: relative;
+	left:192px;
 }
 .espacio-estadocivil{
   margin-left: 88px;
+}
+
+.espaciodpto{
+	position: relative;
+	left: 150px;
 }
