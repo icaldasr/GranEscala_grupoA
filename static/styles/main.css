@@ -1,3 +1,10 @@
+.light-table-filter {margin-bottom: 5px;}
+table.members_details { width: 100%;  border-collapse: collapse;  }
+.members_details tr:nth-of-type(odd) { background: #eee; }
+.members_details th { background: lightblue; color: white; font-weight: bold; }
+.members_details td, .members_details th {padding: 6px; border: 1px solid #ccc;text-align: left;} 
+
+
 body{
 	font-family: 'Lato', sans-serif;
 }
@@ -79,6 +86,9 @@ div{
 }
 
 
+.espacio-bot1-tabla{
+  margin-left: 430px;
+}
 .espacio-botones{
   margin-left: 80px;
 }
