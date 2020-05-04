@@ -210,19 +210,18 @@ begin
                 select cita_maximo(nro_cons) into cita_max;
                 insert into horarios (nro_cita, fecha, id_consultorio, documento_paciente)
                 values (cita_max, _fecha, nro_cons, id_paciente);
-                return 1;
+                return cita_max;
             else
                 return 0;
             end if;
         else
-            return 2;
+            return 0;
         end if;
     else
-        return 3;
+        return 0;
     end if;
 END; //
 delimiter ;
-
 
 
 

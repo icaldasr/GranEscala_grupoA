@@ -2,7 +2,6 @@
 
 import os
 from flask import Flask, render_template, request, redirect, session, g, url_for, flash
-from flask_mysqldb import MySQL
 from clases.Sistema import Sistema
 
 app = Flask(__name__)
