@@ -231,7 +231,6 @@ delimiter ;
 
 
 
-
 --funcion ingresar administrador
 --retorna 1 si la insercion fue realizada
 --retorna 0 si el correo ya existe
