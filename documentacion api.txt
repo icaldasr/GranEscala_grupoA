@@ -103,9 +103,10 @@
                     fecha: "mes/dia/año hora:minuto:segundo",
                     medico: "documento",
                     ips: "ips 1",
+                    nro_cita: "cita nueva"
                 }
             }
-        ruta: http://thawing-stream-48846.herokuapp.com/cita
+        ruta: http://thawing-stream-48846.herokuapp.com/horarios
         salidas: retorna un mensaje de confirmacion o de error
 
 
