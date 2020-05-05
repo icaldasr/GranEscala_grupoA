@@ -39,20 +39,44 @@ def admin():
 
 @app.route("/Buscar", methods = ["POST", "GET"])
 def buscar():
-    return render_template("admin_2.html")
+    if "user" in session:
+        usuario = session["user"]
+        return render_template("admin_2.html")
+    else: 
+        return "ERROR: No ha iniciado sesión"
 
 @app.route("/registrarDoctor", methods = ["POST", "GET"])
 def registrarDoctor():
-    return "Registro Doctor"##redirect(url_for("registrarMedico.html"))  ##No existe aun
+    if "user" in session:
+        usuario = session["user"]
+        return render_template("registrardoctor.html")
+    else: 
+        return "ERROR: No ha iniciado sesión"
 
 
 @app.route("/registrarPaciente", methods = ["POST", "GET"])
 def registrarPaciente():
-    return "Registro Paciente"##redirect(url_for("registrarPaciente.html"))  ##No existe aun
+    if "user" in session:
+        usuario = session["user"]
+        return render_template("registrarpaciente.html")
+    else: 
+        return "ERROR: No ha iniciado sesión"
 
 @app.route("/registrarAdministrador", methods = ["POST", "GET"])
 def registrarAdministrador():
-    return redirect(url_for("registrarAdministador.html"))  ##No existe aun
+    if "user" in session:
+        usuario = session["user"]
+        return render_template("registraradmin.html")
+    else: 
+        return "ERROR: No ha iniciado sesión"
+
+@app.route("/solicitudes", methods = ["POST","GET"])
+def solicitudes():
+    if "user" in session:
+        usuario = session["user"]
+        return "Hola amigo Otoya" #render_template("solicitudes.html")
+    else: 
+        return "ERROR: No ha iniciado sesión"
 
 
 
