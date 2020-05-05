@@ -7,7 +7,6 @@
 
     <link rel="stylesheet"  type= "text/css" href= "{{ url_for('static',filename='styles/registrar.css') }}">
     <link rel="stylesheet"  type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
-
     
     <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
@@ -29,7 +28,7 @@
         <nav>
           <ul class="no-lista margen-abajo">
 
-            <li class="col-md-6 inline-block espacio-arriba espacio-izq"><h1 align="left"><b><u>Registrar Paciente:</u></b></h1></li>
+            <li class="col-md-6 inline-block espacio-arriba espacio-izq"><h1 align="left"><b><u>Registrar Administrador:</u></b></h1></li>
             
           </ul>
 	       </nav>
@@ -93,23 +92,18 @@
 
     <div class="agregarEspacioizq " >
 
-      <label class="inline-block" for="start">Fecha de Nacimiento:</label>
-
-      <input class="inline-block centerfecha" type="date" id="start" name="trip-start" value="2020-07-22" min="1900-01-01" max="2020-12-31">
+      <p class="inline-block">Correo:</p>
+      <input type="text" name="dni" class=" centercorreo inline-block ">
 
     </div>
 
-    &ensp;
 
 
     <div class="agregarEspacioizq " >
 
-      <p class="inline-block">Estado Civil:</p>
-      <select name="OS" class=" espacio-estadocivil ">
-            <option value="1">Soltero/a</option> 
-            <option value="2">Casado/a</option> 
-            <option value="3">Viudo/a</option>
-        </select>
+      <label class="inline-block" for="start">Fecha de Nacimiento:</label>
+
+      <input class="inline-block centerfecha" type="date" id="start" name="trip-start" value="2020-07-22" min="1900-01-01" max="2020-12-31">
 
     </div>
 
@@ -154,9 +148,8 @@
 
     </div>
 
+  
 
-
-     &ensp;
 
 
     <div class="agregarEspacioizq"style="height:180px;width:430px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto; " align="left" >
@@ -225,6 +218,19 @@ Otras finalidades
     </div>
 
     &ensp;
+
+
+
+
+
+
+    
+
+
+
+
+
+
 
     
 
