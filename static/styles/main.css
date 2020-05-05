@@ -89,6 +89,13 @@ div{
   margin-left: 0px;
 }
 
+.quitarespacioizqbuscar{
+  margin-left: -120px;
+}
+
+.wrapper {
+    text-align: center;
+}
 
 .espacio-bot1-tabla{
   margin-left: 430px;
