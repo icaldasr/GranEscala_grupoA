@@ -4,6 +4,8 @@
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
+
+
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {font-family: Arial, Helvetica, sans-serif;}
@@ -72,10 +74,10 @@ span.psw {
 </head>
 <body>
 
-<title>Login</title>
-<H1>Login</H1>
+<title>LOGIN</title>
+ <H1>Login</H1>
 
-<form action="#" method="post">   <!--/action_page.php-->
+<form action="/action_page.php" method="post">
   <div class="imgcontainer">
     <img src="avatar2.png" alt="Avatar" class="avatar">
   </div>
@@ -88,16 +90,57 @@ span.psw {
     <input type="password" placeholder="Enter Password" name="psw" required>
         
     <button type="submit">Login</button>
+
     <!-- <label>
       <input type="checkbox" checked="checked" name="remember"> Remember me
     </label> -->
   </div>
+
+ 
 
 <!--   <div class="container" style="background-color:#f1f1f1">
     <button type="button" class="cancelbtn">Cancel</button>
     <span class="psw">Forgot <a href="#">password?</a></span>
   </div> -->
 </form>
+   <a href="#"><p style="color:blue2" data-toggle="modal" data-target="#exampleModal" align="center">Recuperar contraseña</p></a>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Restablecer contraseña:</h5>
+      </div>
+      <div class="modal-body">
+        <form>
+          <p>Escriba el correo electronico con el cual se ha registrado, se le enviara a este una nueva contraseña</p>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">Correo electronico:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Confirmar correo electronico:</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Send message</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
 
 </body>
 </html>
