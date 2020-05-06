@@ -4,13 +4,15 @@
 --  retorna 0 si la eps o la especializacion no existen 
 delimiter //
 create function ingresar_medico (_nro_documento int, _eps varchar(50), _nombre varchar(50), 
-                                 _apellido varchar(50), _espc varchar(50), _contra varchar(10), _correo varchar(100))
+                                 _apellido varchar(50), _espc varchar(50), _contra varchar(10), _correo varchar(100),
+                                 _celular int, _t_documento varchar(100))
     returns int
 begin
     declare _id_eps int;
     declare espc int;
     declare id_med int;
     declare corre varchar(100);
+    declare tip int;
     
     select id_eps into _id_eps from eps where nombre = _eps;
     select id_especializacion into espc from especializaciones where nombre = _espc;
@@ -22,13 +24,18 @@ begin
                 if id_med IS Null then
                     select correo into corre from login where correo = _correo;
                     if corre IS Null then
-                        insert into login (correo, contrasena, tipo)
-                        values (_correo, _contra, 'medico');
+                        select id_tipo into tip from tipo_documento where descripcion = _t_documento;
+                        if tip IS NOT Null then
+                            insert into login (correo, contrasena, tipo)
+                            values (_correo, _contra, 'medico');
 
-                        insert into medicos (nro_documento, id_Eps, nombres, apellido, id_espc, Correo) 
-                        values (_nro_documento, _id_eps, _nombre, _apellido, espc, _correo);
+                            insert into medicos (nro_documento, id_Eps, nombres, apellido, id_espc, Correo, id_tip, celular) 
+                            values (_nro_documento, _id_eps, _nombre, _apellido, espc, _correo, tip, _celular);
 
-                        return 1;
+                            return 1;
+                        else
+                            return 4;
+                        end if;
                     else
                         return 3;
                     end if;
@@ -238,11 +245,12 @@ delimiter ;
 
 delimiter //
 create function ingresar_admin (_id_admin int, _nombre varchar(20), _apellido varchar(20), _contra varchar(10), 
-                                _correo varchar(100))
+                                _correo varchar(100), _t_tipo varchar(100))
     returns int
 begin
     declare id_adm int;
     declare corre varchar(100);
+    declare tip int;
 
     select nro_documento into id_adm from administrador where nro_documento = _id_admin;
     if id_adm IS Null then
@@ -250,11 +258,16 @@ begin
         if id_adm IS Null then
             select correo into corre from login where correo = _correo;
             if corre IS Null then
-                insert into login (correo, contrasena, tipo)
-                values (_correo, _contra, 'administrador');
+                select id_tipo into tip from tipo_documento where descripcion = _t_documento;
+                if tip IS NOT Null then
+                    insert into login (correo, contrasena, tipo)
+                    values (_correo, _contra, 'administrador');
 
-                insert into administrador (nro_documento, nombres, apellido, Correo)
-                values (_id_admin, _nombre, _apellido, _correo);
+                    insert into administrador (nro_documento, nombres, apellido, Correo)
+                    values (_id_admin, _nombre, _apellido, _correo);
+                else
+                    return 3;
+                end if;
 
                 return 1;
             else
