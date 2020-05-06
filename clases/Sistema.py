@@ -8,6 +8,7 @@ from email.mime.text import MIMEText
 from clases.Gestor import Gestor
 from clases.SolicitudM import SolicitudM
 from clases.HistoriaClinica import HistoriaClinica
+from clases.Administrador import Administrador
 
 
 class Sistema():
@@ -129,7 +130,18 @@ class Sistema():
         msg.attach(MIMEText(mensaje, 'plain'))
         server = smtplib.SMTP('smtp.gmail.com: 587')
         server.starttls()
-        server.login(msg['From'], 'bananiiiin')
-        server.sendmail(msg['From'], msg['To'], msg.as_string())
+        server.login(msg['From'], 'bananiiiin') ##conexión con el servicio de correos
+        server.sendmail(msg['From'], msg['To'], msg.as_string()) #envia mensaje
         server.quit()
         print("Mensaje enviado")
+
+    def cargarAdmin(self, correo): 
+        query = self.dataBase.obtenerAdmin(correo)
+        if query != None:
+            ndoc= query[0]
+            nom = query[1]
+            ape = query[2]
+            admin = Administrador("CC", ndoc, nom, ape, 3104290948, correo, "1" )
+            return admin
+        else:
+            return None

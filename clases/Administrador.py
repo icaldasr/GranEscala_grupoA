@@ -4,7 +4,7 @@ from clases.Usuario import Usuario
 
 class Administrador(Usuario):
     def __init__(self, tipoDoc, numDoc, nom, ap, cel, nomusr, cla):
-        Usuario.__init__(tipoDoc, numDoc, nom, ap, cel, nomusr, cla)
+        Usuario.__init__(self, tipoDoc, numDoc, nom, ap, cel, nomusr, cla)
         self.solMactiva = None
 
     def agregarDoctor(self,  tipoDoc, numDoc, nom, ap, cel, nomusr, cla):

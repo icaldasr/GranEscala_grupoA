@@ -67,3 +67,12 @@ class Gestor():
                 if i[1] == correo:
                     return i[2]
                     
+    def obtenerAdmin(self, correo):
+        self.cursor.execute(
+            "select nro_documento, nombres, apellido, correo, contrasena from login INNER JOIN administrador USING (correo) where correo = %s" , correo
+        )
+        temp = self.cursor.fetchone()
+        if temp == None:
+            return None
+        else:
+            return temp

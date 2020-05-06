@@ -22,8 +22,7 @@ def login():
             session['user'] = nomusuario 
             return redirect(url_for("doctor"))
         else:
-
-             return render_template("login.html")
+            return render_template("login.html")
     else:
         if "user" in session:
             return redirect(url_for("logout"))  ##aqui se puede cambiar la conf para que cuando se cierre el navegador se mantenga la sesion iniciada
@@ -35,14 +34,19 @@ def setcookie():
         correo = request.form['correo1']
         print(correo)
         sis.enviarClave(correo)
-    return redirect(url_for('login'))
+    return redirect(url_for("login"))
     #return render_template("login.html")
 
 @app.route("/admin", methods = ["POST", "GET"])
 def admin():
     if "user" in session:
         usuario = session["user"]
-        return render_template("admin.html")
+        #ad es objeto Administrador
+        ad = sis.cargarAdmin(session["user"])   #carga el usuario en clase Administrador
+        if(ad != None):
+            return render_template("admin.html", nombre=ad.getNombre(), correo= usuario)
+        else:
+            return render_template("admin.html", nombre="UnNombre", correo= usuario)
     else:
         return redirect(url_for("login"))
 
