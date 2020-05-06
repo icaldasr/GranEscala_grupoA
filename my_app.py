@@ -35,7 +35,8 @@ def setcookie():
         correo = request.form['correo1']
         print(correo)
         sis.enviarClave(correo)
-    return render_template("login.html")
+    return redirect(url_for('login'))
+    #return render_template("login.html")
 
 @app.route("/admin", methods = ["POST", "GET"])
 def admin():
