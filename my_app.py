@@ -29,7 +29,7 @@ def login():
         return render_template("login.html")
 
 @app.route('/recuperar', methods = ['POST', 'GET'])
-def setcookie():
+def cambioContrasena():
     if request.method == 'POST':
         correo = request.form['correo1']
         print(correo)
