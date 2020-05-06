@@ -52,3 +52,18 @@ class Gestor():
     def nuevoIdSolicitudM(self):
         #return nuevo id para una solicitud de medicamentos
         print ("hola1")
+
+
+    def obtenerContrasenaPara(self, correo):
+        self.cursor.execute(
+            "(SELECT  correo, contrasena, tipo FROM login inner JOIN medicos USING (correo))  UNION (select nombres, correo, contrasena, tipo from login INNER JOIN administrador USING (correo))"
+        )
+        temp = self.cursor.fetchall()
+        #print (temp)
+        if temp == None:
+            return None
+        else:
+            for i in temp:
+                if i[1] == correo:
+                    return i[2]
+                    

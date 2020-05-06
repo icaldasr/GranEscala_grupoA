@@ -1,9 +1,14 @@
 #Sistema.py
 #Autor: Luis Miguel Oviedo
-
+#smtp lib para envío de mensajes en recuperacion de la clave de ingreso
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+##dentro del proyecto
 from clases.Gestor import Gestor
 from clases.SolicitudM import SolicitudM
 from clases.HistoriaClinica import HistoriaClinica
+
 
 class Sistema():
     instance = None
@@ -112,3 +117,19 @@ class Sistema():
             if i.getEstado() == "esperando":
                 return i
         return None
+
+    def enviarClave(self, correo):
+        msg = MIMEMultipart()
+        
+        contra = self.dataBase.obtenerContrasenaPara(correo)
+        mensaje = 'Por favor no vuelva a olvidar que su clave de ingreso es: ' + contra
+        msg['from'] = 'valledevEPS@gmail.com'
+        msg['to'] = correo
+        msg['Subject'] = 'Recuperación de contraseña EPS'
+        msg.attach(MIMEText(mensaje, 'plain'))
+        server = smtplib.SMTP('smtp.gmail.com: 587')
+        server.starttls()
+        server.login(msg['From'], 'bananiiiin')
+        server.sendmail(msg['From'], msg['To'], msg.as_string())
+        server.quit()
+        print("Mensaje enviado")
