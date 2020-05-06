@@ -20,20 +20,29 @@ create table eps(
     descripcion varchar(100)
 );
 
+create table tipo_documento(
+    id_tipo int primary key,
+    descripcion varchar(100)
+);
+
 create table medicos(
     nro_documento int primary key,
     id_Eps int references eps(id_eps),
     nombres varchar(20),
     apellido varchar(30),
     id_espc int references especializaciones(id_especializacion),
-    Correo varchar(100) references login(correo)
+    Correo varchar(100) references login(correo),
+    id_tip int references tipo_documento(id_tip),
+    celular int
 );
 
 create table administrador(
     nro_documento int primary key,
     nombres varchar(20),
     apellido varchar(30),
-    Correo varchar(100) references login(correo)
+    Correo varchar(100) references login(correo),
+    id_tip int references tipo_documento(id_tip),
+    celular int
 );
 
 create table ips(
