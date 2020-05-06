@@ -29,7 +29,6 @@ def login():
         return render_template("login.html")
 
 
-
 @app.route("/admin", methods = ["POST", "GET"])
 def admin():
     if "user" in session:
