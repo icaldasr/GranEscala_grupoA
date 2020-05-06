@@ -22,12 +22,20 @@ def login():
             session['user'] = nomusuario 
             return redirect(url_for("doctor"))
         else:
-            return render_template("login.html")
+
+             return render_template("login.html")
     else:
         if "user" in session:
             return redirect(url_for("logout"))  ##aqui se puede cambiar la conf para que cuando se cierre el navegador se mantenga la sesion iniciada
         return render_template("login.html")
 
+@app.route('/recuperar', methods = ['POST', 'GET'])
+def setcookie():
+    if request.method == 'POST':
+        correo = request.form['correo1']
+        print(correo)
+        sis.enviarClave(correo)
+    return render_template("login.html")
 
 @app.route("/admin", methods = ["POST", "GET"])
 def admin():

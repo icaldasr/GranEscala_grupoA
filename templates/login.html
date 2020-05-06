@@ -89,7 +89,7 @@ span.psw {
     <label for="psw"><b>Contraseña</b></label>
     <input type="password" placeholder="Introduzca su contraseña" name="psw" required>
         
-    <button type="submit">Login</button>
+    <button type="submit">Iniciar Sesión</button>
 
     <!-- <label>
       <input type="checkbox" checked="checked" name="remember"> Remember me
@@ -113,7 +113,7 @@ span.psw {
         <h5 class="modal-title" id="exampleModalLabel">Restablecer contraseña:</h5>
       </div>
       <div class="modal-body">
-        <form>
+        <form action = "/recuperar" method="post">
           <p>Escriba el correo electrónico con el cuál se ha registrado, se le enviará a este la contraseña</p>
           <div class="form-group">
             <label for="correo1" class="col-form-label">Correo electrónico:</label>
@@ -123,11 +123,14 @@ span.psw {
             <label for="correo2" class="col-form-label">Confirmar correo electrónico:</label>
             <input type="text" class="form-control" name="correo2">
           </div>
+          <!--p><input type="submit" value ="enviar" name=""></p-->
+          <button type="submit" class="btn btn-primary" >Enviar Contraseña</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" >Send message</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+        
       </div>
     </div>
   </div>

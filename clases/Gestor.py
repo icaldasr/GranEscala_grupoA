@@ -56,7 +56,7 @@ class Gestor():
 
     def obtenerContrasenaPara(self, correo):
         self.cursor.execute(
-            "(SELECT  correo, contrasena, tipo FROM login inner JOIN medicos USING (correo))  UNION (select nombres, correo, contrasena, tipo from login INNER JOIN administrador USING (correo))"
+            "(SELECT  nombres, correo, contrasena, tipo FROM login inner JOIN medicos USING (correo))  UNION (select nombres, correo, contrasena, tipo from login INNER JOIN administrador USING (correo))"
         )
         temp = self.cursor.fetchall()
         #print (temp)
