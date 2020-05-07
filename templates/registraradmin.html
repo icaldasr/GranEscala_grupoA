@@ -17,7 +17,17 @@
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="CustomStyles.css" rel="stylesheet" />
 
-
+    <div>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <div class = "alert alert-success">
+              {{ message }}</li>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      {% block body %}{% endblock %}  
+      </div>
     
 
 </head>
