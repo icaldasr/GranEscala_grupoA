@@ -92,4 +92,12 @@ class Gestor():
         self.cursor.execute('''INSERT INTO administrador VALUES (%s,%s,%s,%s,%s,%s)''', (nrodocumento, nombre, apellido, correo,celular,tipoDoc))
         self.cursor.execute('''INSERT INTO login VALUES (%s, %s, 'administardor')''',(correo,contra))
         self.conexion.commit()
-        
+
+    
+    def obtener_tipo_documentos(self):
+        self.cursor.execute(
+            """
+            select descripcion from tipo_documento
+            """
+        )
+        return self.cursor.fetchall()

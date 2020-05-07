@@ -73,6 +73,7 @@ def registrarDoctor():
     if "user" in session:
         usuario = session["user"]
         contra = secrets.token_urlsafe(6)
+        tipo_documentos = sis.tipo_documento()
         if request.method == 'POST':
             term = request.form.get('terminos')
             if term == "on":
@@ -99,7 +100,7 @@ def registrarDoctor():
             else:
                 mensaje = '¡Debes aceptar los términos y condiciones para continuar!'
                 flash(mensaje)
-        return render_template("registrardoctor.html")
+        return render_template("registrardoctor.html", t_d = tipo_documentos)
     else: 
         message = '¡Primero debes iniciar sesión!'
         flash(message)
@@ -204,3 +205,9 @@ def logout():
     session.pop("user", None)
     
     return redirect(url_for("login"))
+
+
+
+
+if __name__ == "__main__":
+    app.run(debug=True)

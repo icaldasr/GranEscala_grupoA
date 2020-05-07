@@ -149,3 +149,6 @@ class Sistema():
             return admin
         else:
             return None
+
+    def tipo_documento(self):
+        return self.dataBase.obtener_tipo_documentos()
