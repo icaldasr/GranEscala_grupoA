@@ -3,6 +3,7 @@
 import os
 from flask import Flask, render_template, request, redirect, session, g, url_for, flash
 from clases.Sistema import Sistema
+import secrets
 
 app = Flask(__name__)
 app.secret_key = "ValleDev1234"
@@ -32,8 +33,11 @@ def login():
 def cambioContrasena():
     if request.method == 'POST':
         correo = request.form['correo1']
+        correo2 = request.form['correo2']
         print(correo)
         sis.enviarClave(correo)
+        mensaje = 'Contraseña enviada al correo {}'.format(correo)
+        flash(mensaje)
     return redirect(url_for("login"))
     #return render_template("login.html")
 
@@ -62,6 +66,7 @@ def buscar():
 def registrarDoctor():
     if "user" in session:
         usuario = session["user"]
+        contra = secrets.token_urlsafe(6)
         if request.method == 'POST':
             term = request.form.get('terminos')
             if term == "on":
@@ -83,16 +88,33 @@ def registrarDoctor():
                 #sis.agregarDoctor(int(tipodoc), int(nrodocumento), nombre, apellido, int(ideps), int(idespecializacion), rh, correo, nacimiento, int(tel), departamento, ciudad, bario, sexo)
                 print (nombre + " - " + apellido + " - "+ tipodoc + " - " + nrodocumento +" - "+ ideps + " - " + nacimiento + " - " + rh+" - " + correo  + " - " + sexo + " - " +term)
                 return redirect(url_for("admin"))
-        
+            
         return render_template("registrardoctor.html")
     else: 
         return "ERROR: No ha iniciado sesión"
 
-
 @app.route("/registrarPaciente", methods = ["POST", "GET"])
+#FALTA GUARDAR
 def registrarPaciente():
     if "user" in session:
         usuario = session["user"]
+        if request.method == 'POST':
+            term = reques.form.get('terminos')
+            if term == "on":
+                nombre = request.form["nombre"]
+                apellido = request.form["apellido"]
+                tipodoc = request.form["TDP"]
+                nrodocumento = request.form["numeroDocumento"]
+                rh = request.form["RH"]
+                nacimiento = request.form["fechaNacimiento"]
+                eCivil = request.form["EC"]
+                telefono = request.form["tel"]
+                departamento = request.form["departamento"]
+                ciudad = request.form["ciudad"]
+                barrio = request.form["barrio"]
+                sexo = request.form["sexo"]
+                return redirect(url_for("admin"))
+
         return render_template("registrarpaciente.html")
     else: 
         return "ERROR: No ha iniciado sesión"
@@ -101,8 +123,31 @@ def registrarPaciente():
 def registrarAdministrador():
     if "user" in session:
         usuario = session["user"]
+        contra = secrets.token_urlsafe(6)
+        #print("CONTRASEÑA",contra)
+        if request.method == 'POST':
+            term = reques.form.get('terminos')
+            if term == "on":
+                nombre = request.form["nombre"]
+                apellido = request.form["apellido"]
+                tipodoc = request.form["TDA"]
+                nrodocumento = request.form["numeroDocumento"]
+                rh = request.form["RH"]
+                correoE = request.form["correoE"]
+                nacimiento = request.form["fNacimiento"]
+                telefono = request.form["tel"]
+                #eCivil = request.form["EC"]
+                departamento = request.form["departamento"]
+                ciudad = request.form["ciudad"]
+                barrio = request.form["barrio"]
+                sexo = request.form["sexo"]
+                sis.agregarAdmin(nrodocumento, nombre, apellido, correoE,telefono,tipodoc,contra)
+                return redirect(url_for("admin"))
+            else:
+                print("ERROR")
         return render_template("registraradmin.html")
     else: 
+        
         return "ERROR: No ha iniciado sesión"
 
 @app.route("/solicitudes", methods = ["POST","GET"])

@@ -9,6 +9,7 @@ from clases.Gestor import Gestor
 from clases.SolicitudM import SolicitudM
 from clases.HistoriaClinica import HistoriaClinica
 from clases.Administrador import Administrador
+import secrets
 
 
 class Sistema():
@@ -69,7 +70,11 @@ class Sistema():
         
 
     def agregarDoctor(self, tipodoc, nrodocumento, nombre, apellido, ideps, idespecializacion, rh, correo, nacimiento, tel, departamento, ciudad, bario, sexo):
+        
         self.dataBase.insertarDoctor(tipodoc, nrodocumento, nombre, apellido, ideps, idespecializacion, rh, correo, nacimiento, tel, departamento, ciudad, bario, sexo)
+
+    def agregarAdmin(sel,nrodocumento, nombre, apellido, correo,celular,tipoDoc,contra):
+        self.dataBase.insertarAdministrador(nrodocumento, nombre, apellido, correo,celular,tipoDoc,contra)
 
     def posDoctor(self, tipodoc, numdoc):
         cont = 0

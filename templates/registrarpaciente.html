@@ -37,18 +37,19 @@
 
     &ensp;
 
+    <form method = "POST">
 
     <div class="agregarEspacioizq " >
 
       <p class="inline-block">Nombre:</p>
-      <input type="text" name="nombreyapellido" class=" center6 inline-block ">
+      <input type="text" name="nombre" class=" center6 inline-block ">
 
     </div>
 
     <div class="agregarEspacioizq " >
 
       <p class="inline-block">Apellido:</p>
-      <input type="text" name="nombreyapellido" class=" center6 inline-block ">
+      <input type="text" name="apellido" class=" center6 inline-block ">
 
     </div>
 
@@ -58,7 +59,7 @@
 
         <p class="inline-block">Tipo documento:</p>
 
-        <select name="OS" class=" centertipo ">
+        <select name="TDP" class=" centertipo ">
             <option value="1">C.C</option> 
             <option value="2">T.I</option> 
             <option value="3">Pasaporte</option>
@@ -77,7 +78,7 @@
     <div class="agregarEspacioizq " >
 
       <p class="inline-block">RH:</p>
-      <select name="OS" class=" espaciorh inline-block  ">
+      <select name="RH" class=" espaciorh inline-block  ">
             <option value="1">A+</option> 
             <option value="2">B+</option> 
             <option value="3">O+</option>
@@ -95,17 +96,18 @@
 
       <label class="inline-block" for="start">Fecha de Nacimiento:</label>
 
-      <input class="inline-block centerfecha" type="date" id="start" name="trip-start" value="2020-07-22" min="1900-01-01" max="2020-12-31">
+      <input class="inline-block centerfecha" type="date" id="start" name="fechaNacimiento" value="2020-07-22" min="1900-01-01" max="2020-12-31">
 
     </div>
 
     &ensp;
 
+    
 
     <div class="agregarEspacioizq " >
 
       <p class="inline-block">Estado Civil:</p>
-      <select name="OS" class=" espacio-estadocivil ">
+      <select name="EC" class=" espacio-estadocivil ">
             <option value="1">Soltero/a</option> 
             <option value="2">Casado/a</option> 
             <option value="3">Viudo/a</option>
@@ -146,7 +148,7 @@
     <div class="agregarEspacioizq " >
 
       <p class="inline-block">Sexo:</p>
-      <select name="OS" class=" espacio-sexo inline-block  ">
+      <select name="sexo" class=" espacio-sexo inline-block  ">
             <option value="1">Masculino</option> 
             <option value="2">Femenino</option> 
             <option value="3">Transformer</option>
@@ -220,7 +222,7 @@ Otras finalidades
     
     <div class="agregarEspacioizq espacio-arriba">
 
-        <a href="/Atras"><button type="submit" class="btn btn-outline-primary " value="call_flask_funtion">Atras</button></a>
+        <a href="/admin"><button type="submit" class="btn btn-outline-primary " value="call_flask_funtion">Atras</button></a>
 
         <a href="/Registrar"><button type="submit" class="btn btn-outline-primary espacio-izq" value="call_flask_funtion">Registrar</button></a>
 
@@ -228,7 +230,7 @@ Otras finalidades
 
     &ensp;
 
-    
+    </form>    
 
 </body>
 </html>
