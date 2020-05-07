@@ -76,3 +76,13 @@ class Gestor():
             return None
         else:
             return temp
+
+    def insertarDoctor(self, tipodoc, nrodocumento, nombre, apellido, ideps, idespecializacion, rh, correo, nacimiento, tel, departamento, ciudad, bario, sexo):
+        self.cursor.execute(
+            "insert into admin (id_tip, nro_documento, nombres, apellido, id_eps, id_espc, correo) values (%d, %d, %s, %s, %d, %d, %s)" , tipodoc, nrodocumento, nombre, apellido, ideps, idespecializacion, correo
+        )
+        self.conexion.commit()
+        self.cursor.execute(
+            "insert into login (correo, contrasena, tipo) values (%s, '123456', 'Doctor' )", correo
+        )
+        self.conexion.commit()

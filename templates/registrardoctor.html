@@ -37,18 +37,18 @@
 
     &ensp;
 
-
+  <form method="POST">
     <div class="agregarEspacioizq " >
 
       <p class="inline-block">Nombre:</p>
-      <input type="text" name="nombreyapellido" class=" center6 inline-block ">
+      <input type="text" name="nombre" class=" center6 inline-block ">
 
     </div>
 
     <div class="agregarEspacioizq " >
 
       <p class="inline-block">Apellido:</p>
-      <input type="text" name="nombreyapellido" class=" center6 inline-block ">
+      <input type="text" name="apellido" class=" center6 inline-block ">
 
     </div>
 
@@ -58,10 +58,11 @@
 
         <p class="inline-block">Tipo documento:</p>
 
-        <select name="OS" class=" centertipo ">
-            <option value="1">C.C</option> 
-            <option value="2">T.I</option> 
-            <option value="3">Pasaporte</option>
+        <select name="TD" class=" centertipo ">
+            <option value="C.C.">C.C</option> 
+            <option value="T.I.">T.I</option> 
+            <option value="Pasaporte">Pasaporte</option>
+            <option value="Cedula extrangera">Cédula extrangera</option>
         </select>
 
     </div>
@@ -78,29 +79,29 @@
     <div class="agregarEspacioizq " >
 
       <p class="inline-block">ID EPS:</p>
-      <input type="text" name="dni" class=" center8 inline-block ">
+      <input type="text" name="ideps" class=" center8 inline-block ">
 
     </div>
 
     <div class="agregarEspacioizq " >
 
       <p class="inline-block">ID Especialización:</p>
-      <input type="text" name="dni" class=" center4 inline-block ">
+      <input type="text" name="esp" class=" center4 inline-block ">
 
     </div>
 
     <div class="agregarEspacioizq " >
 
       <p class="inline-block">RH:</p>
-      <select name="OS" class=" espaciorh inline-block  ">
-            <option value="1">A+</option> 
-            <option value="2">B+</option> 
-            <option value="3">O+</option>
-            <option value="4">AB+</option>
-            <option value="5">AB-</option>
-            <option value="6">A-</option> 
-            <option value="7">B-</option> 
-            <option value="8">O-</option>
+      <select name="RH" class=" espaciorh inline-block  ">
+            <option value="A+">A+</option> 
+            <option value="B+">B+</option> 
+            <option value="O+">O+</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="A-">A-</option> 
+            <option value="B-">B-</option> 
+            <option value="O-">O-</option>
         </select>
 
     </div>
@@ -109,7 +110,7 @@
     <div class="agregarEspacioizq " >
 
       <p class="inline-block">Correo:</p>
-      <input type="text" name="dni" class=" centercorreo inline-block ">
+      <input type="text" name="correo" class=" centercorreo inline-block ">
 
     </div>
 
@@ -119,7 +120,7 @@
 
       <label class="inline-block" for="start">Fecha de Nacimiento:</label>
 
-      <input class="inline-block centerfecha" type="date" id="start" name="trip-start" value="2020-07-22" min="1900-01-01" max="2020-12-31">
+      <input class="inline-block centerfecha" type="date" id="start" name="fecnac" value="2020-07-22" min="1900-01-01" max="2020-12-31">
 
     </div>
 
@@ -156,11 +157,11 @@
     <div class="agregarEspacioizq " >
 
       <p class="inline-block">Sexo:</p>
-      <select name="OS" class=" espacio-sexo inline-block  ">
-            <option value="1">Masculino</option> 
-            <option value="2">Femenino</option> 
-            <option value="3">Transformer</option>
-        </select>
+      <select name="sex" class=" espacio-sexo inline-block  ">
+          <option value="Masculino">Masculino</option> 
+          <option value="Femenino">Femenino</option> 
+          <option value="Transformer">Transformer</option> 
+      </select>
 
     </div>
 
@@ -222,7 +223,7 @@ Otras finalidades
 
     <div class="agregarEspacioizq">
 
-     <input type="checkbox" name="terminos" value="term"> He leido y acepto los terminos y condiciones<br>
+     <input type="checkbox" name="terminos"> He leido y acepto los terminos y condiciones<br>
 
     </div>
 
@@ -230,13 +231,14 @@ Otras finalidades
     <div class="agregarEspacioizq espacio-arriba">
 
 
-        <a href="/Atras"><button type="submit" class="btn btn-outline-primary " value="call_flask_funtion">Atras</button></a>
+        <a href="/admin"><button type="button" class="btn btn-outline-primary " value="call_flask_funtion">Atras</button></a>
 
         <a href="/Registrar"><button type="submit" class="btn btn-outline-primary espacio-izq" value="call_flask_funtion">Registrar</button></a>
 
     </div>
 
     &ensp;
+  </form>>
 
 
 

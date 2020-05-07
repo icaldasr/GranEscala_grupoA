@@ -62,6 +62,28 @@ def buscar():
 def registrarDoctor():
     if "user" in session:
         usuario = session["user"]
+        if request.method == 'POST':
+            term = request.form.get('terminos')
+            if term == "on":
+                nombre = request.form["nombre"]
+                apellido = request.form["apellido"]
+                tipodoc = request.form["TD"]
+                nrodocumento = request.form["numeroDocumento"]
+                ideps = request.form["ideps"]
+                idespecializacion = request.form["esp"]
+                rh = request.form["RH"]
+                correo = request.form["correo"]
+                nacimiento = request.form["fecnac"]
+                tel = request.form["tel"]
+                departamento = request.form["departamento"]
+                ciudad = request.form["ciudad"]
+                barrio = request.form["barrio"]
+                sexo = request.form["sex"]
+                ##Falta cambiar en el formulario los valores especificos de las opciones de seleccion que van en la BD 
+                #sis.agregarDoctor(int(tipodoc), int(nrodocumento), nombre, apellido, int(ideps), int(idespecializacion), rh, correo, nacimiento, int(tel), departamento, ciudad, bario, sexo)
+                print (nombre + " - " + apellido + " - "+ tipodoc + " - " + nrodocumento +" - "+ ideps + " - " + nacimiento + " - " + rh+" - " + correo  + " - " + sexo + " - " +term)
+                return redirect(url_for("admin"))
+        
         return render_template("registrardoctor.html")
     else: 
         return "ERROR: No ha iniciado sesión"

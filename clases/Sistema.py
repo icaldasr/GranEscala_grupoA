@@ -68,9 +68,8 @@ class Sistema():
         
         
 
-    def agregarDoctor(self, doctor):
-        self.doctores.append(doctor)
-        #dataBase.agregarDoctor(doctor)
+    def agregarDoctor(self, tipodoc, nrodocumento, nombre, apellido, ideps, idespecializacion, rh, correo, nacimiento, tel, departamento, ciudad, bario, sexo):
+        self.dataBase.insertarDoctor(tipodoc, nrodocumento, nombre, apellido, ideps, idespecializacion, rh, correo, nacimiento, tel, departamento, ciudad, bario, sexo)
 
     def posDoctor(self, tipodoc, numdoc):
         cont = 0
