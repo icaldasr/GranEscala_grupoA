@@ -7,11 +7,30 @@
   <link rel="stylesheet"  type= "text/css" href= "{{ url_for('static',filename='styles/registrar.css') }}">
   <link rel="stylesheet"  type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
     
+<<<<<<< HEAD
   <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+=======
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+    <div>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <div class = "alert alert-success">
+              {{ message }}</li>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      {% block body %}{% endblock %}  
+    </div>
+>>>>>>> 3765071f20a2d7fa3095213695a0a8c2d1da7309
 
 
+<<<<<<< HEAD
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -20,6 +39,11 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   <link href="CustomStyles.css" rel="stylesheet" />
+=======
+    
+    
+
+>>>>>>> 3765071f20a2d7fa3095213695a0a8c2d1da7309
 </head>
 
 <body>
