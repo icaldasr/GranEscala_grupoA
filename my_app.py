@@ -71,7 +71,6 @@ def buscar():
 @app.route("/registrarDoctor", methods = ["POST", "GET"])
 def registrarDoctor():
     if "user" in session:
-        t_documentos = sis.tipo_documentos()
         usuario = session["user"]
         contra = secrets.token_urlsafe(6)
         if request.method == 'POST':
@@ -97,15 +96,10 @@ def registrarDoctor():
                 mensaje = '¡Doctor creado satisfactoriamente!'
                 flash(mensaje)
                 return redirect(url_for("admin"))
-<<<<<<< HEAD
-            
-        return render_template("registrardoctor.html", t_d = t_documentos)
-=======
             else:
                 mensaje = '¡Debes aceptar los términos y condiciones para continuar!'
                 flash(mensaje)
         return render_template("registrardoctor.html")
->>>>>>> 3765071f20a2d7fa3095213695a0a8c2d1da7309
     else: 
         message = '¡Primero debes iniciar sesión!'
         flash(message)
@@ -210,8 +204,3 @@ def logout():
     session.pop("user", None)
     
     return redirect(url_for("login"))
-
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
