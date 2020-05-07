@@ -154,7 +154,7 @@ def registrarAdministrador():
 def solicitudes():
     if "user" in session:
         usuario = session["user"]
-        return "Hola amigo Otoya" #render_template("solicitudes.html")
+        return render_template("solicitudes.html")
     else: 
         return "ERROR: No ha iniciado sesión"
 
