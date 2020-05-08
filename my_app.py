@@ -37,9 +37,17 @@ def cambioContrasena():
         correo = request.form['correo1']
         correo2 = request.form['correo2']
         print(correo)
-        sis.enviarClave(correo)
-        mensaje = 'Contraseña enviada al correo {}'.format(correo)
-        flash(mensaje)
+
+        if correo != correo2:
+            flash("Los correos ingresados no coinciden, intente nuevamente","error")
+
+        else: 
+            if sis.enviarClave(correo) == True:
+                mensaje = 'Contraseña enviada al correo {}'.format(correo)
+                flash('Contraseña enviada al correo {}'.format(correo),"success")
+            else:
+                mensaje = 'El correo no está registardo'
+                flash("El correo ingresado no está registrado en el sistema","error")
     return redirect(url_for("login"))
     #return render_template("login.html")
 

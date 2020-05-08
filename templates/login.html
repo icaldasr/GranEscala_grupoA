@@ -5,11 +5,15 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 <div>
-{% with messages = get_flashed_messages() %}
+{% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
-    {% for message in messages %}
-      <div class = "alert alert-success">
-        {{ message }}</li>
+    {% for category,message in messages %}
+    {% if category == 'success'%}
+      <div class = "alert alert-success mb-3" role="alert">{{ message }}</div>
+    {%endif%}
+    {% if category == 'error'%}
+      <div class = "alert alert-danger mb-3" role="alert">{{ message }}</div>
+    {%endif%}
     {% endfor %}
   {% endif %}
 {% endwith %}
@@ -43,6 +47,13 @@ button {
 
 button:hover {
   opacity: 0.8;
+}
+.alert.success {
+  background-color: green;
+}
+
+.alert.error {
+  background-color: red;
 }
 
 .cancelbtn {
@@ -139,8 +150,8 @@ span.psw {
             <input type="email" class="form-control" name="correo2" required>
           </div>
           <!--p><input type="submit" value ="enviar" name=""></p-->
-          <button type="submit" class="btn btn-primary" >Enviar Contraseña</button>
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="submit"  class="btn btn-primary" >Enviar Contraseña</button>
+          <button type="button"  class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         </form>
       </div>
       <div class="modal-footer">
@@ -151,8 +162,6 @@ span.psw {
   </div>
 </div>
 </div>
-
-
 
 
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

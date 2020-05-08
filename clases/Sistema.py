@@ -126,18 +126,24 @@ class Sistema():
     def enviarClave(self, correo):
         msg = MIMEMultipart()
         
-        contra = self.dataBase.obtenerContrasenaPara(correo)
-        mensaje = 'Por favor no vuelva a olvidar que su clave de ingreso es: ' + contra
-        msg['from'] = 'valledevEPS@gmail.com'
-        msg['to'] = correo
-        msg['Subject'] = 'Recuperación de contraseña EPS'
-        msg.attach(MIMEText(mensaje, 'plain'))
-        server = smtplib.SMTP('smtp.gmail.com: 587')
-        server.starttls()
-        server.login(msg['From'], 'bananiiiin') ##conexión con el servicio de correos
-        server.sendmail(msg['From'], msg['To'], msg.as_string()) #envia mensaje
-        server.quit()
-        print("Mensaje enviado")
+        existe = self.dataBase.buscarCorreo(correo)
+        if self.dataBase.buscarCorreo(correo) == True:
+
+            contra = self.dataBase.obtenerContrasenaPara(correo)
+            mensaje = 'Por favor no vuelva a olvidar que su clave de ingreso es: ' + contra
+            msg['from'] = 'valledevEPS@gmail.com'
+            msg['to'] = correo
+            msg['Subject'] = 'Recuperación de contraseña EPS'
+            msg.attach(MIMEText(mensaje, 'plain'))
+            server = smtplib.SMTP('smtp.gmail.com: 587')
+            server.starttls()
+            server.login(msg['From'], 'bananiiiin') ##conexión con el servicio de correos
+            server.sendmail(msg['From'], msg['To'], msg.as_string()) #envia mensaje
+            server.quit()
+            print("Mensaje enviado")
+            return True
+        else:
+            return False
 
     def cargarAdmin(self, correo): 
         query = self.dataBase.obtenerAdmin(correo)

@@ -54,6 +54,15 @@ class Gestor():
         print ("hola1")
 
 
+    def buscarCorreo(self,correo):
+        self.cursor.execute("SELECT count(*) FROM login where correo = %s",correo)
+        temp = self.cursor.fetchone()[0]
+        if temp == 1:
+            
+            return True
+        else:
+            return False
+
     def obtenerContrasenaPara(self, correo):
         self.cursor.execute(
             "(SELECT  nombres, correo, contrasena, tipo FROM login inner JOIN medicos USING (correo))  UNION (select nombres, correo, contrasena, tipo from login INNER JOIN administrador USING (correo))"
