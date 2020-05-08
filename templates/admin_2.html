@@ -18,7 +18,17 @@
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
 
-
+    <div>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for message in messages %}
+              <div class = "alert alert-success">
+                {{ message }}</li>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        {% block body %}{% endblock %}  
+      </div>
 
 
 <!-- borrar: -->
