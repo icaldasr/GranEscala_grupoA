@@ -174,3 +174,13 @@ class Sistema():
 
     def tipo_documento(self):
         return self.dataBase.obtener_tipo_documentos()
+
+
+    def obtener_eps(self):
+        return self.dataBase.eps()
+
+    def obtener_espc(self):
+        return self.dataBase.especializacion()
+
+    def obtener_ciudades(self):
+        return self.dataBase.ciudades()

@@ -82,6 +82,9 @@ def registrarDoctor():
         usuario = session["user"]
         contra = secrets.token_urlsafe(6)
         tipo_documentos = sis.tipo_documento()
+        epss = sis.obtener_eps()
+        espcc = sis.obtener_espc()
+        ciu = sis.obtener_ciudades()
         if request.method == 'POST':
             term = request.form.get('terminos')
             if term == "on":
@@ -116,7 +119,7 @@ def registrarDoctor():
             else:
                 mensaje = '¡Debes aceptar los términos y condiciones para continuar!'
                 flash(mensaje,"error")
-        return render_template("registrardoctor.html", t_d = tipo_documentos)
+        return render_template("registrardoctor.html", t_d = tipo_documentos, ep=epss, esp=espcc, ci = ciu)
     else: 
         message = '¡Primero debes iniciar sesión!'
         flash(message,"error")

@@ -86,14 +86,18 @@
       <label for="inputPassword4">Nro. documento</label>
       <input type="last name" name="numeroDocumento" class="form-control">
       
-      <label for="exampleFormControlSelect1">Seleccione una IPS</label>
+      <label for="exampleFormControlSelect1">Seleccione una EPS</label>
       <select name="ideps" class="form-control">
-        <option value="falta hacer esto">falta hacer esto</option>
+        {% for i in ep %}
+          <option value={{ i.0 }}>{{ i.0 }}</option>
+        {% endfor %}
       </select>
   
       <label for="exampleFormControlSelect1">Seleccione una Especialización</label>
       <select name="esp" class="form-control">
-        <option value="falta hacer esto">falta hacer esto</option>
+        {% for i in esp %}
+          <option value={{ i.0 }}>{{ i.0 }}</option>
+        {% endfor %}
       </select>
 
       <label for="exampleFormControlSelect1">Ingrese su Correo</label>
@@ -104,7 +108,9 @@
      
       <label for="exampleFormControlSelect1">Ingrese su Ciudad de Residencia</label>
       <select name="ciudad" class="form-control">
-        <option value="falta esto">falta esto</option> 
+        {% for i in ci %}
+          <option value={{ i.0 }}>{{ i.0 }}</option>
+        {% endfor %}
       </select>
       
       <label for="exampleFormControlSelect1">Ingrese su Barrio</label>

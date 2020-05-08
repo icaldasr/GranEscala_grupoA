@@ -87,14 +87,18 @@ class Gestor():
             return temp
 
     def insertarDoctor(self, tipodoc, nrodocumento, nombre, apellido, eps, especializacion, rh, correo, nacimiento, tel, ciudad, barrio, sexo, contra):
-        x = self.cursor.execute(
-            "select ingresar_medico(%s, %s, %s, %s, %s, %s, %s, %s, %s)" , (int(nrodocumento), eps, nombre, apellido, especializacion, contra, correo, int(tel), tipodoc)
+        self.cursor.execute(
+            """
+            select ingresar_medico(%s, %s, %s, %s, %s, %s, %s, %s, %s)
+            """, 
+            (int(nrodocumento), eps, nombre, apellido, especializacion, contra, correo, int(tel), tipodoc)
         )
-        if x == 1:
-            self.conexion.commit()
+        consulta = self.cursor.fetchall()
+        self.conexion.commit()
+        if consulta[0][0] == 1:
             return 1
         else:
-            return x
+            return consulta[0][0]
         
 
     def insertarAdministrador(self, nrodocumento, nombre, apellido, correo,celular,tipoDoc,contra):
@@ -108,6 +112,31 @@ class Gestor():
         self.cursor.execute(
             """
             select descripcion from tipo_documento
+            """
+        )
+        return self.cursor.fetchall()
+
+    def eps(self):
+        self.cursor.execute(
+            """
+            select nombre from eps
+            """
+        )
+        return self.cursor.fetchall()
+
+    def especializacion(self):
+        self.cursor.execute(
+            """
+            select nombre from especializaciones
+            """
+        )
+        return self.cursor.fetchall()
+
+
+    def ciudades(self):
+        self.cursor.execute(
+            """
+            select nombre from ciudad
             """
         )
         return self.cursor.fetchall()
