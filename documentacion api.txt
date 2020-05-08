@@ -9,7 +9,7 @@
         el formato de json es:
 
             {
-                consultorio 1: [
+                "consultorio 1": [
                     {
                         nombre doctor: "mimi",
                         documento doctor: "1231231",
@@ -22,7 +22,7 @@
                     }
                 ],
 
-                consultorio 2: [
+                "consultorio 2": [
                     {
                         nombre doctor: "banano",
                         documento doctor: "123331231",
@@ -41,15 +41,15 @@
         salidas: retorna un json con el id de la ips, el nombre de la ips, direccion de la ips
 
         {
-            1: {
+            "1": {
                 nombre: "ips 1",
                 direccion: "direccion"
             },
-            2: {
+            "2": {
                 nombre: "ips 2",
                 direccion: "direccion"
             },
-            3: {
+            "3": {
                 nombre: "ips 3",
                 direccion: "direccion"
             }
@@ -65,16 +65,16 @@
         salidas: retorna un json con el nro de cita, la fecha, la ips, la direccion, medico, y la especializacion
 
         {
-            1:{
+            "1":{
                 fecha: "dia-mes-año hora-minuto-segundo",
-                ips: "ips 1"
+                ips: "ips 1",
                 direccion: "direccion",
                 medico: "medico",
                 especializacion: "especializacion"
             },
-            2:{
+            "2":{
                 fecha: "dia-mes-año hora-minuto-segundo",
-                ips: "ips 2"
+                ips: "ips 2",
                 direccion: "direccion",
                 medico: "medico",
                 especializacion: "especializacion"
@@ -97,7 +97,7 @@
 
     * agendar cita:
         metodo: POST
-        entradas: recive un json con el siguiente formato
+        entradas: recive un json con el siguiente formato (UNA SOLA CITA POR PETICION)
             {
                 documento paciente: {
                     fecha: "mes/dia/año hora:minuto:segundo",
@@ -120,10 +120,10 @@
         ruta: http://thawing-stream-48846.herokuapp.com/ips/<string:nombre_ips>
         salidas: retorna un json con el siguiente formato
 
-            {
+           {
                 "nombre ips": [
-                    especializacion 1,
-                    especializacion 2
+                    "especializacion 1",
+                    "especializacion 2"
                 ]
             }
 
@@ -135,7 +135,7 @@
     metodo: POST
     entradas: recive un json con el siguiente formato
         {
-            documento paciente: {
+            "documento paciente": {
                 fecha: "mes/dia/año hora:minuto:segundo",
                 medico: "documento",
                 ips: "ips 1",
