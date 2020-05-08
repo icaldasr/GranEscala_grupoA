@@ -173,6 +173,8 @@ def registrarAdministrador():
                 barrio = request.form["barrio"]
                 sexo = request.form["sexo"]
                 #sis.agregarAdmin(nrodocumento, nombre, apellido, correoE,telefono,tipodoc,contra)
+                sis.agregarAdmin(nrodocumento, nombre, apellido, correoE,telefono,tipodoc,contra)
+
                 mensaje = '¡Administrador creado satisfactoriamente!'
                 flash(mensaje)
                 sis.enviarDatosLogin(correoE,contra,'Administrador')
