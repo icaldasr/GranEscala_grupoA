@@ -89,8 +89,8 @@ def registrarDoctor():
                 apellido = request.form["apellido"]
                 tipodoc = request.form["TD"]
                 nrodocumento = request.form["numeroDocumento"]
-                ideps = request.form["ideps"]
-                idespecializacion = request.form["esp"]
+                eps = request.form["ideps"]
+                especializacion = request.form["esp"]
                 rh = request.form["RH"]
                 correo = request.form["correo"]
                 nacimiento = request.form["fecnac"]
@@ -100,12 +100,19 @@ def registrarDoctor():
                 barrio = request.form["barrio"]
                 sexo = request.form["sex"]
                 ##Falta cambiar en el formulario los valores especificos de las opciones de seleccion que van en la BD 
-                #sis.agregarDoctor(int(tipodoc), int(nrodocumento), nombre, apellido, int(ideps), int(idespecializacion), rh, correo, nacimiento, int(tel), departamento, ciudad, bario, sexo)
-                print (nombre + " - " + apellido + " - "+ tipodoc + " - " + nrodocumento +" - "+ ideps + " - " + nacimiento + " - " + rh+" - " + correo  + " - " + sexo + " - " +term)
-                mensaje = '¡Doctor creado satisfactoriamente!'
-                flash(mensaje,"success")
-                sis.enviarDatosLogin(correo,contra,'Doctor')
-                return redirect(url_for("admin"))
+                x = sis.agregarDoctor(tipodoc, int(nrodocumento), nombre, apellido, eps, especializacion, rh, correo, nacimiento, int(tel), ciudad, barrio, sexo, contra)
+                if x == 1:
+                    mensaje = '¡Doctor creado satisfactoriamente!'
+                    flash(mensaje,"success")
+                    sis.enviarDatosLogin(correo,contra,'Doctor')
+                    ##print (nombre + " - " + apellido + " - "+ tipodoc + " - " + nrodocumento +" - "+ ideps + " - " + nacimiento + " - " + rh+" - " + correo  + " - " + sexo + " - " +term)
+                    return redirect(url_for("admin"))
+                elif x == 2:
+                    mensaje = '¡Un usuario con este número de documento ya existe! No puedes agregar una persona con dos cuentas en el sistema.'
+                    flash(mensaje,"error")
+                elif x == 3: 
+                    mensaje = '¡Un usuario con este correo ya existe! Usa otro correo. '
+                    flash(mensaje,"error")
             else:
                 mensaje = '¡Debes aceptar los términos y condiciones para continuar!'
                 flash(mensaje,"error")

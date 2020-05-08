@@ -86,15 +86,16 @@ class Gestor():
         else:
             return temp
 
-    def insertarDoctor(self, tipodoc, nrodocumento, nombre, apellido, ideps, idespecializacion, rh, correo, nacimiento, tel, departamento, ciudad, bario, sexo):
-        self.cursor.execute(
-            "insert into medicos (id_tip, nro_documento, nombres, apellido, id_eps, id_espc, correo) values (%d, %d, %s, %s, %d, %d, %s)" , tipodoc, nrodocumento, nombre, apellido, ideps, idespecializacion, correo
+    def insertarDoctor(self, tipodoc, nrodocumento, nombre, apellido, eps, especializacion, rh, correo, nacimiento, tel, ciudad, barrio, sexo, contra):
+        x = self.cursor.execute(
+            "select ingresar_medico(%s, %s, %s, %s, %s, %s, %s, %s, %s)" , (int(nrodocumento), eps, nombre, apellido, especializacion, contra, correo, int(tel), tipodoc)
         )
-        self.conexion.commit()
-        self.cursor.execute(
-            "insert into login (correo, contrasena, tipo) values (%s, '123456', 'medico' )", correo
-        )
-        self.conexion.commit()
+        if x == 1:
+            self.conexion.commit()
+            return 1
+        else:
+            return x
+        
 
     def insertarAdministrador(self, nrodocumento, nombre, apellido, correo,celular,tipoDoc,contra):
         

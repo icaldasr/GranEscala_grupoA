@@ -70,9 +70,9 @@ class Sistema():
         
         
 
-    def agregarDoctor(self, tipodoc, nrodocumento, nombre, apellido, ideps, idespecializacion, rh, correo, nacimiento, tel, departamento, ciudad, bario, sexo):
-        
-        self.dataBase.insertarDoctor(tipodoc, nrodocumento, nombre, apellido, ideps, idespecializacion, rh, correo, nacimiento, tel, departamento, ciudad, bario, sexo)
+    def agregarDoctor(self, tipodoc, nrodocumento, nombre, apellido, ideps, idespecializacion, rh, correo, nacimiento, tel, ciudad, barrio, sexo, contra):
+        x = self.dataBase.insertarDoctor(tipodoc, nrodocumento, nombre, apellido, ideps, idespecializacion, rh, correo, nacimiento, tel, ciudad, barrio, sexo, contra)
+        return x
 
     def agregarAdmin(sel,nrodocumento, nombre, apellido, correo,celular,tipoDoc,contra):
         self.dataBase.insertarAdministrador(nrodocumento, nombre, apellido, correo,celular,tipoDoc,contra)
@@ -148,8 +148,6 @@ class Sistema():
 
     def enviarDatosLogin(self,correo,contra,rol):
         msg = MIMEMultipart()
-        
-        
         mensaje = 'Usted ha sido registrado como: '+ rol + '\nCorreo registrado: ' + correo + '\nRecuerde que su contraseña es: ' + contra
         msg['from'] = 'valledevEPS@gmail.com'
         msg['to'] = correo
