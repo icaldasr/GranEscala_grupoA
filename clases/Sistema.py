@@ -10,7 +10,8 @@ from clases.SolicitudM import SolicitudM
 from clases.HistoriaClinica import HistoriaClinica
 from clases.Administrador import Administrador
 import secrets
-
+from email.header import Header
+from email.utils import formataddr
 
 class Sistema():
     instance = None
@@ -131,7 +132,7 @@ class Sistema():
 
             contra = self.dataBase.obtenerContrasenaPara(correo)
             mensaje = 'Por favor no vuelva a olvidar que su clave de ingreso es: ' + contra
-            msg['from'] = 'valledevEPS@gmail.com'
+            msg['from'] = formataddr((str(Header('VALLEDEV', 'utf-8')), 'valledevEPS@gmail.com')) 
             msg['to'] = correo
             msg['Subject'] = 'Recuperación de contraseña EPS'
             msg.attach(MIMEText(mensaje, 'plain'))
@@ -144,6 +145,23 @@ class Sistema():
             return True
         else:
             return False
+
+    def enviarDatosLogin(self,correo,contra,rol):
+        msg = MIMEMultipart()
+        
+        
+        mensaje = 'Usted ha sido registrado como: '+ rol + '\nCorreo registrado: ' + correo + '\nRecuerde que su contraseña es: ' + contra
+        msg['from'] = 'valledevEPS@gmail.com'
+        msg['to'] = correo
+        msg['Subject'] = 'REGISTRO EXITOSO'
+        msg.attach(MIMEText(mensaje, 'plain'))
+        server = smtplib.SMTP('smtp.gmail.com: 587')
+        server.starttls()
+        server.login(msg['From'], 'bananiiiin') ##conexión con el servicio de correos
+        server.sendmail(msg['From'], msg['To'], msg.as_string()) #envia mensaje
+        server.quit()
+        print("Mensaje enviado")
+
 
     def cargarAdmin(self, correo): 
         query = self.dataBase.obtenerAdmin(correo)

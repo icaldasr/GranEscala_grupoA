@@ -24,7 +24,7 @@ def login():
             return redirect(url_for("doctor"))
         else:
             mensaje = 'El correo o la contraseña son erroneos. ¡Vuelve a intentarlo!'
-            flash(mensaje)
+            flash(mensaje,"error")
             return render_template("login.html")
     else:
         if "user" in session:
@@ -63,7 +63,7 @@ def admin():
             return render_template("admin.html", nombre="UnNombre", correo= usuario)
     else:
         message = '¡Primero debes iniciar sesión!'
-        flash(message)
+        flash(message,"error")
         return redirect(url_for("login"))
         
 @app.route("/Buscar", methods = ["POST", "GET"])
@@ -95,7 +95,7 @@ def registrarDoctor():
                 correo = request.form["correo"]
                 nacimiento = request.form["fecnac"]
                 tel = request.form["tel"]
-                departamento = request.form["departamento"]
+                #departamento = request.form["departamento"]
                 ciudad = request.form["ciudad"]
                 barrio = request.form["barrio"]
                 sexo = request.form["sex"]
@@ -104,14 +104,15 @@ def registrarDoctor():
                 print (nombre + " - " + apellido + " - "+ tipodoc + " - " + nrodocumento +" - "+ ideps + " - " + nacimiento + " - " + rh+" - " + correo  + " - " + sexo + " - " +term)
                 mensaje = '¡Doctor creado satisfactoriamente!'
                 flash(mensaje)
+                sis.enviarDatosLogin(correo,contra,'Doctor')
                 return redirect(url_for("admin"))
             else:
                 mensaje = '¡Debes aceptar los términos y condiciones para continuar!'
-                flash(mensaje)
+                flash(mensaje,"error")
         return render_template("registrardoctor.html", t_d = tipo_documentos)
     else: 
         message = '¡Primero debes iniciar sesión!'
-        flash(message)
+        flash(message,"error")
         return redirect(url_for("login"))
 
 @app.route("/registrarPaciente", methods = ["POST", "GET"])
@@ -136,15 +137,16 @@ def registrarPaciente():
                 sexo = request.form["sexo"]
                 mensaje = '!Paciente creado satisfactoriamente!'
                 flash(mensaje)
+
                 return redirect(url_for("admin"))
             else:
                 message = '¡Debes aceptar los términos y condiciones para continuar!'
-                flash(message)
+                flash(message,"error")
 
         return render_template("registrarpaciente.html")
     else: 
         message = '¡Primero debes iniciar sesión!'
-        flash(message)
+        flash(message,"error")
         return redirect(url_for("login"))
 
 @app.route("/registrarAdministrador", methods = ["POST", "GET"])
@@ -153,6 +155,7 @@ def registrarAdministrador():
         usuario = session["user"]
         contra = secrets.token_urlsafe(6)
         #print("CONTRASEÑA",contra)
+        tipo_documentos = sis.tipo_documento()
         if request.method == 'POST':
             term = reques.form.get('terminos')
             if term == "on":
@@ -169,17 +172,18 @@ def registrarAdministrador():
                 ciudad = request.form["ciudad"]
                 barrio = request.form["barrio"]
                 sexo = request.form["sexo"]
-                sis.agregarAdmin(nrodocumento, nombre, apellido, correoE,telefono,tipodoc,contra)
-                mensaje = '!Administrador creado satisfactoriamente!'
+                #sis.agregarAdmin(nrodocumento, nombre, apellido, correoE,telefono,tipodoc,contra)
+                mensaje = '¡Administrador creado satisfactoriamente!'
                 flash(mensaje)
+                sis.enviarDatosLogin(correoE,contra,'Administrador')
                 return redirect(url_for("admin"))
             else:
                 message = '¡Debes aceptar los términos y condiciones para continuar!'
-                flash(message)
-        return render_template("registraradmin.html")
+                flash(message,"error")
+        return render_template("registraradmin.html",t_d = tipo_documentos)
     else: 
         message = '¡Primero debes iniciar sesión!'
-        flash(message)
+        flash(message,"error")
         return redirect(url_for("login"))
 
 @app.route("/solicitudes", methods = ["POST","GET"])
@@ -189,10 +193,8 @@ def solicitudes():
         return render_template("solicitudes.html")
     else: 
         message = '¡Primero debes iniciar sesión!'
-        flash(message)
+        flash(message,"error")
         return redirect(url_for("login"))
-
-
 
 @app.route("/doctor", methods = ["POST", "GET"])
 def doctor():
@@ -201,7 +203,7 @@ def doctor():
         return f"<h1>{usuario}</h1>" ##Debe mostrar la página inicial de doctor
     else:
         message = '¡Primero debes iniciar sesión!'
-        flash(message)
+        flash(message,"error")
         return redirect(url_for("login"))
 
 

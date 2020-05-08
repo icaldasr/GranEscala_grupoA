@@ -13,15 +13,19 @@
     <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <div>
-      {% with messages = get_flashed_messages() %}
-        {% if messages %}
-          {% for message in messages %}
-            <div class = "alert alert-success">
-              {{ message }}</li>
-          {% endfor %}
-        {% endif %}
-      {% endwith %}
-      {% block body %}{% endblock %}  
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category,message in messages %}
+        {% if category == 'success'%}
+          <div class = "alert alert-success mb-3" role="alert">{{ message }}</div>
+        {%endif%}
+        {% if category == 'error'%}
+          <div class = "alert alert-danger mb-3" role="alert">{{ message }}</div>
+        {%endif%}
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    {% block body %}{% endblock %}  
       </div>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -234,7 +238,7 @@ Otras finalidades
 
         <a href="/admin"><button type="button" class="btn btn-outline-primary " value="call_flask_funtion">Atras</button></a>
 
-        <a href="/Registrar"><button type="submit" class="btn btn-outline-primary espacio-izq" value="call_flask_funtion">Registrar</button></a>
+        <a href="#"><button type="submit" class="btn btn-outline-primary espacio-izq" value="call_flask_funtion">Registrar</button></a>
 
     </div>
 
