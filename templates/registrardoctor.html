@@ -48,23 +48,23 @@
     &ensp;
   <form method="POST">
     <div class="form-group" style="width: 500px;margin-left: 50px;">
-      <label for="inputEmail4">Nombre</label>
+      <label for="inputEmail4">Nombre</label required>
       <input type="name" name="nombre" class="form-control">
       
-      <label for="inputPassword4">Apellido</label>
+      <label for="inputPassword4">Apellido</label required>
       <input type="last name" name="apellido" class="form-control">
 
-      <label for="exampleFormControlSelect1">Seleccione su Sexo</label>
+      <label for="exampleFormControlSelect1">Seleccione su Sexo</label required>
       <select name="sex" class="form-control">
         <option value="Masculino">Masculino</option> 
         <option value="Femenino">Femenino</option> 
         <option value="Transformer">Transformer</option> 
       </select>
       
-      <label for="exampleFormControlSelect1">Fecha de Nacimiento</label>
+      <label for="exampleFormControlSelect1">Fecha de Nacimiento</label required>
       <input class="inline-block centerfecha" type="date" id="start" name="fecnac" value="2020-07-22" min="1900-01-01" max="2020-12-31">
 
-      <label for="exampleFormControlSelect1">Seleccione el Tipo de Sangre</label>
+      <label for="exampleFormControlSelect1">Seleccione el Tipo de Sangre</label required>
       <select name="RH" class="form-control">
         <option value="A+">A+</option> 
         <option value="B+">B+</option> 
@@ -76,44 +76,44 @@
         <option value="O-">O-</option>
       </select>
 
-      <label for="exampleFormControlSelect1">Seleccione un Tipo de Documento</label>
+      <label for="exampleFormControlSelect1">Seleccione un Tipo de Documento</label required>
       <select name="TD" class="form-control">
         {% for i in t_d %}
           <option value={{ i.0 }}>{{ i.0 }}</option> 
         {% endfor %}
       </select>
 
-      <label for="inputPassword4">Nro. documento</label>
+      <label for="inputPassword4">Nro. documento</label required>
       <input type="last name" name="numeroDocumento" class="form-control">
       
-      <label for="exampleFormControlSelect1">Seleccione una EPS</label>
+      <label for="exampleFormControlSelect1">Seleccione una EPS</label required>
       <select name="ideps" class="form-control">
         {% for i in ep %}
           <option value={{ i.0 }}>{{ i.0 }}</option>
         {% endfor %}
       </select>
   
-      <label for="exampleFormControlSelect1">Seleccione una Especialización</label>
+      <label for="exampleFormControlSelect1">Seleccione una Especialización</label required>
       <select name="esp" class="form-control">
         {% for i in esp %}
           <option value={{ i.0 }}>{{ i.0 }}</option>
         {% endfor %}
       </select>
 
-      <label for="exampleFormControlSelect1">Ingrese su Correo</label>
+      <label for="exampleFormControlSelect1">Ingrese su Correo</label required>
       <input type="last name" name="correo" class="form-control">
 
-      <label for="exampleFormControlSelect1">Ingrese su Telefono</label>
+      <label for="exampleFormControlSelect1">Ingrese su Telefono</label required>
       <input type="last name" name="tel" class="form-control">
      
-      <label for="exampleFormControlSelect1">Ingrese su Ciudad de Residencia</label>
+      <label for="exampleFormControlSelect1">Ingrese su Ciudad de Residencia</label required>
       <select name="ciudad" class="form-control">
         {% for i in ci %}
           <option value={{ i.0 }}>{{ i.0 }}</option>
         {% endfor %}
       </select>
       
-      <label for="exampleFormControlSelect1">Ingrese su Barrio</label>
+      <label for="exampleFormControlSelect1">Ingrese su Barrio</label required>
       <input type="last name" name="barrio" class="form-control">
 
     <div class="agregarEspacioizq"style="height:180px;width:430px;border:1px solid #ccc;font:16px/26px Georgia, Garamond, Serif;overflow:auto;" align="left" >
@@ -167,7 +167,7 @@ Otras finalidades
   </div>
   <div class="form-group">
     <div class="agregarEspacioizq">
-     <input type="checkbox" name="terminos"> He leido y acepto los terminos y condiciones<br>
+     <input type="checkbox" name="terminos"> He leido y acepto los terminos y condiciones<br required>
     </div>
 
     <div class="agregarEspacioizq espacio-arriba">

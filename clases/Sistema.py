@@ -132,7 +132,7 @@ class Sistema():
 
             contra = self.dataBase.obtenerContrasenaPara(correo)
             mensaje = 'Por favor no vuelva a olvidar que su clave de ingreso es: ' + contra
-            msg['from'] = formataddr((str(Header('VALLEDEV', 'utf-8')), 'valledevEPS@gmail.com')) 
+            msg['from'] = 'valledevEPS@gmail.com'
             msg['to'] = correo
             msg['Subject'] = 'Recuperación de contraseña EPS'
             msg.attach(MIMEText(mensaje, 'plain'))
