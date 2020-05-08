@@ -73,7 +73,7 @@ def buscar():
         return render_template("admin_2.html")
     else: 
         message = '¡Primero debes iniciar sesión!'
-        flash(message)
+        flash(message,"error")
         return redirect(url_for("login"))
 
 @app.route("/registrarDoctor", methods = ["POST", "GET"])
@@ -103,7 +103,7 @@ def registrarDoctor():
                 #sis.agregarDoctor(int(tipodoc), int(nrodocumento), nombre, apellido, int(ideps), int(idespecializacion), rh, correo, nacimiento, int(tel), departamento, ciudad, bario, sexo)
                 print (nombre + " - " + apellido + " - "+ tipodoc + " - " + nrodocumento +" - "+ ideps + " - " + nacimiento + " - " + rh+" - " + correo  + " - " + sexo + " - " +term)
                 mensaje = '¡Doctor creado satisfactoriamente!'
-                flash(mensaje)
+                flash(mensaje,"success")
                 sis.enviarDatosLogin(correo,contra,'Doctor')
                 return redirect(url_for("admin"))
             else:
@@ -157,26 +157,26 @@ def registrarAdministrador():
         #print("CONTRASEÑA",contra)
         tipo_documentos = sis.tipo_documento()
         if request.method == 'POST':
-            term = reques.form.get('terminos')
+            term = request.form.get('terminos')
             if term == "on":
-                nombre = request.form["nombre"]
-                apellido = request.form["apellido"]
-                tipodoc = request.form["TDA"]
-                nrodocumento = request.form["numeroDocumento"]
-                rh = request.form["RH"]
+                # nombre = request.form["nombre"]
+                # apellido = request.form["apellido"]
+                # tipodoc = request.form["TDA"]
+                # nrodocumento = request.form["numeroDocumento"]
+                # rh = request.form["RH"]
                 correoE = request.form["correoE"]
-                nacimiento = request.form["fNacimiento"]
-                telefono = request.form["tel"]
-                #eCivil = request.form["EC"]
-                departamento = request.form["departamento"]
-                ciudad = request.form["ciudad"]
-                barrio = request.form["barrio"]
-                sexo = request.form["sexo"]
+                # nacimiento = request.form["fNacimiento"]
+                # telefono = request.form["tel"]
+                # #eCivil = request.form["EC"]
+                # departamento = request.form["departamento"]
+                # ciudad = request.form["ciudad"]
+                # barrio = request.form["barrio"]
+                # sexo = request.form["sexo"]
                 #sis.agregarAdmin(nrodocumento, nombre, apellido, correoE,telefono,tipodoc,contra)
-                sis.agregarAdmin(nrodocumento, nombre, apellido, correoE,telefono,tipodoc,contra)
+                #sis.agregarAdmin(nrodocumento, nombre, apellido, correoE,telefono,tipodoc,contra)
 
                 mensaje = '¡Administrador creado satisfactoriamente!'
-                flash(mensaje)
+                flash(mensaje,"success")
                 sis.enviarDatosLogin(correoE,contra,'Administrador')
                 return redirect(url_for("admin"))
             else:
