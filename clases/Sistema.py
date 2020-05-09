@@ -9,6 +9,7 @@ from clases.Gestor import Gestor
 from clases.SolicitudM import SolicitudM
 from clases.HistoriaClinica import HistoriaClinica
 from clases.Administrador import Administrador
+from clases.Doctor import Doctor
 import secrets
 from email.header import Header
 from email.utils import formataddr
@@ -168,6 +169,18 @@ class Sistema():
             return admin
         else:
             return None
+
+    def cargarDoctor(self, correo):
+        query =  self.dataBase.obtenerDoctor(correo)
+        if query != None:
+            ndoc= query[0]
+            nom = query[1]
+            ape = query[2]
+            doc = Doctor("tipoDoc", ndoc, nom, ape, 3456789666, correo, "1")
+            return doc
+        else:
+            return None
+
 
     def tipo_documento(self):
         return self.dataBase.obtener_tipo_documentos()

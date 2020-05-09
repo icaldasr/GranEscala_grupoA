@@ -42,7 +42,7 @@
 
 				<li class="col-md-9 inline-block espacio-arriba espacio-izq"><h1 align="left">BIENVENIDO</h1></li>
 				
-            	<li class="col-md-2 inline-block "><a href="#"><p style="color:black" align="right">Cerrar Sesion</p></a></li>
+            	<li class="col-md-2 inline-block "><a href="/logout"><p style="color:black" align="right">Cerrar Sesion</p></a></li>
 
 
 			</ul>
@@ -56,13 +56,13 @@
 
 
 	<div class="agregarEspacioizq">
-		<img src="avatar2.png" alt="Avatar" class="avatar" width="200px" height="200px">
+		<img src=" {{ url_for('static', filename='images/avatar2.png')}}" alt="Avatar" class="avatar"  width="200px" height="200px">
 	</div>
 
 
 	<div class="agregarEspacioizq espacio-arriba " >
 		<p class="inline-block">NOMBRE:</p>
-		<p class="inline-block espacio-texto2" >Andres Felipe Salazar</p>
+		<p class="inline-block espacio-texto2" >{{ nombre + apellido }}</p>
 
 	</div>
     &ensp;
@@ -71,7 +71,7 @@
     <div class="agregarEspacioizq" >
 
 		<p class="inline-block">CORREO:</p>
-		<p class="inline-block espacio-texto2" >elmo@epsSura.com</p>
+		<p class="inline-block espacio-texto2" >{{ correo }}</p>
 
 	</div>
 

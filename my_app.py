@@ -223,7 +223,9 @@ def solicitudes():
 def doctor():
     if "user" in session:
         usuario = session["user"]
-        return f"<h1>{usuario}</h1>" ##Debe mostrar la página inicial de doctor
+        doc = sis.cargarDoctor(session["user"])
+
+        return render_template("doctor.html",  nombre=doc.getNombre(), correo= usuario, apellido= doc.getApellido())
     else:
         message = '¡Primero debes iniciar sesión!'
         flash(message,"error")

@@ -86,6 +86,16 @@ class Gestor():
         else:
             return temp
 
+    def obtenerDoctor(self, correo):
+        self.cursor.execute(
+            "select nro_documento, nombres, apellido, correo, contrasena from login INNER JOIN medicos USING (correo) where correo = %s" , correo
+        )
+        temp = self.cursor.fetchone()
+        if temp == None:
+            return None
+        else:
+            return temp
+
     def insertarDoctor(self, tipodoc, nrodocumento, nombre, apellido, eps, especializacion, rh, correo, nacimiento, tel, ciudad, barrio, sexo, contra):
         self.cursor.execute(
             """
