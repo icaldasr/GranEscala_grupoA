@@ -70,13 +70,12 @@
     <div class="agregarEspacioizq ">
         
 
-        <p class="inline-block">Tipo documento:</p>
-
-        <select name="TDA" class=" centertipo ">
-            <option value="1">C.C</option> 
-            <option value="2">T.I</option> 
-            <option value="3">Pasaporte</option>
-        </select>
+      <label for="exampleFormControlSelect1">Seleccione un Tipo de Documento</label required>
+      <select name="tipoDoc" class="form-control">
+        {% for i in t_d %}
+          <option value={{ i.0 }}>{{ i.0 }}</option> 
+        {% endfor %}
+      </select>
 
     </div>
 
@@ -138,11 +137,12 @@
     </div>
 
 
-    <div class="agregarEspacioizq">
-        <p class="inline-block">Ciudad:</p>
-        <input type="text" name="ciudad" class=" centerciudad inline-block ">
-        
-    </div>
+      <label for="exampleFormControlSelect1">Ingrese su Ciudad de Residencia</label required>
+      <select name="ciudad" class="form-control">
+        {% for i in ci %}
+          <option value={{ i.0 }}>{{ i.0 }}</option>
+        {% endfor %}
+      </select>
 
 
     <div class="agregarEspacioizq">
@@ -155,7 +155,7 @@
     <div class="agregarEspacioizq " >
 
       <p class="inline-block">Sexo:</p>
-      <select name="OS" class=" espacio-sexo inline-block  ">
+      <select name="sexoAdmin" class=" espacio-sexo inline-block  ">
             <option value="1">Masculino</option> 
             <option value="2">Femenino</option> 
             <option value="3">Transformer</option>

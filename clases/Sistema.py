@@ -66,17 +66,14 @@ class Sistema():
         else:
             return -1
 
-
-        
-        
-
     def agregarDoctor(self, tipodoc, nrodocumento, nombre, apellido, ideps, idespecializacion, rh, correo, nacimiento, tel, ciudad, barrio, sexo, contra):
         x = self.dataBase.insertarDoctor(tipodoc, nrodocumento, nombre, apellido, ideps, idespecializacion, rh, correo, nacimiento, tel, ciudad, barrio, sexo, contra)
         return x
 
-    def agregarAdmin(sel,nrodocumento, nombre, apellido, correo,celular,tipoDoc,contra):
-        self.dataBase.insertarAdministrador(nrodocumento, nombre, apellido, correo,celular,tipoDoc,contra)
-
+    def agregarAdmin(self,nrodocumento, nombre, apellido, contra,correo,tipoDoc,telefono):
+        y = self.dataBase.insertarAdministrador(nrodocumento, nombre, apellido, contra,correo,tipoDoc,telefono)
+        return y
+    
     def posDoctor(self, tipodoc, numdoc):
         cont = 0
         found = False

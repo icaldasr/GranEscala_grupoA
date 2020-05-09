@@ -164,35 +164,46 @@ def registrarAdministrador():
     if "user" in session:
         usuario = session["user"]
         contra = secrets.token_urlsafe(6)
-        #print("CONTRASEÑA",contra)
         tipo_documentos = sis.tipo_documento()
+        #epss = sis.obtener_eps()
+        #espcc = sis.obtener_espc()
+        ciu = sis.obtener_ciudades()
         if request.method == 'POST':
             term = request.form.get('terminos')
             if term == "on":
-                # nombre = request.form["nombre"]
-                # apellido = request.form["apellido"]
-                # tipodoc = request.form["TDA"]
-                # nrodocumento = request.form["numeroDocumento"]
-                # rh = request.form["RH"]
+                nombre = request.form["nombre"]
+                apellido = request.form["apellido"]
+                tipoDoc = request.form["tipoDoc"]
+                nrodocumento = request.form["numeroDocumento"]
+                #rh = request.form["RH"]
                 correoE = request.form["correoE"]
-                # nacimiento = request.form["fNacimiento"]
-                # telefono = request.form["tel"]
-                # #eCivil = request.form["EC"]
-                # departamento = request.form["departamento"]
-                # ciudad = request.form["ciudad"]
-                # barrio = request.form["barrio"]
-                # sexo = request.form["sexo"]
-                #sis.agregarAdmin(nrodocumento, nombre, apellido, correoE,telefono,tipodoc,contra)
-                #sis.agregarAdmin(nrodocumento, nombre, apellido, correoE,telefono,tipodoc,contra)
+                #nacimiento = request.form["fNacimiento"]
+                telefono = request.form["tel"]
+                #eCivil = request.form["EC"]
+                departamento = request.form["departamento"]
+                ciudad = request.form["ciudad"]
+                barrio = request.form["barrio"]
+                sexo = request.form["sexoAdmin"]
+                
+                x = sis.agregarAdmin(nrodocumento, nombre, apellido, contra,correoE,tipoDoc,telefono)
 
-                mensaje = '¡Administrador creado satisfactoriamente!'
-                flash(mensaje,"success")
-                sis.enviarDatosLogin(correoE,contra,'Administrador')
-                return redirect(url_for("admin"))
+                if x == 1:
+                    mensaje = '¡Administrador creado satisfactoriamente!'
+                    flash(mensaje,"success")
+                    sis.enviarDatosLogin(correoE,contra,'Administrador')
+                    ##print (nombre + " - " + apellido + " - "+ tipodoc + " - " + nrodocumento +" - "+ ideps + " - " + nacimiento + " - " + rh+" - " + correo  + " - " + sexo + " - " +term)
+                    return redirect(url_for("admin"))
+                elif x == 2:
+                    mensaje = '¡Un usuario con este número de documento ya existe! No puedes agregar una persona con dos cuentas en el sistema.'
+                    flash(mensaje,"error")
+                elif x == 0: 
+                    mensaje = '¡Un usuario con este correo ya existe! Usa otro correo. '
+                    flash(mensaje,"error")
+
             else:
-                message = '¡Debes aceptar los términos y condiciones para continuar!'
-                flash(message,"error")
-        return render_template("registraradmin.html",t_d = tipo_documentos)
+                mensaje = '¡Debes aceptar los términos y condiciones para continuar!'
+                flash(mensaje,"error")
+        return render_template("registraradmin.html", t_d = tipo_documentos, ci = ciu)
     else: 
         message = '¡Primero debes iniciar sesión!'
         flash(message,"error")

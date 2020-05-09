@@ -242,10 +242,11 @@ delimiter ;
 --retorna 1 si la insercion fue realizada
 --retorna 0 si el correo ya existe
 --retorna 2 si el admin ya existe (nro de documento)
+--retorna 3 si el tipo de documento no existe
 
 delimiter //
 create function ingresar_admin (_id_admin int, _nombre varchar(20), _apellido varchar(20), _contra varchar(10), 
-                                _correo varchar(100), _t_tipo varchar(100))
+                                _correo varchar(100), _t_tipo varchar(100), _celular int)
     returns int
 begin
     declare id_adm int;
@@ -258,18 +259,17 @@ begin
         if id_adm IS Null then
             select correo into corre from login where correo = _correo;
             if corre IS Null then
-                select id_tipo into tip from tipo_documento where descripcion = _t_documento;
+                select id_tipo into tip from tipo_documento where descripcion = _t_tipo;
                 if tip IS NOT Null then
                     insert into login (correo, contrasena, tipo)
                     values (_correo, _contra, 'administrador');
 
-                    insert into administrador (nro_documento, nombres, apellido, Correo)
-                    values (_id_admin, _nombre, _apellido, _correo);
+                    insert into administrador (nro_documento, nombres, apellido, Correo, celular, id_tip)
+                    values (_id_admin, _nombre, _apellido, _correo, _celular, tip);
+                    return 1;
                 else
                     return 3;
                 end if;
-
-                return 1;
             else
                 return 0;
             end if;

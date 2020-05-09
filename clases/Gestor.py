@@ -101,12 +101,20 @@ class Gestor():
             return consulta[0][0]
         
 
-    def insertarAdministrador(self, nrodocumento, nombre, apellido, correo,celular,tipoDoc,contra):
-        
-        self.cursor.execute('''INSERT INTO administrador VALUES (%s,%s,%s,%s,%s,%s)''', (nrodocumento, nombre, apellido, correo,celular,tipoDoc))
-        self.cursor.execute('''INSERT INTO login VALUES (%s, %s, 'administardor')''',(correo,contra))
+    def insertarAdministrador(self, nrodocumento, nombre, apellido,contra,correo,tipoDoc,telefono):
+        self.cursor.execute(
+            """
+            SELECT ingresar_admin(%s, %s, %s, %s, %s, %s, %s)
+            """,
+            (int(nrodocumento),nombre,apellido,contra,correo,tipoDoc,telefono)
+            )
+        consulta = self.cursor.fetchall()
         self.conexion.commit()
-
+        
+        if consulta[0][0] == 1:
+            return 1
+        else:
+            return consulta[0][0]
     
     def obtener_tipo_documentos(self):
         self.cursor.execute(
