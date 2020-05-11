@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+
+<head> 
+   
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet"  type= "text/css" href= "{{ url_for('static',filename='styles/registrar.css') }}">     
+  <link rel="stylesheet"  type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
+    
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  <div>
+  <!-- {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category,message in messages %}
+      {% if category == 'success'%}
+        <div class = "alert alert-success mb-3" role="alert">{{ message }}</div>
+      {%endif%}
+      {% if category == 'error'%}
+        <div class = "alert alert-danger mb-3" role="alert">{{ message }}</div>
+      {%endif%}
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  {% block body %}{% endblock %}   -->
+  </div>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="CustomStyles.css" rel="stylesheet" />
+</head>
+
+<body>
+  <title>CONSUTA</title>
+  <header>
+    <nav>
+      <ul class="no-lista margen-abajo">
+        <li class="col-md-4 inline-block espacio-arriba espacio-izq"><h1 align="left"><b><u>Nombre Paciente:</u></b></h1></li>  
+        <li class="col-md-5 inline-block espacio-arriba quitarEspacioizq"><h1 align="left">Frank Violencia</h1></li>
+      
+      </ul>  
+      <div class="agregarEspacioizq espacio-arriba"></div>
+        <a href="/mostrarHCPaciente"><button type="submit">Mostrar HC</button></a>
+    </div>      
+	  </nav>
+  </header>
+    &ensp;
+  <form method="POST">
+    <div class="form-group" style="width: 500px;margin-left: 50px;">
+
+      <label>Fecha: </label>
+      <p class="inline-block espacio-texto2" >01/01/2020</p>
+      <!-- <input class="inline-block centerfecha" type="date" id="start" name="fecnac" value="2020-07-22" min="1900-01-01" max="2020-12-31"> -->
+
+      <label class="agregarEspacioizq">Hora:</label>
+      <p class="inline-block espacio-texto2" >00:00</p>
+
+      
+      <p for="inputEmail4">Motivo:</p>
+      <input type="text" name="motivo" class="form-control inline-block" required>
+
+      <label for="inputEmail4" class="espacio-arriba">Peso:</label >
+      <input type="number" name="peso" class="form-control inline-block" required>
+
+      <label for="inputEmail4" class="espacio-arriba">Estatura:</label>
+      <input type="number" name="estatura" class="form-control inline-block" required>
+
+      <label for="inputPassword4" class="espacio-arriba">Presion:</label>
+      <input type="number" name="presion" class="form-control" required>
+      
+      <label for="inputPassword4" class="espacio-arriba">Facie:</label>
+      <input type="text" name="facie" class="form-control">
+      
+      <label for="inputPassword4" class="espacio-arriba">Temperatura:</label>
+      <input type="number" name="temperatura" class="form-control" required>
+
+      <label for="inputPassword4" class="espacio-arriba">Observaciones:</label>
+      <input type="text" name="observaciones" class="form-control" required>
+
+      <label for="inputEmail4" class="espacio-arriba">Estado de conciencia:</label>
+      <input type="input" name="conciencia" class="form-control  inline-block" required>
+
+      <label for="inputEmail4" class="espacio-arriba">Lenguaje:</label>
+      <input type="text" name="lenguaje" class="form-control inline-block">
+
+      <label for="inputEmail4" class="espacio-arriba">Estado auditivo:</label >
+      <input type="text" name="auditivo" class="form-control inline-block">
+
+      <label for="inputEmail4" class="espacio-arriba">Agudeza visual:</label>
+      <input type="text" name="visual" class="form-control inline-block">
+      
+      <label for="inputPassword4" class="espacio-arriba">Alimentacion:</label>
+      <input type="text" name="alimentacion" class="form-control">
+
+      <label for="inputPassword4" class="espacio-arriba">Apetito:</label >
+      <input type="text" name="apetito" class="form-control">
+
+      <label for="inputPassword4" class="espacio-arriba">Sed:</label>
+      <input type="text" name="sed" class="form-control">
+
+      <label for="inputPassword4" class="espacio-arriba">Diuresis:</label >
+      <input type="text" name="diuresis" class="form-control">
+      
+      <label for="inputPassword4" class="espacio-arriba">Catarsis intestinal:</label >
+      <input type="text" name="catarsisintest" class="form-control">
+      
+      <label for="inputPassword4" class="espacio-arriba">Sueño:</label >
+      <input type="text" name="suenho" class="form-control">
+
+      <label for="inputPassword4" class="espacio-arriba">Relaciones sexuales:</label >
+      <input type="text" name="relaciones" class="form-control">
+
+      <label for="inputPassword4" class="espdacio-arriba">Alcohol:</label >
+      <input type="text" name="alcohol" class="form-control">
+
+      <label for="inputPassword4" class="espacio-arriba">Tabaco:</label >
+      <input type="text" name="tabaco" class="form-control">
+
+      <label for="inputPassword4" class="espacio-arriba">Drogas:</label >
+      <input type="text" name="drogas" class="form-control">
+      
+      <label for="inputPassword4" class="espacio-arriba">Medicacion:</label>
+      <input type="text" name="medicacion" class="form-control">
+
+      <label for="exampleFormControlSelect1" class="espacio-arriba">Resultados:</label>
+      <input type="text" name="resultados" class="form-control">
+
+      <label for="exampleFormControlSelect1" class="espacio-arriba">Anexos:</label>
+      <input type="text" name="anexos" class="form-control">
+
+      <label for="exampleFormControlSelect1" class="espacio-arriba">Lactancia:</label>
+      <input type="text" name="lactancia" class="form-control">
+
+      <label for="exampleFormControlSelect1" class="espacio-arriba">Iniciacion Sexual:</label>
+      <input type="text" name="inicsex" class="form-control">
+
+      <label for="exampleFormControlSelect1" class="espacio-arriba">Gineco obstetria:</label >
+      <input type="text" name="gineco" class="form-control">
+
+      <label for="exampleFormControlSelect1" class="espacio-arriba">Menarca:</label >
+      <input type="text" name="menarca" class="form-control">
+
+      <label for="exampleFormControlSelect1" class="espacio-arriba">Embarazos:</label >
+      <input type="text" name="embarazos" class="form-control">
+
+      <label>Partos:</label >
+      <input type="text" name="partos" class="form-control">
+
+      <label for="exampleFormControlSelect1" class="espacio-arriba">Abortos:</label>
+      <input type="text" name="abortos" class="form-control">
+
+
+      <label for="exampleFormControlSelect1" class="espacio-arriba">Gramaje:</label>
+      <input type="number" name="gramaje" class="form-control">
+
+      <label for="exampleFormControlSelect1" class="espacio-arriba">Resumen:</label>
+      <input type="text" name="Resumen" class="form-control" required>
+
+      <label for="exampleFormControlSelect1" class="espacio-arriba">Diagnostico:</label>
+      <input type="text" name="diagnostico" class="form-control" required>
+
+      <!-- <select name="sex" class="form-control">
+        <option value="Masculino">Masculino</option> 
+        <option value="Femenino">Femenino</option> 
+        <option value="Transformer">Transformer</option> 
+      </select> -->
+      
+      <!-- <label for="exampleFormControlSelect1">Fecha de Nacimiento</label required>
+      <input class="inline-block centerfecha" type="date" id="start" name="fecnac" value="2020-07-22" min="1900-01-01" max="2020-12-31"> -->
+
+      <label for="exampleFormControlSelect1" class="espacio-arriba">Medicamentos:</label>
+      <select name="medicamentos" class="form-control">
+        <option value="acetaminofem">Acetaminofem</option> 
+        <option value="allegra">Allegra</option> 
+        <option value="loratadina">Loratadina</option>
+        <option value="exomeprasol">Exomeprasol</option>
+      </select>
+
+      <label for="exampleFormControlSelect1" class="espacio-arriba">Incapacidad:</label>
+      <input type="name" name="nombre" class="form-control">
+
+      <label for="exampleFormControlSelect1" class="espacio-arriba">Remisión:</label>
+        <select name="remision" class="form-control">
+          <option value="cardiologo">Cardiologo</option> 
+          <option value="ortopedista">Ortopedista</option> 
+          <option value="nutricionista">Nutricionista</option>
+          <option value="odontologo">Odontologo</option>
+          <option value="gastro">Gastroenterologo</option>
+          <option value="internista">Internista</option>
+        </select>
+
+        <label for="exampleFormControlSelect1" class="espacio-arriba">Examenes:</label required>
+          <select name="examenes" class="form-control">
+            <option value="tac">Tac</option> 
+            <option value="hemograma">Hemograma</option> 
+            <option value="rayos-x">Rayos-x</option>
+          </select>
+
+          <label for="exampleFormControlSelect1" class="espacio-arriba">Tratamiento:</label required>
+          <select name="tratamiento" class="form-control">
+            <option value="nebulizacion">Nebulizacion</option> 
+            <option value="sueros">Sueros</option> 
+            <option value="quimio">Quimioterapia</option>
+            <option value="fisioterapia">Fisioterapia</option>
+            <option value="radioterapia">Radioterapia</option>
+            <option value="terapia :3">Terapia Mental</option>
+          </select>
+
+    <div class="agregarEspacioizq espacio-arriba"></div>
+        <a href="/doctor"><button type="button">Salir</button></a>
+        <button type="submit">Siguiente Cita</button>
+    </div>
+  </div>
+    &ensp;
+  </form>
+</body>
+</html>

@@ -224,12 +224,23 @@ def doctor():
     if "user" in session:
         usuario = session["user"]
         doc = sis.cargarDoctor(session["user"])
-
         return render_template("doctor.html",  nombre=doc.getNombre(), correo= usuario, apellido= doc.getApellido())
     else:
         message = '¡Primero debes iniciar sesión!'
         flash(message,"error")
         return redirect(url_for("login"))
+
+
+@app.route("/citaPaciente")
+def citaPaciente():
+    if "user" in session:
+        doc = sis.cargarDoctor(session["user"])
+        return render_template("cita.html")
+    else:
+        message = '¡Primero debes iniciar sesión!'
+        flash(message,"error")
+        return redirect(url_for("login"))
+
 
 
 @app.route("/logout")
