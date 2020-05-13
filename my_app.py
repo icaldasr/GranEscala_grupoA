@@ -1,10 +1,22 @@
 #my_app.py
 
 import os
-from flask import Flask, render_template, request, redirect, session, g, url_for, flash
+from flask import Flask, render_template, request, redirect, session, g, url_for, flash, jsonify, make_response
 from clases.Sistema import Sistema
 import secrets
 
+import json
+
+from reportlab.pdfgen import canvas
+import pdfkit 
+#https://stackoverflow.com/questions/1909025/import-error-with-virtualenv
+
+#WKHTMLTOPDF_PATH = 'D:/PROGRAMAS/wkhtmltox/bin'
+#from wkhtmltopdf import WKhtmlToPdf
+#from pdfdocument.document import PDFDocument
+
+#pdfkit.from_url('https://www.google.com/','sample.pdf') 
+#os.environ['PYTHONPATH'] = os.getcwd()
 app = Flask(__name__)
 app.secret_key = "ValleDev1234"
 sis = Sistema()
@@ -230,7 +242,6 @@ def doctor():
         flash(message,"error")
         return redirect(url_for("login"))
 
-
 @app.route("/citaPaciente")
 def citaPaciente():
     if "user" in session:
@@ -241,7 +252,34 @@ def citaPaciente():
         flash(message,"error")
         return redirect(url_for("login"))
 
+@app.route('/mostrarHCPaciente', methods = ['POST', 'GET'])
+#pip install pdfdocument
+def json():
+    #config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_PATH)
+    #_status = pdfkit.from_string(
+        
+    #return _path if _status else ''
+    if request.is_json:
+        req = request.get_json()
+        #print(req)
+        prueba = sis.recorrerHC(req)
+        f = open("diccionario.txt","w")
+        f.write(str(req))
+        f.close()
 
+ #       responsestring = pdfkit.from_string("prueba",False)
+#        response = make_response(responsestring, False)
+
+        #response.headers['Content-Type'] = 'aplicacion/pdf'
+        #response.headers['Content-Disposition'] = 'attachment;filename=salida.pdf'
+        return "JSON recibido",200
+    
+    else:
+
+        #return 
+        flash("No se ha recibido la Historia Clínica del paciente","error")
+
+        return redirect(url_for("doctor"))
 
 @app.route("/logout")
 def logout():
@@ -256,4 +294,5 @@ def logout():
 
 
 if __name__ == "__main__":
+    os.environ['PYTHONPATH'] = os.getcwd()
     app.run(debug=True)

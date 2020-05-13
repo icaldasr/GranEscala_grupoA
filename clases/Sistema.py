@@ -13,6 +13,11 @@ from clases.Doctor import Doctor
 import secrets
 from email.header import Header
 from email.utils import formataddr
+#pip install pypdf2
+#from PyPDF import PdfFileReader
+#pip install pdfkit
+
+
 
 class Sistema():
     instance = None
@@ -194,3 +199,15 @@ class Sistema():
 
     def obtener_ciudades(self):
         return self.dataBase.ciudades()
+
+    def recorrerHC(self,diccionario):
+        #pip install pdfkit
+        key = diccionario.keys()
+        #elemento = diccionario.values()
+        
+        for key in diccionario:
+            elemento = key, ":",diccionario[key]
+            print(elemento)
+            #print (key, ":",diccionario[key])
+
+        #print(diccionario.items())
