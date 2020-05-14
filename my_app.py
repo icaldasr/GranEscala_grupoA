@@ -7,6 +7,8 @@ import secrets
 from datetime import datetime,date
 import time
 
+import requests
+
 import json
 
 from reportlab.pdfgen import canvas
@@ -251,9 +253,11 @@ def citaPaciente():
         hora = time.localtime()
         horaActual = time.strftime("%H:%M:%S", hora)
         fechaAct = date.today() #https://www.programiz.com/python-programming/datetime/current-datetime
-        print(fechaAct)
+        recibir = sis.recibirTokenHCCORE()
+        #print(fechaAct)
         #print(current_time)
         #print("timestamp =", timestamp)
+        print("token: ",recibir)
         if request.method == 'POST':
             #fecha = request.form[""]
             motivo =request.form["motivo"]

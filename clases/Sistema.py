@@ -2,6 +2,9 @@
 #Autor: Luis Miguel Oviedo
 #smtp lib para envío de mensajes en recuperacion de la clave de ingreso
 import smtplib
+import requests
+import json
+
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 ##dentro del proyecto
@@ -199,6 +202,22 @@ class Sistema():
 
     def obtener_ciudades(self):
         return self.dataBase.ciudades()
+
+    def recibirTokenHCCORE(self):
+        url = 'http://34.95.198.251:3001/eps/sign'
+        payload = { "id":"1", "password":"ValleMedPassword"}
+        headers = { 'Content-Type' : 'application/json' }
+
+        response = requests.post(url,data=json.dumps(payload),headers=headers)
+        response_json = response.json()
+        token = response_json['token']
+        print(response.status_code)
+
+        if response.status_code == 200:
+            #print("BIEN")
+            return token
+        else:
+            print("Fallo en conexión con la API")
 
     def recorrerHC(self,diccionario):
         #pip install pdfkit
