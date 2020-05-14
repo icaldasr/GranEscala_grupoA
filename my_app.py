@@ -4,6 +4,8 @@ import os
 from flask import Flask, render_template, request, redirect, session, g, url_for, flash, jsonify, make_response
 from clases.Sistema import Sistema
 import secrets
+from datetime import datetime,date
+import time
 
 import json
 
@@ -242,10 +244,130 @@ def doctor():
         flash(message,"error")
         return redirect(url_for("login"))
 
-@app.route("/citaPaciente")
+@app.route("/citaPaciente", methods = ['POST', 'GET'])
 def citaPaciente():
     if "user" in session:
         doc = sis.cargarDoctor(session["user"])
+        hora = time.localtime()
+        horaActual = time.strftime("%H:%M:%S", hora)
+        fechaAct = date.today() #https://www.programiz.com/python-programming/datetime/current-datetime
+        print(fechaAct)
+        #print(current_time)
+        #print("timestamp =", timestamp)
+        if request.method == 'POST':
+            #fecha = request.form[""]
+            motivo =request.form["motivo"]
+            observaciones = request.form["observaciones"]
+            conciencia = request.form["conciencia"]
+            lenguaje = request.form["lenguaje"]
+            auditivo = request.form["auditivo"]
+            agudezaVisual = request.form["agudeza"]
+            peso = request.form["peso"]
+            estatura = request.form["estatura"]
+            presion = request.form["presion"]
+            facie = request.form["facie"]
+            edad = request.form["edad"]
+            temperatura = request.form["temperatura"]
+            alimentacion = request.form["alimentacion"]
+            apetito = request.form["apetito"]
+            sed = request.form["sed"]
+            diuresis = request.form["diuresis"]
+            catarsis = request.form["catarsis"]
+            sueno = request.form["sueño"]
+            relaciones = request.form["Relaciones"]
+            alcohol = request.form["alcohol"]
+            tabaco = request.form["Tabaco"]
+            drogas = request.form["drogas"]
+            medicacion = request.form["medicacion"]
+            resultados = request.form["resultados"]
+            anexos = request.form["anexos"]
+            lactancia = request.form["lactancia"]
+            iniciacion = request.form["iniciacion"]
+            gineco = request.form["gineco"]
+            menarca = request.form["menarca"]
+            embarazos = request.form["Embarazos"]
+            partos = request.form["partos"]
+            abortos = request.form["abortos"]
+            gramaje = request.form["gramaje"]
+            resumen = request.form["resumen"]
+            diagnostico = request.form["diagnostico"]
+
+            #Medicamentos
+            cb1 = request.form.get("cbox1")
+            if cb1 != None:
+                print(cb1)
+            cb2 = request.form.get("cbox2") 
+            if cb2 != None:
+                print(cb2)
+            cb3 = request.form.get("cbox3") 
+            if cb3 != None:
+                print(cb3)
+            cb4 = request.form.get("cbox4") 
+            if cb4 != None:
+                print(cb4)
+            cb5 = request.form.get("cbox5") 
+            if cb5 != None:
+                print(cb5)
+
+            inidicacionesMedicamentos = request.form["InidicacionesMedicamentos"]
+            incapacidad = request.form["incapacidad"]
+
+            #Remisiones
+            cb6 = request.form.get("cbox6")
+            if cb6 != None:
+                print(cb6)
+            cb7 = request.form.get("cbox7") 
+            if cb7 != None:
+                print(cb7)
+            cb8 = request.form.get("cbox8") 
+            if cb8 != None:
+                print(cb8)
+            cb9 = request.form.get("cbox9") 
+            if cb9 != None:
+                print(cb9)
+            cb10 = request.form.get("cbox10") 
+            if cb10 != None:
+                print(cb10)
+
+            #Examenes
+            cb11 = request.form.get("cbox11")
+            if cb11 != None:
+                print(cb11)
+            cb12 = request.form.get("cbox12") 
+            if cb12 != None:
+                print(cb12)
+            cb13 = request.form.get("cbox13") 
+            if cb13 != None:
+                print(cb13)
+            cb14 = request.form.get("cbox14") 
+            if cb14 != None:
+                print(cb14)
+            cb15 = request.form.get("cbox15") 
+            if cb15 != None:
+                print(cb15)
+
+            #Tratamientos
+            cb16 = request.form.get("cbox16")
+            if cb16 != None:
+                print(cb16)
+            cb17 = request.form.get("cbox17") 
+            if cb17 != None:
+                print(cb17)
+            cb18 = request.form.get("cbox18") 
+            if cb18 != None:
+                print(cb13)
+            cb19 = request.form.get("cbox19") 
+            if cb19 != None:
+                print(cb19)
+            cb20 = request.form.get("cbox20") 
+            if cb20 != None:
+                print(cb20)
+
+            mensaje = '¡Cita cargada satisfactoriamente!'
+            flash(mensaje,"success")
+
+            print(partos)
+            return redirect(url_for("doctor"))
         return render_template("cita.html")
     else:
         message = '¡Primero debes iniciar sesión!'

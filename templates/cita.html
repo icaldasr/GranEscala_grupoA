@@ -58,11 +58,25 @@
     <div class="form-group" style="width: 500px;margin-left: 50px;">
 
       <label>Fecha: </label required>
-      <p class="inline-block espacio-texto2" >01/01/2020</p>
+
+      <p class="inline-block espacio-texto2" ><span id="fecha"></span></p>
+
+      <script>
+      var dt = new Date();
+      document.getElementById("fecha").innerHTML = dt.toLocaleDateString();
+      </script>  
+      <!--p class="inline-block espacio-texto2" >01/01/2020</p-->
       <!-- <input class="inline-block centerfecha" type="date" id="start" name="fecnac" value="2020-07-22" min="1900-01-01" max="2020-12-31"> -->
 
       <label class="agregarEspacioizq">Hora:</label required>
-      <p class="inline-block espacio-texto2 espacio-abajo" >00:00</p>
+
+        <p class="inline-block espacio-texto2 espacio-abajo"><span id="hora"></span></p>
+
+        <script>
+        var dt = new Date();
+        document.getElementById("hora").innerHTML = dt.toLocaleTimeString();
+        </script>
+
     </div> 
       
       <!-- <label for="inputEmail4">Motivo:</label> 
@@ -228,10 +242,10 @@
         <input type="text" name="abortos" class="cl34 sinline-block center6 quitarEspacioizq tamaño espacio-abajo">
       </div>
 
-      <div class="agregarEspacioizq">
+      <!--div class="agregarEspacioizq">
         <label class="inline-block">Medicamentos:</label>
         <input type="text" name="medicamentos" class="cl35 inline-block center6 quitarEspacioizq tamaño espacio-abajo">
-      </div>
+      </div-->
 
       <div class="agregarEspacioizq">
         <label class="inline-block">Gramaje:</label>
@@ -259,12 +273,17 @@
 
       <p class="agregarEspacioizq" for="exampleFormControlSelect1">Medicamentos: </p required>
         
-        <label class="agregarEspacioizq"><input type="checkbox" id="cbox1" value="1_checkbox">    DOLEX</label><br>
-        <label class="agregarEspacioizq"><input type="checkbox" id="cbox2" value="2_checkbox">    DOLORAN</label><br>
-        <label class="agregarEspacioizq"><input type="checkbox" id="cbox3" value="3_checkbox">    ALLEGRA</label><br>
-        <label class="agregarEspacioizq"><input type="checkbox" id="cbox4" value="4_checkbox">    COLAXIN</label><br>
-        <label class="agregarEspacioizq"><input type="checkbox" id="cbox5" value="5_checkbox">    INSULINA  </label><br>
+        <label class="agregarEspacioizq"><input type="checkbox" id="cbox1" name="cbox1" value="Acetaminofen">    ACETAMINOFEN</label><br>
+        <label class="agregarEspacioizq"><input type="checkbox" id="cbox2" name="cbox2" value="Loratadina">    LORATADINA</label><br>
+        <label class="agregarEspacioizq"><input type="checkbox" id="cbox3" name="cbox3" value="Allegra">    ALLEGRA</label><br>
+        <label class="agregarEspacioizq"><input type="checkbox" id="cbox4" name="cbox4" value="Colaxin">    COLAXIN</label><br>
+        <label class="agregarEspacioizq"><input type="checkbox" id="cbox5" name="cbox5" value="Insulina">    INSULINA  </label><br>
 
+      <div class="agregarEspacioizq">
+        <label class="inline-block">Inidicaciones de los medicamentos:</label>
+        <input type="text" name="InidicacionesMedicamentos" class="cl38 inline-block center6 quitarEspacioizq tamaño espacio-abajo">
+      </div>
+      <!--p class="agregarEspacioizq" for="exampleFormControlSelect1">Inidicación de los medicamentos: </p required-->
         <!-- <input type="checkbox" id="cbox2" value="second_checkbox"> <p for="cbox2">M2</p>
         <input type="checkbox" id="cbox3" value="second_checkbox"> <p for="cbox2">M3</p>
         <input type="checkbox" id="cbox4" value="second_checkbox"> <p for="cbox2">M4</p>
@@ -277,29 +296,29 @@
 
       <p class="agregarEspacioizq" for="exampleFormControlSelect1" class="espacio-arriba">Remision:</p required>
         
-        <label class="agregarEspacioizq"><input type="checkbox" id="cbox6" value="6_checkbox">    Oncologo</label><br>
-        <label class="agregarEspacioizq"><input type="checkbox" id="cbox7" value="7_checkbox">    Gatroenterlologo</label><br>
-        <label class="agregarEspacioizq"><input type="checkbox" id="cbox8" value="8_checkbox">    Cardiologo</label><br>
-        <label class="agregarEspacioizq"><input type="checkbox" id="cbox9" value="9_checkbox">    Pediatra</label><br>
-        <p class="agregarEspacioizq"><input type="checkbox" id="cbox10" value="10_checkbox">    Odontologo</p><br>
+        <label class="agregarEspacioizq"><input type="checkbox" id="cbox6" name="cbox6" value="Oncologo">    Oncologo</label><br>
+        <label class="agregarEspacioizq"><input type="checkbox" id="cbox7" name="cbox7" value="Gastroenterologo">    Gatroenterlologo</label><br>
+        <label class="agregarEspacioizq"><input type="checkbox" id="cbox8" name="cbox8" value="Cardiologo">    Cardiologo</label><br>
+        <label class="agregarEspacioizq"><input type="checkbox" id="cbox9" name="cbox9" value="Pediatra">    Pediatra</label><br>
+        <p class="agregarEspacioizq"><input type="checkbox" id="cbox10" name="cbox10" value="Odontologo">    Odontologo</p><br>
 
         <p class="agregarEspacioizq" for="exampleFormControlSelect1" class="espacio-arriba">Examenes:</p required>
-        <label class="agregarEspacioizq" ><input type="checkbox" id="cbox11" value="11_checkbox">    Hemograma</label><br>
-        <label class="agregarEspacioizq"><input type="checkbox" id="cbox12" value="12_checkbox">    Radioterapia</label><br>
-        <label class="agregarEspacioizq"><input type="checkbox" id="cbox13" value="13_checkbox">    Quimioterapia</label><br>
-        <label class="agregarEspacioizq"><input type="checkbox" id="cbox14" value="14_checkbox">    Nebulizacion</label><br>
-        <p class="agregarEspacioizq"><input type="checkbox" id="cbox15" value="15_checkbox">    Suero</p><br>
+        <label class="agregarEspacioizq" ><input type="checkbox" id="cbox11" name="cbox11" value="Hemograma">    Hemograma</label><br>
+        <label class="agregarEspacioizq"><input type="checkbox" id="cbox12" name="cbox12" value="Uroanalisis">    Uroanalisis</label><br>
+        <label class="agregarEspacioizq"><input type="checkbox" id="cbox13" name="cbox13" value="Coprologico">    Coprologico</label><br>
+        <label class="agregarEspacioizq"><input type="checkbox" id="cbox14" name="cbox14" value="Tiroides">    Tiroides</label><br>
+        <p class="agregarEspacioizq"><input type="checkbox" id="cbox15" name="cbox15" value="Perfil_Renal">    Perfil Renal</p><br>
 
           <p class="agregarEspacioizq" for="exampleFormControlSelect1" class="espacio-arriba">Tratamiento:</p required>
-            <label class="agregarEspacioizq"><input type="checkbox" id="cbox16" value="16_checkbox">    Dieta</label><br>
-            <label class="agregarEspacioizq"><input type="checkbox" id="cbox17" value="17_checkbox">    Ejercicio</label><br>
-            <label class="agregarEspacioizq"><input type="checkbox" id="cbox18" value="18_checkbox">    Hidroterapia</label><br>
-            <label class="agregarEspacioizq"><input type="checkbox" id="cbox19" value="19_checkbox">    Fisioterapia</label><br>
-            <p class="agregarEspacioizq"><input type="checkbox" id="cbox20" value="20_checkbox">    Ortopedia</p><br>
+            <label class="agregarEspacioizq"><input type="checkbox" id="cbox16" name="cbox16" value="Dieta">    Dieta</label><br>
+            <label class="agregarEspacioizq"><input type="checkbox" id="cbox17" name="cbox17" value="Ejercicio">    Ejercicio</label><br>
+            <label class="agregarEspacioizq"><input type="checkbox" id="cbox18" name="cbox18" value="Hidroterapia">    Hidroterapia</label><br>
+            <label class="agregarEspacioizq"><input type="checkbox" id="cbox19" name="cbox19" value="Fisioterapia">    Fisioterapia</label><br>
+            <p class="agregarEspacioizq"><input type="checkbox" id="cbox20" name="cbox20" value="Radioterapia">    Radioterapia</p><br>
 
     <div class="agregarEspacioizq "></div>
         <a href="/admin"><button type="button" class="btn btn-outline-primary agregarEspacioizq espacio-abajo tamaño1" value="call_flask_funtion">Atras</button></a>
-        <a href="#"><button type="submit" class="btn btn-outline-primary espacio-izq espacio-abajo tamaño1" value="call_flask_funtion">Siguiente Cita</button></a>
+        <a href="/doctor"><button type="submit" class="btn btn-outline-primary espacio-izq espacio-abajo tamaño1" value="call_flask_funtion">Guardar Cita</button></a>
     </div>
   </div>
     &ensp;
