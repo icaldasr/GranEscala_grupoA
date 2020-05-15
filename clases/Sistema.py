@@ -210,6 +210,7 @@ class Sistema():
 
         response = requests.post(url,data=json.dumps(body),headers=headers)
         response_json = response.json()
+        #print(response_json)
         token = response_json['token']
         print(response.status_code)
 
@@ -218,6 +219,7 @@ class Sistema():
             return token
         else:
             print("Fallo en conexión con la API")
+            return response.status_code
 
     def agregarPaciente(self,nrodocumento,nombreCompleto,nacimiento,eCivil,telefono,sexo):
         token = self.recibirTokenHCCORE()
@@ -240,24 +242,22 @@ class Sistema():
         body['telefono'] = int(telefono)
         body['sexo'] = str(sexo)
         
-        headers = { 'Content-Type' : 'application/json', 'Autorization' : '{}'.format(token)}
-        #headers['Autorization'] = token
+        headers = { 'Content-Type' : 'application/json', 'Authorization' : '{}'.format(token)}
         print(body)
         print(headers)
 
         response = requests.post(url, data = json.dumps(body),headers=headers)
-        #response = requests.post(url,params = body,headers=headers)
-        #response_json = response.json()
-        #token = response_json['token']
+
         print(response.status_code)
 
         if response.status_code == 200:
-            #print("BIEN")
+            print(response.content)
             return 1
         else:
-            print("Fallo en conexión con la API")
+            print(response.content)
+            #print("Fallo en conexión con la API")
             return 2
-
+        
     def recorrerHC(self,diccionario):
         #pip install pdfkit
         key = diccionario.keys()
