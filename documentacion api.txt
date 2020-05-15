@@ -8,28 +8,36 @@
         salidas: retorna un json con el nro de consultorio, nombre del doctor, documento de doctor, y la fecha disponible
         el formato de json es:
 
-            {
-                "consultorio 1": [
+            [
+                {
+                    "name": "consultorio 2",
+                    "availableAppointment": [
                     {
-                        nombre doctor: "mimi",
-                        documento doctor: "1231231",
-                        fecha cita: "dia-mes-año hora-minuto-segundo"
+                        "id": 3,
+                        "doctorName": "b",
+                        "doctorDocument": 3,
+                        "date": "May 9, 2020 11:08:22 PM"
+                    }
+                    ]
+                },
+                {
+                    "name": "consultorio 1",
+                    "availableAppointment": [
+                    {
+                        "id": 2,
+                        "doctorName": "José",
+                        "doctorDocument": 2,
+                        "date": "May 9, 2020 11:08:22 PM"
                     },
                     {
-                        nombre doctor: "mimi",
-                        documento doctor: "1231231",
-                        fecha cita: "dia-mes-año hora-minuto-segundo"
+                        "id": 1,
+                        "doctorName": "Juan",
+                        "doctorDocument": 1,
+                        "date": "May 9, 2020 11:08:22 PM"
                     }
-                ],
-
-                "consultorio 2": [
-                    {
-                        nombre doctor: "banano",
-                        documento doctor: "123331231",
-                        fecha cita: "dia-mes-año hora-minuto-segundo"
-                    }
-                ]
-            }
+                    ]
+                }
+            ]
 
 
 
@@ -40,20 +48,19 @@
         ruta: http://thawing-stream-48846.herokuapp.com/ips
         salidas: retorna un json con el id de la ips, el nombre de la ips, direccion de la ips
 
-        {
-            "1": {
-                nombre: "ips 1",
-                direccion: "direccion"
-            },
-            "2": {
-                nombre: "ips 2",
-                direccion: "direccion"
-            },
-            "3": {
-                nombre: "ips 3",
-                direccion: "direccion"
-            }
-        }
+        
+            [
+                {
+                    "id": 1,
+                    "name": "Coomeva",
+                    "streetAddress": "Calle 5 # 5 - 40"
+                },
+                {
+                    "id": 1,
+                    "name": "Coomeva",
+                    "streetAddress": "Calle 1 # 15 - 12"
+                }
+            ]
 
 
 
@@ -64,22 +71,50 @@
         ruta: http://thawing-stream-48846.herokuapp.com/horarios/<int:documento>
         salidas: retorna un json con el nro de cita, la fecha, la ips, la direccion, medico, y la especializacion
 
-        {
-            "1":{
-                fecha: "dia-mes-año hora-minuto-segundo",
-                ips: "ips 1",
-                direccion: "direccion",
-                medico: "medico",
-                especializacion: "especializacion"
-            },
-            "2":{
-                fecha: "dia-mes-año hora-minuto-segundo",
-                ips: "ips 2",
-                direccion: "direccion",
-                medico: "medico",
-                especializacion: "especializacion"
-            },
-        }
+            [
+                {
+                    "id": 1,
+                    "date": "May 9, 2020 10:54:53 PM",
+                    "healthProviderInstitute": "Coomeva",
+                    "address": "Calle 1 # 15 - 12",
+                    "doctorName": "Juan",
+                    "specialization": "Oftamología"
+                },
+                {
+                    "id": 2,
+                    "date": "May 9, 2020 10:54:53 PM",
+                    "healthProviderInstitute": "Sanitas",
+                    "address": "Calle 5 # 5 - 40",
+                    "doctorName": "Jose",
+                    "specialization": "Odontología"
+                }
+            ]
+
+
+
+
+
+
+
+
+
+    * obtener cita especifica de un paciente:
+        metodo: GET
+        entradas: recive dos enteros uno para el numero de documento del paciente y otro para el id de la cita
+        ruta: http://thawing-stream-48846.herokuapp.com/<int:documento>/<int:nro_cita>
+        salidas: retorna un json con el siguiente formato:
+
+            {
+                "id": 1,
+                "date": "May 9, 2020 10:50:21 PM",
+                "healthProviderInstitute": "Coomeva",
+                "address": "Calle 1 # 15 - 12",
+                "doctorName": "Mimi",
+                "specialization": "Oftamología"
+            }
+
+
+
 
 
 
@@ -99,12 +134,10 @@
         metodo: POST
         entradas: recive un json con el siguiente formato (UNA SOLA CITA POR PETICION)
             {
-                documento paciente: {
-                    fecha: "mes/dia/año hora:minuto:segundo",
-                    medico: "documento",
-                    ips: "ips 1",
-                    nro_cita: "cita nueva"
-                }
+                "patientDocument": 1,
+                "date": "May 9, 2020 11:01:55 PM",
+                "doctorDocument": 1,
+                "healthProviderInstituteName": "Coomeva"
             }
         ruta: http://thawing-stream-48846.herokuapp.com/horarios
         salidas: retorna un mensaje de confirmacion o de error
@@ -120,12 +153,27 @@
         ruta: http://thawing-stream-48846.herokuapp.com/ips/<string:nombre_ips>
         salidas: retorna un json con el siguiente formato
 
-           {
-                "nombre ips": [
-                    "especializacion 1",
-                    "especializacion 2"
-                ]
-            }
+           [
+                {
+                    "name": "consultorio 1",
+                    "specialties": [
+                    {
+                        "name": "Oftamología"
+                    },
+                    {
+                        "name": "Odontología"
+                    }
+                    ]
+                },
+                {
+                    "name": "consultorio 2",
+                    "specialties": [
+                    {
+                        "name": "Urología"
+                    }
+                    ]
+                }
+            ]
 
 
 
@@ -135,11 +183,11 @@
     metodo: POST
     entradas: recive un json con el siguiente formato
         {
-            "documento paciente": {
-                fecha: "mes/dia/año hora:minuto:segundo",
-                medico: "documento",
-                ips: "ips 1",
-            }
+            "id": 1,
+            "patientDocument": 1,
+            "date": "May 9, 2020 11:28:51 PM",
+            "doctorDocument": 2,
+            "healthProviderInstituteName": "Coomeva"
         }
     ruta: http://thawing-stream-48846.herokuapp.com/solicitud
     salidas: retorna un mensaje de erro en el caso de que el cambio solicitado no sea posible, o un 
