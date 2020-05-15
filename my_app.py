@@ -148,7 +148,7 @@ def registrarPaciente():
         usuario = session["user"]
         if request.method == 'POST':
             term = request.form.get('terminos')
-            if term == "on":
+            if term != None:
                 nombre = request.form["nombre"]
                 apellido = request.form["apellido"]
                 tipodoc = request.form["TDP"]
@@ -161,9 +161,17 @@ def registrarPaciente():
                 ciudad = request.form["ciudad"]
                 barrio = request.form["barrio"]
                 sexo = request.form["sexo"]
-                mensaje = '!Paciente creado satisfactoriamente!'
-                flash(mensaje)
-
+                nombreCompleto = '{} {}'.format(nombre,apellido)
+                #print(nacimiento)
+                #print("NombreCompleto",nombreCompleto)
+                agregar = sis.agregarPaciente(int(nrodocumento),nombreCompleto,nacimiento,eCivil,int(telefono),sexo)
+                if agregar == 1:
+                    mensaje = '¡Paciente creado satisfactoriamente!'
+                    flash(mensaje,"success")
+                #sis.agregarPaciente()
+                else:
+                    mensaje = '¡El paciente no ha sido creado! Intentélo nuevamente'
+                    flash(mensaje,"error")
                 return redirect(url_for("admin"))
             else:
                 message = '¡Debes aceptar los términos y condiciones para continuar!'
@@ -253,11 +261,11 @@ def citaPaciente():
         hora = time.localtime()
         horaActual = time.strftime("%H:%M:%S", hora)
         fechaAct = date.today() #https://www.programiz.com/python-programming/datetime/current-datetime
-        recibir = sis.recibirTokenHCCORE()
+        #recibir = sis.recibirTokenHCCORE()
         #print(fechaAct)
         #print(current_time)
         #print("timestamp =", timestamp)
-        print("token: ",recibir)
+        #print("token: ",recibir)
         if request.method == 'POST':
             #fecha = request.form[""]
             motivo =request.form["motivo"]

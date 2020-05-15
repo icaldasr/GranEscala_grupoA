@@ -56,14 +56,14 @@
     <div class="agregarEspacioizq " >
 
       <p class="inline-block">Nombre:</p>
-      <input type="text" name="nombre" class=" center6 inline-block ">
+      <input type="text" name="nombre" class=" center6 inline-block " required>
 
     </div>
 
     <div class="agregarEspacioizq " >
 
       <p class="inline-block">Apellido:</p>
-      <input type="text" name="apellido" class=" center6 inline-block ">
+      <input type="text" name="apellido" class=" center6 inline-block " required>
 
     </div>
 
@@ -73,7 +73,7 @@
 
         <p class="inline-block">Tipo documento:</p>
 
-        <select name="TDP" class=" centertipo ">
+        <select name="TDP" class=" centertipo " required>
             <option value="1">C.C</option> 
             <option value="2">T.I</option> 
             <option value="3">Pasaporte</option>
@@ -85,14 +85,14 @@
     <div class="agregarEspacioizq ">
 
         <p class="inline-block">Nro. documento:</p>
-        <input type="text" name="numeroDocumento" class=" centertipo">
+        <input type="text" name="numeroDocumento" class=" centertipo" required>
         
     </div>
 
     <div class="agregarEspacioizq " >
 
       <p class="inline-block">RH:</p>
-      <select name="RH" class=" espaciorh inline-block  ">
+      <select name="RH" class=" espaciorh inline-block  " required>
             <option value="1">A+</option> 
             <option value="2">B+</option> 
             <option value="3">O+</option>
@@ -110,7 +110,7 @@
 
       <label class="inline-block" for="start">Fecha de Nacimiento:</label>
 
-      <input class="inline-block centerfecha" type="date" id="start" name="fechaNacimiento" value="2020-07-22" min="1900-01-01" max="2020-12-31">
+      <input class="inline-block centerfecha" type="date" id="start" name="fechaNacimiento" value="2020-07-22" min="1900-01-01" max="2020-12-31" required>
 
     </div>
 
@@ -121,10 +121,11 @@
     <div class="agregarEspacioizq " >
 
       <p class="inline-block">Estado Civil:</p>
-      <select name="EC" class=" espacio-estadocivil ">
-            <option value="1">Soltero/a</option> 
-            <option value="2">Casado/a</option> 
-            <option value="3">Viudo/a</option>
+      <select name="EC" class=" espacio-estadocivil " required>
+        key = diccionario.keys()
+            <option value="Soltero/a">Soltero/a</option> 
+            <option value="Casado/a">Casado/a</option> 
+            <option value="Viudo/a">Viudo/a</option>
         </select>
 
     </div>
@@ -133,7 +134,7 @@
     <div class="agregarEspacioizq " >
 
       <p class="inline-block">Telefono:</p>
-      <input type="text" name="tel" class=" espacio-telm inline-block ">
+      <input type="text" name="tel" class=" espacio-telm inline-block " required>
 
     </div>
 
@@ -162,10 +163,10 @@
     <div class="agregarEspacioizq " >
 
       <p class="inline-block">Sexo:</p>
-      <select name="sexo" class=" espacio-sexo inline-block  ">
-            <option value="1">Masculino</option> 
-            <option value="2">Femenino</option> 
-            <option value="3">Transformer</option>
+      <select name="sexo" class=" espacio-sexo inline-block  " required>
+            <option value="Masculino">Masculino</option> 
+            <option value="Femenino">Femenino</option> 
+            <option value="Otro">Otro</option>
         </select>
 
     </div>
@@ -229,7 +230,7 @@ Otras finalidades
 
     <div class="agregarEspacioizq">
 
-     <input type="checkbox" name="terminos" value="term"> He leido y acepto los terminos y condiciones<br>
+     <input type="checkbox" name="terminos" value="term" required> He leido y acepto los terminos y condiciones<br>
 
     </div>
 

@@ -205,10 +205,10 @@ class Sistema():
 
     def recibirTokenHCCORE(self):
         url = 'http://34.95.198.251:3001/eps/sign'
-        payload = { "id":"1", "password":"ValleMedPassword"}
+        body = { "id":"1", "password":"ValleMedPassword"}
         headers = { 'Content-Type' : 'application/json' }
 
-        response = requests.post(url,data=json.dumps(payload),headers=headers)
+        response = requests.post(url,data=json.dumps(body),headers=headers)
         response_json = response.json()
         token = response_json['token']
         print(response.status_code)
@@ -218,6 +218,45 @@ class Sistema():
             return token
         else:
             print("Fallo en conexión con la API")
+
+    def agregarPaciente(self,nrodocumento,nombreCompleto,nacimiento,eCivil,telefono,sexo):
+        token = self.recibirTokenHCCORE()
+        
+        url = 'http://34.95.198.251:3001/eps/createUser'
+        body = {
+        "DNI" : 987654,
+        "nombre" : "Diomedez Diaz",
+        "fechaNacimiento" : "1950-12-25",
+        "estadoCivil" : "soltero",
+        "telefono" : 3224053212,
+        "sexo" : "masculino",
+        "idEntidad" : 1
+        }
+        
+        body['DNI'] = int(nrodocumento)
+        body['nombre'] = str(nombreCompleto)
+        body['fechaNacimiento'] = str(nacimiento)
+        body['estadoCivil'] = str(eCivil)
+        body['telefono'] = int(telefono)
+        body['sexo'] = str(sexo)
+        
+        headers = { 'Content-Type' : 'application/json', 'Autorization' : '{}'.format(token)}
+        #headers['Autorization'] = token
+        print(body)
+        print(headers)
+
+        response = requests.post(url, data = json.dumps(body),headers=headers)
+        #response = requests.post(url,params = body,headers=headers)
+        #response_json = response.json()
+        #token = response_json['token']
+        print(response.status_code)
+
+        if response.status_code == 200:
+            #print("BIEN")
+            return 1
+        else:
+            print("Fallo en conexión con la API")
+            return 2
 
     def recorrerHC(self,diccionario):
         #pip install pdfkit
