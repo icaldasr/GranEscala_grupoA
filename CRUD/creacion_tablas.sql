@@ -74,3 +74,12 @@ create table login(
     contrasena varchar(10),
     tipo varchar(30) Not null
 );
+
+create table solicitudes(
+    id_solicitud int primary key,
+    descripcion varchar(100),
+    estado varchar(30),
+    justificacion varchar(50),
+    nro_paciente int,
+    id_medico int references medicos(nro_documento)
+);
