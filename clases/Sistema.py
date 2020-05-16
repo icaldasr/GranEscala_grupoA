@@ -16,9 +16,6 @@ from clases.Doctor import Doctor
 import secrets
 from email.header import Header
 from email.utils import formataddr
-#pip install pypdf2
-#from PyPDF import PdfFileReader
-#pip install pdfkit
 
 
 
@@ -258,14 +255,3 @@ class Sistema():
             #print("Fallo en conexión con la API")
             return 2
         
-    def recorrerHC(self,diccionario):
-        #pip install pdfkit
-        key = diccionario.keys()
-        #elemento = diccionario.values()
-        
-        for key in diccionario:
-            elemento = key, ":",diccionario[key]
-            print(elemento)
-            #print (key, ":",diccionario[key])
-
-        #print(diccionario.items())
