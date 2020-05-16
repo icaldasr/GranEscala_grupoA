@@ -298,6 +298,7 @@ def citaPaciente():
             cb1 = request.form.get("cbox1")
             if cb1 != None:
                 print(cb1)
+                
             cb2 = request.form.get("cbox2") 
             if cb2 != None:
                 print(cb2)
@@ -379,12 +380,12 @@ def citaPaciente():
 @app.route('/mostrarHCPaciente', methods = ['POST', 'GET'])
 def json():
 
-        return "JSON recibido"
+#        return "JSON recibido"
     
-    else:
-        flash("No se ha recibido la Historia Clínica del paciente","error")
+ #   else:
+    flash("No se ha recibido la Historia Clínica del paciente","error")
 
-        return redirect(url_for("doctor"))
+    return redirect(url_for("doctor"))
 
 @app.route("/logout")
 def logout():
