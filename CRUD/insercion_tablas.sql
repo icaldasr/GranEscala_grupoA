@@ -306,7 +306,7 @@ delimiter ;
 
 delimiter //
 create function ingresar_solicitud(_id_so int, _descripcion varchar(100), _estado varchar(30), 
-                                   _justificacion varchar(50), _paciente int, _med int)
+                                   _paciente int, _med int)
     returns int
 begin
     declare id_medi int;
@@ -316,7 +316,7 @@ begin
     if id_medi is not Null then
         select solicitud_maxima() into _soli;
         insert into solicitudes (id_solicitud, descripcion, estado, justificacion, nro_paciente, id_medico)
-        values (_soli, _descripcion, _estado, _justificacion, _paciente, id_medi);
+        values (_soli, _descripcion, _estado, NUll, _paciente, id_medi);
 
         return 1;
     else
