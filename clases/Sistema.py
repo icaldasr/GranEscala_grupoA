@@ -254,4 +254,19 @@ class Sistema():
             print(response.content)
             #print("Fallo en conexión con la API")
             return 2
+
+    def insertarSolicitud(self,descripcion,estado,idmedico,nropaciente):
+        medi = self.dataBase.insertarSolicitudMedicamento(descripcion,estado,idmedico,nropaciente)
+        return medi
+
+    def mostrarSolicitudes(self):
+        solicitud = self.dataBase.obtenerSolicitudes()
+        for i in solicitud:
+
+            idPaciente = i[4]
+            idMedico = i[5]
+            descripcion = i[1]
+            estado = i[3]
+            justificacion = i[3]
         
+            #print()

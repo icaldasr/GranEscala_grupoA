@@ -227,6 +227,7 @@ def registrarAdministrador():
 def solicitudes():
     if "user" in session:
         usuario = session["user"]
+        sis.mostrarSolicitudes()
         return render_template("solicitudes.html")
     else: 
         message = '¡Primero debes iniciar sesión!'
@@ -251,6 +252,8 @@ def citaPaciente():
         hora = time.localtime()
         horaActual = time.strftime("%H:%M:%S", hora)
         fechaAct = date.today() #https://www.programiz.com/python-programming/datetime/current-datetime
+        idDoctor = doc.getNumeroDoc()
+        idPaciente = 333333
         #recibir = sis.recibirTokenHCCORE()
         #print(fechaAct)
         #print(current_time)
@@ -298,73 +301,93 @@ def citaPaciente():
             cb1 = request.form.get("cbox1")
             if cb1 != None:
                 print(cb1)
-                
+                sis.insertarSolicitud(cb1,"Aprobado",idDoctor,idPaciente)
             cb2 = request.form.get("cbox2") 
             if cb2 != None:
                 print(cb2)
+                sis.insertarSolicitud(cb2,"Aprobado",idDoctor,idPaciente)
             cb3 = request.form.get("cbox3") 
             if cb3 != None:
                 print(cb3)
+                sis.insertarSolicitud(cb3,"Pendiente",idDoctor,idPaciente)
             cb4 = request.form.get("cbox4") 
             if cb4 != None:
                 print(cb4)
+                sis.insertarSolicitud(cb4,"Pendiente",idDoctor,idPaciente)
             cb5 = request.form.get("cbox5") 
             if cb5 != None:
                 print(cb5)
+                sis.insertarSolicitud(cb5,"Pendiente",idDoctor,idPaciente)
 
             inidicacionesMedicamentos = request.form["InidicacionesMedicamentos"]
             incapacidad = request.form["incapacidad"]
+            sis.insertarSolicitud(incapacidad,"Pendiente",idDoctor,idPaciente)
 
             #Remisiones
             cb6 = request.form.get("cbox6")
             if cb6 != None:
                 print(cb6)
+                sis.insertarSolicitud(cb6,"Pendiente",idDoctor,idPaciente)
             cb7 = request.form.get("cbox7") 
             if cb7 != None:
                 print(cb7)
+                sis.insertarSolicitud(cb7,"Pendiente",idDoctor,idPaciente)
             cb8 = request.form.get("cbox8") 
             if cb8 != None:
                 print(cb8)
+                sis.insertarSolicitud(cb8,"Pendiente",idDoctor,idPaciente)
             cb9 = request.form.get("cbox9") 
             if cb9 != None:
                 print(cb9)
+                sis.insertarSolicitud(cb9,"Pendiente",idDoctor,idPaciente)
             cb10 = request.form.get("cbox10") 
             if cb10 != None:
                 print(cb10)
+                sis.insertarSolicitud(cb10,"Pendiente",idDoctor,idPaciente)
 
             #Examenes
             cb11 = request.form.get("cbox11")
             if cb11 != None:
                 print(cb11)
+                sis.insertarSolicitud(cb11,"Pendiente",idDoctor,idPaciente)
             cb12 = request.form.get("cbox12") 
             if cb12 != None:
                 print(cb12)
+                sis.insertarSolicitud(cb12,"Pendiente",idDoctor,idPaciente)
             cb13 = request.form.get("cbox13") 
             if cb13 != None:
                 print(cb13)
+                sis.insertarSolicitud(cb13,"Pendiente",idDoctor,idPaciente)
             cb14 = request.form.get("cbox14") 
             if cb14 != None:
                 print(cb14)
+                sis.insertarSolicitud(cb14,"Pendiente",idDoctor,idPaciente)
             cb15 = request.form.get("cbox15") 
             if cb15 != None:
                 print(cb15)
+                sis.insertarSolicitud(cb15,"Pendiente",idDoctor,idPaciente)
 
             #Tratamientos
             cb16 = request.form.get("cbox16")
             if cb16 != None:
                 print(cb16)
+                sis.insertarSolicitud(cb16,"Pendiente",idDoctor,idPaciente)
             cb17 = request.form.get("cbox17") 
             if cb17 != None:
                 print(cb17)
+                sis.insertarSolicitud(cb17,"Pendiente",idDoctor,idPaciente)
             cb18 = request.form.get("cbox18") 
             if cb18 != None:
                 print(cb13)
+                sis.insertarSolicitud(cb18,"Pendiente",idDoctor,idPaciente)
             cb19 = request.form.get("cbox19") 
             if cb19 != None:
                 print(cb19)
+                sis.insertarSolicitud(cb19,"Pendiente",idDoctor,idPaciente)
             cb20 = request.form.get("cbox20") 
             if cb20 != None:
                 print(cb20)
+                sis.insertarSolicitud(cb20,"Pendiente",idDoctor,idPaciente)
 
             mensaje = '¡Cita cargada satisfactoriamente!'
             flash(mensaje,"success")

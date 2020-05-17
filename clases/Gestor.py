@@ -125,7 +125,34 @@ class Gestor():
             return 1
         else:
             return consulta[0][0]
-    
+
+    def insertarSolicitud(self,descripcion,estado,idmedico,nropaciente):
+        self.cursor.execute(
+            """
+            SELECT ingresar_solicitud (%s, %s, %s, %s)""",
+            (descripcion,estado,nropaciente,idmedico))
+        
+        consulta = self.cursor.fetchall()
+        self.conexion.commit()
+        if consulta[0][0] == 1:
+            return 1
+        else:
+            return consulta[0][0]
+
+    def obtenerSolicitudes(self):
+        self.cursor.execute(
+            """
+            SELECT * FROM solicitudes
+            """)
+        consulta = self.cursor.fetchall()
+        return consulta
+    """
+    def acualizarSolicitudes(self,estado,justificacion):
+        self.cursor.execute(
+            """
+            UPDATE solicitudes SET 
+            """)
+    """
     def obtener_tipo_documentos(self):
         self.cursor.execute(
             """
