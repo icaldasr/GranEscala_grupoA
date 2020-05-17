@@ -305,7 +305,7 @@ delimiter ;
 
 
 delimiter //
-create function ingresar_solicitud(_id_so int, _descripcion varchar(100), _estado varchar(30), 
+create function ingresar_solicitud(_descripcion varchar(100), _estado varchar(30), 
                                    _paciente int, _med int)
     returns int
 begin
