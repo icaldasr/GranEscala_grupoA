@@ -256,11 +256,12 @@ class Sistema():
             return 2
 
     def insertarSolicitud(self,descripcion,estado,idmedico,nropaciente):
-        medi = self.dataBase.insertarSolicitudMedicamento(descripcion,estado,idmedico,nropaciente)
+        medi = self.dataBase.insertarSolicitud(descripcion,estado,idmedico,nropaciente)
         return medi
 
     def mostrarSolicitudes(self):
         solicitud = self.dataBase.obtenerSolicitudes()
+        solicitudes = []
         for i in solicitud:
 
             idPaciente = i[4]
@@ -268,5 +269,8 @@ class Sistema():
             descripcion = i[1]
             estado = i[3]
             justificacion = i[3]
-        
-            #print()
+            
+            #return i 
+            solicitudes.append(i)
+            print(i)
+        return solicitudes

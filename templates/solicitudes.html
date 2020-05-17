@@ -76,96 +76,46 @@
         <table class="members_details">
             <thead>
                 <tr>
-                    <th class="members_id text_align_center"><b>CC Paciente</b></th>
-                    <th class="members_name text_align_center"><b>Nombre Paciente</b></th>
-                    <th class="members_position text_align_center"><b>Solicitud</b></th>
-                    <th class="members_blood_group text_align_center"><b>Médico Solicitante</b></th>
-                    <th class="members_address text_align_center"><b>Estado</b></th> 
+                    <th class="members_id text_align_center"><b>ID Solicitud</b></th>
+                    <th class="members_name text_align_center"><b>Solicitud</b></th>
+                    <th class="members_position text_align_center"><b>Estado Actual</b></th>
+                    <th class="members_address text_align_center"><b>Nuevo Estado</b></th>
+                    <th class="members_blood_group text_align_center"><b>Detalles</b></th>
+                    <th class="members_address text_align_center"><b>ID Paciente</b></th> 
+                    <th class="members_address text_align_center"><b>ID Doctor</b></th>
+                    
                     <th class="members_address text_align_center"><b>Justificación</b></th>       
                 </tr>
             </thead>
             <tbody>
             <tr>
-                <td class="members_id text_align_center">M101</td>
-                <td class="members_name">SM Mehdi Akram
-                </td><td class="members_position">CEO, Royal Technologies</td>
-                <td class="members_blood_group text_align_center">AB+</td>
-                <td >
-                    
-                    <select name="OS" >
-                            <option value="1">Creada</option> 
-                            <option value="2">Aceptar</option> 
-                            <option value="3">Rechazar</option>
-                    </select>
+                {% for row in solicitudes %}
+                    <tr>
+                      <td>{{ row[0] }}</td>
+                      <td>{{ row[1] }}</td>
+                      <td>{{ row[2] }}</td>
+                      <td >
+                        <select name="OS" >
+                            <option value="1">Pendiente</option> 
+                            <option value="2">Aprobado</option> 
+                            <option value="3">Rechazado</option>
+                        </select>
+                      </td>
+                      <td>{{ row[3] }}</td>
+                      <td>{{ row[4] }}</td>
+                      <td>{{ row[5] }}</td>
+                      <td>
+                            <input type="text" name="justificacion">
+                      </td>
 
-                </td>
+                    </tr>
+                {% endfor %}
 
-
-                <td>
-                    <input type="text" name="justificacion">
-                </td>
-            </tr>
-            
-            <tr>
-                <td class="members_id text_align_center">M102</td>
-                <td class="members_name">Md. Mahmudul Hasan
-                </td><td class="members_position">Head of Procurement &amp; Commercial Navana Furniture Ltd.</td>
-                <td class="members_blood_group text_align_center">B+</td>
-                <td >
-                    <select name="OS" >
-                            <option value="1">Creada</option> 
-                            <option value="2">Aceptar</option> 
-                            <option value="3">Rechazar</option>
-                    </select>
-                </td>
-                <td>
-                    <input type="text" name="justificacion">
-                </td>
-            </tr>
-        
-            <tr>
-
-                <td class="members_id text_align_center">M103</td>
-                <td class="members_name">Rabindra Nath Das
-                </td><td class="members_position">Manager-Project, Corporate IT,Navana Group</td>
-                <td class="members_blood_group text_align_center">N/A</td>
-                <td >
-                    <select name="OS" >
-                            <option value="1">Creada</option> 
-                            <option value="2">Aceptar</option> 
-                            <option value="3">Rechazar</option>
-                    </select>
-                </td>
-                <td>
-                    <input type="text" name="justificacion">
-                </td>
-            </tr>
-
-            <tr>
-
-                <td class="members_id text_align_center">M103</td>
-                <td class="members_name">Rabindra Nath Das
-                </td><td class="members_position">Manager-Project, Corporate IT,Navana Group</td>
-                <td class="members_blood_group text_align_center">N/A</td>
-                
-                <td >
-                    <select name="OS" >
-                            <option value="1">Creada</option> 
-                            <option value="2">Aceptar</option> 
-                            <option value="3">Rechazar</option>
-                    </select>
-                    <!-- <div class="form-check" align="center">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    </div> -->
-                </td>
-                <td>
-                    <input type="text" name="justificacion">
-                </td>
             </tr>
 
 
         
-                </tbody>
+            </tbody>
         </table>
     
     </div>  

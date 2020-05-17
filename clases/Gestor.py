@@ -146,13 +146,7 @@ class Gestor():
             """)
         consulta = self.cursor.fetchall()
         return consulta
-    """
-    def acualizarSolicitudes(self,estado,justificacion):
-        self.cursor.execute(
-            """
-            UPDATE solicitudes SET 
-            """)
-    """
+
     def obtener_tipo_documentos(self):
         self.cursor.execute(
             """

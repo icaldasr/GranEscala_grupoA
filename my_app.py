@@ -227,8 +227,8 @@ def registrarAdministrador():
 def solicitudes():
     if "user" in session:
         usuario = session["user"]
-        sis.mostrarSolicitudes()
-        return render_template("solicitudes.html")
+        solicitudes = sis.mostrarSolicitudes()
+        return render_template("solicitudes.html",solicitudes = solicitudes)
     else: 
         message = '¡Primero debes iniciar sesión!'
         flash(message,"error")
@@ -253,7 +253,7 @@ def citaPaciente():
         horaActual = time.strftime("%H:%M:%S", hora)
         fechaAct = date.today() #https://www.programiz.com/python-programming/datetime/current-datetime
         idDoctor = doc.getNumeroDoc()
-        idPaciente = 333333
+        idPaciente = 34567
         #recibir = sis.recibirTokenHCCORE()
         #print(fechaAct)
         #print(current_time)
