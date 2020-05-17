@@ -70,6 +70,7 @@
     </header>
     &ensp;
     
+    <form method="POST">
 
     <div id="page-wrap" class="container">
         <input type="search" class="light-table-filter" data-table="members_details" placeholder="Filtrar">
@@ -112,9 +113,6 @@
                 {% endfor %}
 
             </tr>
-
-
-        
             </tbody>
         </table>
     
@@ -122,13 +120,10 @@
 
     <a href="/admin"><button type="button" class="btn btn-outline-primary espacio-bot1-tabla espacio-arriba2">Atras</button></a>
     <button type="submit" class="btn btn-outline-primary espacio-botones espacio-arriba2">Guardar</button>
-    <button type="button" class="btn btn-outline-primary espacio-botones espacio-arriba2">Actualizar</button>
+    <button href="/ActualizarSolicitud" type="submit" class="btn btn-outline-primary espacio-botones espacio-arriba2">Actualizar</button>
+
+</form>
     
-
-
-
-
-
     <script type="text/javascript"
          src="{{ url_for('static', filename='tabla.js') }}"></script>
 </body>

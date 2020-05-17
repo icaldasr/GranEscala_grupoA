@@ -82,6 +82,13 @@ def buscar():
         flash(message,"error")
         return redirect(url_for("login"))
 
+@app.route("/ActualizarSolicitud",methods = ["POST","GET"])
+def actualizarSolicitud():
+    if request.method == 'POST':
+        
+        print("Actualizar")
+        return render_template("solicitudes.html")
+
 @app.route("/registrarDoctor", methods = ["POST", "GET"])
 def registrarDoctor():
     if "user" in session:

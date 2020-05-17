@@ -272,5 +272,5 @@ class Sistema():
             
             #return i 
             solicitudes.append(i)
-            print(i)
+            #print(i)
         return solicitudes
