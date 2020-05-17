@@ -285,6 +285,48 @@ delimiter ;
 
 
 
+delimiter //
+create function solicitud_maxima()
+    returns int
+begin
+    declare soli int;
+    select max(id_solicitud) into soli from solicitudes;
+    if soli is Null then
+        return 1;
+    else
+        set soli = soli + 1;
+        return soli;
+    end if;
+END; //
+delimiter ;
+
+
+
+
+
+delimiter //
+create function ingresar_solicitud(_id_so int, _descripcion varchar(100), _estado varchar(30), 
+                                   _paciente int, _med int)
+    returns int
+begin
+    declare id_medi int;
+    declare _soli int;
+
+    select nro_documento into id_medi from medicos where nro_documento = _med;
+    if id_medi is not Null then
+        select solicitud_maxima() into _soli;
+        insert into solicitudes (id_solicitud, descripcion, estado, justificacion, nro_paciente, id_medico)
+        values (_soli, _descripcion, _estado, NUll, _paciente, id_medi);
+
+        return 1;
+    else
+        return 0;
+    end if;
+END; //
+delimiter ;
+
+
+
 
 
 
