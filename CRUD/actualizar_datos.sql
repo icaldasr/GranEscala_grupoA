@@ -58,7 +58,7 @@ begin
 
     select id_solicitud into id_soli from id_solicitudes where id_solicitud = id;
     if id_soli is not null then
-        update id_solicitudes set estado = _estado, justificacion = _justificacion where id_solicitud = id_soli;
+        update solicitudes set estado = _estado, justificacion = _justificacion where id_solicitud = id_soli;
         return 1;
     else
         return 0;
