@@ -11,6 +11,8 @@ import requests
 
 import json
 
+from json import loads
+
 app = Flask(__name__)
 app.secret_key = "ValleDev1234"
 sis = Sistema()
@@ -227,8 +229,66 @@ def registrarAdministrador():
 def solicitudes():
     if "user" in session:
         usuario = session["user"]
-        sis.mostrarSolicitudes()
-        return render_template("solicitudes.html")
+        solicitudes = sis.mostrarSolicitudes()
+        return render_template("solicitudes.html",solicitudes=solicitudes)
+    else: 
+        message = '¡Primero debes iniciar sesión!'
+        flash(message,"error")
+        return redirect(url_for("login"))
+
+@app.route("/ActualizarSolicitud",methods =["POST","GET"])
+def actualizarSolicitudesFuncion():
+    if "user" in session:
+        usuario = session["user"]
+        if request.method == 'POST':
+            solicitudes = sis.mostrarSolicitudes()
+            req = request.form['json_string']
+            data = loads(req)
+            #print(data['idSolicitud'])
+            #print(data)
+            solicitudesActualizadas = sis.obtenerSolicitudesActualizadas(data)
+            print(solicitudesActualizadas)
+            # for i in data:
+            #     idSolicitud = data[i]['idSolicitud']
+            #     nuevoEstado = data[i]['nuevoEstado']
+            #     justificacion = data[i]['justificacion']
+            #     if nuevoEstado == 'Pendiente':
+            #         nuevoEstado = data[i]['estadoActual']
+            #         print (idSolicitud,nuevoEstado,justificacion)
+            #     else:
+            #         print (idSolicitud,nuevoEstado,justificacion)
+            #return (idSolicitud,nuevoEstado,justificacion)
+
+            #print(data['solicitud0']['idSolicitud'])
+
+            return render_template("solicitudes.html",solicitudes=solicitudes)
+    else: 
+        message = '¡Primero debes iniciar sesión!'
+        flash(message,"error")
+        return redirect(url_for("login"))
+
+@app.route("/guardarSolicitud",methods = ["POST", "GET"])
+def guardarSolicitud():
+    if "user" in session:
+        usuario = session["user"]
+        if request.method == 'POST':
+            solicitudes = sis.mostrarSolicitudes()
+            req = request.form['json_string']
+            data = loads(req)
+            solicitudesActualizadas = sis.obtenerSolicitudesActualizadas(data)
+            for i in solicitudesActualizadas:
+                idSolicitud = i[0]
+                estadoActual = i[1]
+                justificacion = i[2]
+                sis.actualizarSolicitud(idSolicitud,estadoActual,justificacion)
+                #print(i[0])
+                #for j in i:
+
+                    #print("---",solicitudesActualizadas[j])
+            print("Guardar",solicitudesActualizadas)
+            #sis.actualizarSolicitud()
+            #solicitudesActualizadas sis.obtenerSolicitudesActualizadas(data)
+            return render_template("solicitudes.html",solicitudes=solicitudes)
     else: 
         message = '¡Primero debes iniciar sesión!'
         flash(message,"error")

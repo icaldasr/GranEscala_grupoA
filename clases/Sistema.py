@@ -261,6 +261,7 @@ class Sistema():
 
     def mostrarSolicitudes(self):
         solicitud = self.dataBase.obtenerSolicitudes()
+        solicitudes = []
         for i in solicitud:
 
             idPaciente = i[4]
@@ -268,5 +269,34 @@ class Sistema():
             descripcion = i[1]
             estado = i[3]
             justificacion = i[3]
+            
+            solicitudes.append(i)
+                    #print()
+        return solicitudes
+
+    def obtenerSolicitudesActualizadas(self,data):
+        solicitudes = []
+        for i in data:
+            idSolicitud = data[i]['idSolicitud']
+            nuevoEstado = data[i]['nuevoEstado']
+            justificacion = data[i]['justificacion']
+            solicitud = []
+            if nuevoEstado == 'Pendiente':
+                nuevoEstado = data[i]['estadoActual']
+                solicitud.append(idSolicitud)
+                solicitud.append(nuevoEstado)
+                solicitud.append(justificacion)
+                solicitudes.append(solicitud)
+                #return (idSolicitud,nuevoEstado,justificacion)
+            else:
+                solicitud.append(idSolicitud)
+                solicitud.append(nuevoEstado)
+                solicitud.append(justificacion)
+                solicitudes.append(solicitud)
         
-            #print()
+        return solicitudes
+                #return (idSolicitud,nuevoEstado,justificacion)
+
+    def actualizarSolicitud(self,idSolicitud,nuevoEstado,justificacion):
+        solicitudes = self.dataBase.actualizarSolicitudes(idSolicitud,nuevoEstado,justificacion)
+        return solicitudes
