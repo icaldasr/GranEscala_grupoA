@@ -277,12 +277,13 @@ def actualizarSolicitudesFuncion():
 
             if mensaje == 0:
                 print("MENSAJE NO ACTUALIZA")
-                flash('No se pueden actualizar las solicitudes, faltan justificaciones',"error")
-                #return redirect(url_for("solicitudes"))
+                return ('No Funciona',200)
+
             else:
                 print("MENSAJE SI ACTUALIZA")
                 flash('Solicitudes actualizadas',"success")
                 sis.actualizarSolicitud(idSolicitud,estadoActual,justificacion)
+                return ('Funciona',200)
 
             return render_template("solicitudes.html",solicitudes=solicitudes)
     else: 
@@ -298,7 +299,7 @@ def guardarSolicitud():
             print("ACTUALIZADO")
             solicitudes = sis.mostrarSolicitudes()
             print(solicitudes)
-            return redirect(url_for("admin"))
+        return redirect(url_for("admin"))
             #return render_template("solicitudes.html",solicitudes=solicitudes)
 
     else: 
@@ -393,7 +394,8 @@ def citaPaciente():
 
             inidicacionesMedicamentos = request.form["InidicacionesMedicamentos"]
             incapacidad = request.form["incapacidad"]
-            sis.insertarSolicitud(incapacidad,"Pendiente",idDoctor,idPaciente)
+            if incapacidad != '':
+                sis.insertarSolicitud(incapacidad,"Pendiente",idDoctor,idPaciente)
 
             #Remisiones
             cb6 = request.form.get("cbox6")

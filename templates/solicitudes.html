@@ -117,8 +117,8 @@
       class="btn btn-outline-primary espacio-bot1-tabla espacio-arriba2">Atras</button></a>
   <button  id="ButtonActualizar" type="submit"
     class="btn btn-outline-primary espacio-botones espacio-arriba2">Actualizar</button>
-  <!--button id="ButtonGuardar" type="submit"
-    class="btn btn-outline-primary espacio-botones espacio-arriba2">Guardar</button-->
+  <button id="ButtonGuardar" type="submit"
+    class="btn btn-outline-primary espacio-botones espacio-arriba2">Guardar y Salir</button>
   <script type="text/javascript" src="{{ url_for('static', filename='tabla.js') }}"></script>
 </body>
 
@@ -145,12 +145,20 @@
       console.log(json)
       $.post("/ActualizarSolicitud", { json_string: json }).then((res) => {
           console.log(res)
-          location.reload();
+          if(res == 'Funciona')
+            {alert("Solicitudes actualizadas") 
+            location.reload();
+            window.location = "http://localhost:5000/admin";
+        }
+        else
+            { alert("Las solicitudes no fueron actualizadas. Complete las justificaciones")
+            location.reload();}
+          //location.reload();
           return false;
         })
         .catch(function(error) {
           console.log(error);
-          location.reload();
+          
           return false;
       });;
     });
