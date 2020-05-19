@@ -256,7 +256,7 @@ class Sistema():
             return 2
 
     def insertarSolicitud(self,descripcion,estado,idmedico,nropaciente):
-        medi = self.dataBase.insertarSolicitudMedicamento(descripcion,estado,idmedico,nropaciente)
+        medi = self.dataBase.insertarSolicitud(descripcion,estado,idmedico,nropaciente)
         return medi
 
     def mostrarSolicitudes(self):
@@ -281,20 +281,46 @@ class Sistema():
             nuevoEstado = data[i]['nuevoEstado']
             justificacion = data[i]['justificacion']
             solicitud = []
+            estado = True
             if nuevoEstado == 'Pendiente':
                 nuevoEstado = data[i]['estadoActual']
                 solicitud.append(idSolicitud)
                 solicitud.append(nuevoEstado)
-                solicitud.append(justificacion)
-                solicitudes.append(solicitud)
+                #solicitud.append(justificacion)
+                #solicitudes.append(solicitud)
+
+                if justificacion == '':
+                    solicitud.append(data[i]['detalles'])
+                    solicitud.append('anterior')
+                    solicitud.append(False)
+                    solicitudes.append(solicitud)
+                else:
+                    solicitud.append(justificacion)
+                    solicitud.append('')
+                    solicitud.append(False)
+                    solicitudes.append(solicitud)
+                estado = False
                 #return (idSolicitud,nuevoEstado,justificacion)
             else:
                 solicitud.append(idSolicitud)
                 solicitud.append(nuevoEstado)
-                solicitud.append(justificacion)
-                solicitudes.append(solicitud)
-        
-        return solicitudes
+                #solicitud.append(justificacion)
+                #solicitudes.append(solicitud)
+                if justificacion == '':
+                    solicitud.append(data[i]['detalles'])
+
+                    solicitud.append('')
+                    solicitud.append(True)
+                    solicitudes.append(solicitud)
+
+                else:
+
+                    solicitud.append(justificacion)
+                    solicitud.append('')
+                    solicitud.append(True)
+                    solicitudes.append(solicitud)
+                estado = True     
+        return (solicitudes)
                 #return (idSolicitud,nuevoEstado,justificacion)
 
     def actualizarSolicitud(self,idSolicitud,nuevoEstado,justificacion):

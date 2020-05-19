@@ -4,6 +4,22 @@
 
 <head>
 
+    <div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %} 
+        {% for category,message in messages %}
+        {% if category == 'success'%}
+          <div class = "alert alert-success mb-3" role="alert">{{ message }}</div>
+        {%endif%}
+        {% if category == 'error'%}
+          <div class = "alert alert-danger mb-3" role="alert">{{ message }}</div>
+        {%endif%}
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    {% block body %}{% endblock %}  
+    </div>
+
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -18,21 +34,8 @@
   <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
 
-  <div>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    {% for category,message in messages %}
-    {% if category == 'success'%}
-    <div class="alert alert-success mb-3" role="alert">{{ message }}</div>
-    {%endif%}
-    {% if category == 'error'%}
-    <div class="alert alert-danger mb-3" role="alert">{{ message }}</div>
-    {%endif%}
-    {% endfor %}
-    {% endif %}
-    {% endwith %}
-    {% block body %}{% endblock %}
-  </div>
+
+
 
 
 
@@ -112,10 +115,10 @@
   </div>
   <a href="/admin"><button type="button"
       class="btn btn-outline-primary espacio-bot1-tabla espacio-arriba2">Atras</button></a>
-  <button id="ButtonActualizar" type="submit"
+  <button  id="ButtonActualizar" type="submit"
     class="btn btn-outline-primary espacio-botones espacio-arriba2">Actualizar</button>
-  <button id="ButtonGuardar" type="submit"
-    class="btn btn-outline-primary espacio-botones espacio-arriba2">Guardar</button>
+  <!--button id="ButtonGuardar" type="submit"
+    class="btn btn-outline-primary espacio-botones espacio-arriba2">Guardar</button-->
   <script type="text/javascript" src="{{ url_for('static', filename='tabla.js') }}"></script>
 </body>
 
@@ -140,7 +143,16 @@
       });
       var json = JSON.stringify(obj);
       console.log(json)
-      $.post("/ActualizarSolicitud", { json_string: json });
+      $.post("/ActualizarSolicitud", { json_string: json }).then((res) => {
+          console.log(res)
+          location.reload();
+          return false;
+        })
+        .catch(function(error) {
+          console.log(error);
+          location.reload();
+          return false;
+      });;
     });
   });
   $(document).ready(function () {

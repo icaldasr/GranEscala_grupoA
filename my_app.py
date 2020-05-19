@@ -247,19 +247,42 @@ def actualizarSolicitudesFuncion():
             #print(data['idSolicitud'])
             #print(data)
             solicitudesActualizadas = sis.obtenerSolicitudesActualizadas(data)
-            print(solicitudesActualizadas)
-            # for i in data:
-            #     idSolicitud = data[i]['idSolicitud']
-            #     nuevoEstado = data[i]['nuevoEstado']
-            #     justificacion = data[i]['justificacion']
-            #     if nuevoEstado == 'Pendiente':
-            #         nuevoEstado = data[i]['estadoActual']
-            #         print (idSolicitud,nuevoEstado,justificacion)
-            #     else:
-            #         print (idSolicitud,nuevoEstado,justificacion)
-            #return (idSolicitud,nuevoEstado,justificacion)
+            #print(solicitudesActualizadas)
 
-            #print(data['solicitud0']['idSolicitud'])
+            mensaje = 1
+
+            for i in solicitudesActualizadas:
+                idSolicitud = i[0]
+                estadoActual = i[1]
+                justificacion = i[2]
+                cambio = i[4]
+
+                if cambio == False:
+                    #if estadoActual == 'Rechazado':
+                     #   print("NSTADO RECHAZADO",idSolicitud)
+                    #else:
+                     #   print("CAMBIO A ESTADO RECHAZADO",idSolicitud)
+                        #mensaje = 1
+                    sis.actualizarSolicitud(idSolicitud,estadoActual,justificacion)
+                else:
+                    #print("TRUE",idSolicitud)
+                    if justificacion == 'None':
+                        #print("NO SE ACTUALIZA")
+                        mensaje = 0
+                        #flash("NO SE ACTUALIZA","error")
+                    else:
+                        #print("SI SE ACTUALIZA")
+                        sis.actualizarSolicitud(idSolicitud,estadoActual,justificacion)
+                        #mensaje = 1
+
+            if mensaje == 0:
+                print("MENSAJE NO ACTUALIZA")
+                flash('No se pueden actualizar las solicitudes, faltan justificaciones',"error")
+                #return redirect(url_for("solicitudes"))
+            else:
+                print("MENSAJE SI ACTUALIZA")
+                flash('Solicitudes actualizadas',"success")
+                sis.actualizarSolicitud(idSolicitud,estadoActual,justificacion)
 
             return render_template("solicitudes.html",solicitudes=solicitudes)
     else: 
@@ -272,23 +295,12 @@ def guardarSolicitud():
     if "user" in session:
         usuario = session["user"]
         if request.method == 'POST':
+            print("ACTUALIZADO")
             solicitudes = sis.mostrarSolicitudes()
-            req = request.form['json_string']
-            data = loads(req)
-            solicitudesActualizadas = sis.obtenerSolicitudesActualizadas(data)
-            for i in solicitudesActualizadas:
-                idSolicitud = i[0]
-                estadoActual = i[1]
-                justificacion = i[2]
-                sis.actualizarSolicitud(idSolicitud,estadoActual,justificacion)
-                #print(i[0])
-                #for j in i:
+            print(solicitudes)
+            return redirect(url_for("admin"))
+            #return render_template("solicitudes.html",solicitudes=solicitudes)
 
-                    #print("---",solicitudesActualizadas[j])
-            print("Guardar",solicitudesActualizadas)
-            #sis.actualizarSolicitud()
-            #solicitudesActualizadas sis.obtenerSolicitudesActualizadas(data)
-            return render_template("solicitudes.html",solicitudes=solicitudes)
     else: 
         message = '¡Primero debes iniciar sesión!'
         flash(message,"error")
