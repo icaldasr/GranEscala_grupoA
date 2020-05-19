@@ -1,131 +1,188 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
 
-    <link rel="stylesheet" 
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" 
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" 
-    crossorigin="anonymous">
-
-    <link rel="stylesheet"  type= "text/css" href= "{{ url_for('static',filename='styles/registrar.css') }}">
-    <link rel="stylesheet"  type= "text/css" href= "{{ url_for('static',filename='styles/main.css') }}">
-    <link rel="stylesheet" href="tabla.js">
-    <script type="text/javascript" src="{{ url_for('static', filename = 'styles/tabla.js') }}"></script>
-
-
-
-    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    
     <div>
-        {% with messages = get_flashed_messages(with_categories=true) %}
-          {% if messages %}
-            {% for category,message in messages %}
-            {% if category == 'success'%}
-              <div class = "alert alert-success mb-3" role="alert">{{ message }}</div>
-            {%endif%}
-            {% if category == 'error'%}
-              <div class = "alert alert-danger mb-3" role="alert">{{ message }}</div>
-            {%endif%}
-            {% endfor %}
-          {% endif %}
-        {% endwith %}
-        {% block body %}{% endblock %}          
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %} 
+        {% for category,message in messages %}
+        {% if category == 'success'%}
+          <div class = "alert alert-success mb-3" role="alert">{{ message }}</div>
+        {%endif%}
+        {% if category == 'error'%}
+          <div class = "alert alert-danger mb-3" role="alert">{{ message }}</div>
+        {%endif%}
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    {% block body %}{% endblock %}  
     </div>
 
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/registrar.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/main.css') }}">
+  <link rel="stylesheet" href="tabla.js">
+  <script type="text/javascript" src="{{ url_for('static', filename = 'styles/tabla.js') }}"></script>
 
 
-<!-- borrar: -->
+
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+
+
+
+
+
+  <!-- borrar: -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="CustomStyles.css" rel="stylesheet" />
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
+
 <body>
 
-    <title>Solicitudes</title>
-    <header>
-        <nav >
-            <ul class="no-lista margen-abajo ">
-    
-    <!--             <div class="col-md-5 inline-block "><a href="index.html"><img src="logo_infree1.png" width="10px" height="50%px" align="left" padding = "0px 0px 0px 0px"></a></div> -->
-                
-                <li class="col-md-11 inline-block espacio-arriba espacio-izq"><h1 align="center">Solicitudes de pacientes:</h1></li>
-    
-                <!-- <li class="col-md-1 inline-block pacifico margen "><a href="index.html" class="terracota">INICIO</a></li> -->
-            <!-- 	<li class="col-md-1 inline-block margen"><a href="contacto.html">NOSOTROS </a></li>
+  <title>Solicitudes</title>
+  <header>
+    <nav>
+      <ul class="no-lista margen-abajo ">
+
+        <!--             <div class="col-md-5 inline-block "><a href="index.html"><img src="logo_infree1.png" width="10px" height="50%px" align="left" padding = "0px 0px 0px 0px"></a></div> -->
+
+        <li class="col-md-11 inline-block espacio-arriba espacio-izq">
+          <h1 align="center">Solicitudes de pacientes:</h1>
+        </li>
+
+        <!-- <li class="col-md-1 inline-block pacifico margen "><a href="index.html" class="terracota">INICIO</a></li> -->
+        <!--    <li class="col-md-1 inline-block margen"><a href="contacto.html">NOSOTROS </a></li>
                 <li class="col-md-1 inline-block margen"><a href="menu.html">PORTAFOLIO</a></li>
                 <li class="col-md-1 inline-block margen"><a href="menu.html">SERVICIOS</a></li>
                 <li class="col-md-1 inline-block margen"><a href="menu.html">ESCRIBENOS</a></li> -->
-         
-    <!-- 			<li class="col-md-1 inline-block margen"><a href="menu.html">BLOG</a></li>
+
+        <!--            <li class="col-md-1 inline-block margen"><a href="menu.html">BLOG</a></li>
      -->
-    
-            </ul>
-    
-        </nav>
-    </header>
-    &ensp;
-    
-    <form method="POST">
 
-    <div id="page-wrap" class="container">
-        <input type="search" class="light-table-filter" data-table="members_details" placeholder="Filtrar">
-        <table class="members_details">
-            <thead>
-                <tr>
-                    <th class="members_id text_align_center"><b>ID Solicitud</b></th>
-                    <th class="members_name text_align_center"><b>Solicitud</b></th>
-                    <th class="members_position text_align_center"><b>Estado Actual</b></th>
-                    <th class="members_address text_align_center"><b>Nuevo Estado</b></th>
-                    <th class="members_blood_group text_align_center"><b>Detalles</b></th>
-                    <th class="members_address text_align_center"><b>ID Paciente</b></th> 
-                    <th class="members_address text_align_center"><b>ID Doctor</b></th>
-                    
-                    <th class="members_address text_align_center"><b>Justificación</b></th>       
-                </tr>
-            </thead>
-            <tbody>
-            <tr>
-                {% for row in solicitudes %}
-                    <tr>
-                      <td>{{ row[0] }}</td>
-                      <td>{{ row[1] }}</td>
-                      <td>{{ row[2] }}</td>
-                      <td >
-                        <select name="OS" >
-                            <option value="1">Pendiente</option> 
-                            <option value="2">Aprobado</option> 
-                            <option value="3">Rechazado</option>
-                        </select>
-                      </td>
-                      <td>{{ row[3] }}</td>
-                      <td>{{ row[4] }}</td>
-                      <td>{{ row[5] }}</td>
-                      <td>
-                            <input type="text" name="justificacion">
-                      </td>
+      </ul>
 
-                    </tr>
-                {% endfor %}
-
-            </tr>
-            </tbody>
-        </table>
-    
-    </div>  
-
-    <a href="/admin"><button type="button" class="btn btn-outline-primary espacio-bot1-tabla espacio-arriba2">Atras</button></a>
-    <button type="submit" class="btn btn-outline-primary espacio-botones espacio-arriba2">Guardar</button>
-    <button href="/ActualizarSolicitud" type="submit" class="btn btn-outline-primary espacio-botones espacio-arriba2">Actualizar</button>
-
-</form>
-    
-    <script type="text/javascript"
-         src="{{ url_for('static', filename='tabla.js') }}"></script>
+    </nav>
+  </header>
+  &ensp;
+  <div id="page-wrap" class="container">
+    <input type="search" class="light-table-filter" data-table="members_details" placeholder="Filtrar">
+    <table id="myTable" class="members_details">
+      <thead>
+        <tr>
+          <th class="members_id text_align_center"><b>ID Solicitud</b></th>
+          <th class="members_name text_align_center"><b>Solicitud</b></th>
+          <th class="members_position text_align_center"><b>Estado Actual</b></th>
+          <th class="members_address text_align_center"><b>Nuevo Estado</b></th>
+          <th class="members_blood_group text_align_center"><b>Detalles</b></th>
+          <th class="members_address text_align_center"><b>ID Paciente</b></th>
+          <th class="members_address text_align_center"><b>ID Doctor</b></th>
+          <th class="members_address text_align_center"><b>Justificación</b></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in solicitudes %}
+        <tr class="item">
+          <td class="idSolicitud">{{ row[0] }}</td>
+          <td class="solicitud">{{ row[1] }}</td>
+          <td class="estadoActual">{{ row[2] }}</td>
+          <td>
+            <select class="nuevoEstado" name="OS">
+              <option value="1">Pendiente</option>
+              <option value="2">Aprobado</option>
+              <option value="3">Rechazado</option>
+            </select>
+          </td>
+          <td class="detalles">{{ row[3] }}</td>
+          <td class="idPaciente">{{ row[4] }}</td>
+          <td class="idDoctor">{{ row[5] }}</td>
+          <td>
+            <input class="justificacion" type="text" name="justificacion">
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <a href="/admin"><button type="button"
+      class="btn btn-outline-primary espacio-bot1-tabla espacio-arriba2">Atras</button></a>
+  <button  id="ButtonActualizar" type="submit"
+    class="btn btn-outline-primary espacio-botones espacio-arriba2">Actualizar</button>
+  <button id="ButtonGuardar" type="submit"
+    class="btn btn-outline-primary espacio-botones espacio-arriba2">Guardar y Salir</button>
+  <script type="text/javascript" src="{{ url_for('static', filename='tabla.js') }}"></script>
 </body>
 
 </html>
+<script>
+  $(document).ready(function () {
+    $('#ButtonActualizar').click(function () {
+      var obj = {};
+      var contador = 0;
+      $("tr.item").each(function () {
+        var object1 = $(this).find("td.idSolicitud").text();
+        var object2 = $(this).find("td.solicitud").text();
+        var object3 = $(this).find("td.estadoActual").text();
+        var object4 = $(this).find("select.nuevoEstado option:selected").text();
+        var object5 = $(this).find("td.detalles").text();
+        var object6 = $(this).find("td.idPaciente").text();
+        var object7 = $(this).find("td.idDoctor").text();
+        var object8 = $(this).find("input.justificacion").val();
+
+        obj["solicitud" + contador] = { idSolicitud: object1, solicitud: object2, estadoActual: object3, nuevoEstado: object4, detalles: object5, idPaciente: object6, idDoctor: object7, justificacion: object8 };
+        contador += 1;
+      });
+      var json = JSON.stringify(obj);
+      console.log(json)
+      $.post("/ActualizarSolicitud", { json_string: json }).then((res) => {
+          console.log(res)
+          if(res == 'Funciona')
+            {alert("Solicitudes actualizadas") 
+            location.reload();
+            window.location = "http://localhost:5000/admin";
+        }
+        else
+            { alert("Las solicitudes no fueron actualizadas. Complete las justificaciones")
+            location.reload();}
+          //location.reload();
+          return false;
+        })
+        .catch(function(error) {
+          console.log(error);
+          
+          return false;
+      });;
+    });
+  });
+  $(document).ready(function () {
+    $('#ButtonGuardar').click(function () {
+      var obj = {};
+      var contador = 0;
+      $("tr.item").each(function () {
+        var object1 = $(this).find("td.idSolicitud").text();
+        var object2 = $(this).find("td.solicitud").text();
+        var object3 = $(this).find("td.estadoActual").text();
+        var object4 = $(this).find("select.nuevoEstado option:selected").text();
+        var object5 = $(this).find("td.detalles").text();
+        var object6 = $(this).find("td.idPaciente").text();
+        var object7 = $(this).find("td.idDoctor").text();
+        var object8 = $(this).find("input.justificacion").val();
+
+        obj["solicitud" + contador] = { idSolicitud: object1, solicitud: object2, estadoActual: object3, nuevoEstado: object4, detalles: object5, idPaciente: object6, idDoctor: object7, justificacion: object8 };
+        contador += 1;
+      });
+      var json = JSON.stringify(obj);
+      console.log(json)
+      $.post("/guardarSolicitud", { json_string: json });
+    });
+  });
+</script>

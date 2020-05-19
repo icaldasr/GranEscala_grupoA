@@ -139,6 +139,7 @@ class Gestor():
         else:
             return consulta[0][0]
 
+
     def obtenerSolicitudes(self):
         self.cursor.execute(
             """
@@ -146,6 +147,18 @@ class Gestor():
             """)
         consulta = self.cursor.fetchall()
         return consulta
+
+    def actualizarSolicitudes(self,idSolicitud,nuevoEstado,justificacion):
+        self.cursor.execute(
+            """SELECT actualizar_solicitud (%s,%s,%s)""",(idSolicitud,nuevoEstado,justificacion))
+        
+        consulta = self.cursor.fetchall()
+        self.conexion.commit()
+        if consulta[0][0] == 1:
+            return 1
+        else:
+            return consulta[0][0]
+
 
     def obtener_tipo_documentos(self):
         self.cursor.execute(

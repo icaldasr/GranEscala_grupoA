@@ -11,6 +11,8 @@ import requests
 
 import json
 
+from json import loads
+
 app = Flask(__name__)
 app.secret_key = "ValleDev1234"
 sis = Sistema()
@@ -81,13 +83,6 @@ def buscar():
         message = '¡Primero debes iniciar sesión!'
         flash(message,"error")
         return redirect(url_for("login"))
-
-@app.route("/ActualizarSolicitud",methods = ["POST","GET"])
-def actualizarSolicitud():
-    if request.method == 'POST':
-        
-        print("Actualizar")
-        return render_template("solicitudes.html")
 
 @app.route("/registrarDoctor", methods = ["POST", "GET"])
 def registrarDoctor():
@@ -235,7 +230,78 @@ def solicitudes():
     if "user" in session:
         usuario = session["user"]
         solicitudes = sis.mostrarSolicitudes()
-        return render_template("solicitudes.html",solicitudes = solicitudes)
+        return render_template("solicitudes.html",solicitudes=solicitudes)
+    else: 
+        message = '¡Primero debes iniciar sesión!'
+        flash(message,"error")
+        return redirect(url_for("login"))
+
+@app.route("/ActualizarSolicitud",methods =["POST","GET"])
+def actualizarSolicitudesFuncion():
+    if "user" in session:
+        usuario = session["user"]
+        if request.method == 'POST':
+            solicitudes = sis.mostrarSolicitudes()
+            req = request.form['json_string']
+            data = loads(req)
+            #print(data['idSolicitud'])
+            #print(data)
+            solicitudesActualizadas = sis.obtenerSolicitudesActualizadas(data)
+            #print(solicitudesActualizadas)
+
+            mensaje = 1
+
+            for i in solicitudesActualizadas:
+                idSolicitud = i[0]
+                estadoActual = i[1]
+                justificacion = i[2]
+                cambio = i[4]
+
+                if cambio == False:
+                    #if estadoActual == 'Rechazado':
+                     #   print("NSTADO RECHAZADO",idSolicitud)
+                    #else:
+                     #   print("CAMBIO A ESTADO RECHAZADO",idSolicitud)
+                        #mensaje = 1
+                    sis.actualizarSolicitud(idSolicitud,estadoActual,justificacion)
+                else:
+                    #print("TRUE",idSolicitud)
+                    if justificacion == 'None':
+                        #print("NO SE ACTUALIZA")
+                        mensaje = 0
+                        #flash("NO SE ACTUALIZA","error")
+                    else:
+                        #print("SI SE ACTUALIZA")
+                        sis.actualizarSolicitud(idSolicitud,estadoActual,justificacion)
+                        #mensaje = 1
+
+            if mensaje == 0:
+                print("MENSAJE NO ACTUALIZA")
+                return ('No Funciona',200)
+
+            else:
+                print("MENSAJE SI ACTUALIZA")
+                flash('Solicitudes actualizadas',"success")
+                sis.actualizarSolicitud(idSolicitud,estadoActual,justificacion)
+                return ('Funciona',200)
+
+            return render_template("solicitudes.html",solicitudes=solicitudes)
+    else: 
+        message = '¡Primero debes iniciar sesión!'
+        flash(message,"error")
+        return redirect(url_for("login"))
+
+@app.route("/guardarSolicitud",methods = ["POST", "GET"])
+def guardarSolicitud():
+    if "user" in session:
+        usuario = session["user"]
+        if request.method == 'POST':
+            print("ACTUALIZADO")
+            solicitudes = sis.mostrarSolicitudes()
+            print(solicitudes)
+        return redirect(url_for("admin"))
+            #return render_template("solicitudes.html",solicitudes=solicitudes)
+
     else: 
         message = '¡Primero debes iniciar sesión!'
         flash(message,"error")
@@ -260,7 +326,7 @@ def citaPaciente():
         horaActual = time.strftime("%H:%M:%S", hora)
         fechaAct = date.today() #https://www.programiz.com/python-programming/datetime/current-datetime
         idDoctor = doc.getNumeroDoc()
-        idPaciente = 34567
+        idPaciente = 333333
         #recibir = sis.recibirTokenHCCORE()
         #print(fechaAct)
         #print(current_time)
@@ -328,7 +394,8 @@ def citaPaciente():
 
             inidicacionesMedicamentos = request.form["InidicacionesMedicamentos"]
             incapacidad = request.form["incapacidad"]
-            sis.insertarSolicitud(incapacidad,"Pendiente",idDoctor,idPaciente)
+            if incapacidad != '':
+                sis.insertarSolicitud(incapacidad,"Pendiente",idDoctor,idPaciente)
 
             #Remisiones
             cb6 = request.form.get("cbox6")
