@@ -473,6 +473,8 @@ def citaPaciente():
                     print(cb20)
                     sis.insertarSolicitud(cb20,"Pendiente",idDoctor,idPaciente)
 
+                sis.crearCita(motivo,idPaciente,str(fechaAct),idDoctor)
+
                 mensaje = '¡Cita cargada satisfactoriamente!'
                 flash(mensaje,"success")
                 
