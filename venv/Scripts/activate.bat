@@ -1,5 +1,5 @@
 @echo off
-set "VIRTUAL_ENV=D:\PUJ\AAAA\GE\GranEscala_grupoA\venv"
+set "VIRTUAL_ENV=C:\Users\usuario\Documents\Ing. Sistemas y computacion\8vo Semestre\Gran escala\NewProyect\venv"
 
 if not defined PROMPT (
     set "PROMPT=$P$G"
