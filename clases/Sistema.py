@@ -4,7 +4,7 @@
 import smtplib
 import requests
 import json
-
+from fpdf import fpdf
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 ##dentro del proyecto
@@ -209,7 +209,7 @@ class Sistema():
         response_json = response.json()
         #print(response_json)
         token = response_json['token']
-        print(response.status_code)
+        #print(response.status_code)
 
         if response.status_code == 200:
             #print("BIEN")
@@ -222,36 +222,288 @@ class Sistema():
         token = self.recibirTokenHCCORE()
         
         url = 'http://34.95.198.251:3001/eps/createUser'
+        headers = { 'Content-Type' : 'application/json', 'Authorization' : '{}'.format(token)}
         body = {
-        "DNI" : 987654,
-        "nombre" : "Diomedez Diaz",
-        "fechaNacimiento" : "1950-12-25",
-        "estadoCivil" : "soltero",
-        "telefono" : 3224053212,
-        "sexo" : "masculino",
-        "idEntidad" : 1
+            "DNI" : 987654,
+            "nombre" : "Diomedez Diaz",
+            "fechaNacimiento" : "1950-12-25",
+            "estadoCivil" : "soltero",
+            "telefono" : 3224053212,
+            "sexo" : "masculino",
+            "idEntidad" : 1
+        }
+        
+        url2 =  'http://34.95.198.251:3001/eps/createHC'
+        body2 = {
+            "DNI" : 987654,
+            "idEntidad" : 1,
+            "fisiologica" : {
+                "lactancia" : " ",
+                "iniciacionSexual" : " ",
+                "ginecoObstretico" : "NO",
+                "menarca" : "NORMAL",
+                "embarazos" : "0",
+                "partos" : "0",
+                "abortos" : "0"
+            },
+            "antecedentes" : {
+                "accidentes" : "Nacimiento",
+                "antecedentesHereditarios" : "DIABETES",
+                "enfermedadesInfancia" : "OTITIS",
+                "intervencionesQuirurgicas" : " ",
+                "alergias" : "NINGUNA",
+                "inmunizacion" : "NINGUNA"
+            }
         }
         
         body['DNI'] = int(nrodocumento)
+        body2['DNI'] = int(nrodocumento)
         body['nombre'] = str(nombreCompleto)
         body['fechaNacimiento'] = str(nacimiento)
         body['estadoCivil'] = str(eCivil)
         body['telefono'] = int(telefono)
         body['sexo'] = str(sexo)
         
-        headers = { 'Content-Type' : 'application/json', 'Authorization' : '{}'.format(token)}
-        print(body)
-        print(headers)
+        
+        #print(body)
+        #print(headers)
 
         response = requests.post(url, data = json.dumps(body),headers=headers)
-
+        
         print(response.status_code)
 
         if response.status_code == 200:
-            print(response.content)
-            return 1
+            response2 = requests.post(url2, data = json.dumps(body2),headers=headers)
+            if response2.status_code == 200:
+                #print ("Info:")
+                #print(response.content)
+                #print(response2.content)
+                return 1
+        else:
+            #print(response.content)
+            #print("Fallo en conexión con la API")
+            return 2
+
+    def getHCPaciente(self, nrodocumento):
+        token = self.recibirTokenHCCORE()
+        datax = {}
+        headers = { 'Content-Type' : 'application/json', 'Authorization' : '{}'.format(token) }
+        urlpaciente = 'http://34.95.198.251:3001/eps/getPaciente'
+        url = 'http://34.95.198.251:3001/eps/getHC'
+        body = {
+            "idEntidad" : 1,
+            "DNI" : 987654
+        }
+
+        body['DNI'] = int(nrodocumento)
+        #### request paciente----------------------------------  
+        responsepac = requests.post(urlpaciente, data = json.dumps(body), headers = headers)
+        if responsepac.status_code == 200:
+            paciente_json = responsepac.json()
+            datax['paciente'] = paciente_json['data']
+
+        else:
+            return (3, responsepac)
+
+
+        #####---------------------------------
+
+        response = requests.post(url, data = json.dumps(body), headers = headers)
+        response_json = response.json()
+        print ("Hola Amigo otoya")
+        print("Primer response: {}".format(response_json) )
+        print("response: {}".format(response))
+        if response.status_code == 200:
+            if (response_json['status'] == "DECLINED"):
+                if response_json['message'] == "Historia clinica no existe":
+                    return (3, response_json)
+            else:
+                
+                citas = []
+                urlcitas = 'http://34.95.198.251:3001/eps/getCitas'
+                bodycitas = {'idEntidad' : 1, 'DNI' : int(nrodocumento) }
+                responsecitas = requests.post(urlcitas, data = json.dumps(bodycitas), headers = headers)
+                responsecitas_json = responsecitas.json()
+                
+                #print("segundo response: {}".format(responsecitas_json) )
+            
+                if (responsecitas_json['status'] == "OK"):
+                    for i in responsecitas_json['data']:
+                        urlcita = 'http://34.95.198.251:3001/eps/getCitaMedica'
+                        body2 = {"idEntidad" : 1,"idCitaMedica" : i["idConsulta"] }
+                        responsecita = requests.post(urlcita, data = json.dumps(bodycitas), headers = headers)
+                        responsecita_json = responsecita.json()
+                        citas.append(responsecita_json)
+    
+                    return (1, response_json)
+                elif (responsecitas_json['status'] == "ERROR") and (responsecitas_json['message'] == "No hay citas"):
+                    datay = response_json['data']
+                    del datay['antecedentes']['id']
+                    del datay['fisiologica']['id']
+                    datax['antecedentes'] = datay['antecedentes']
+                    datax['fisiologica'] = datay['fisiologica']
+                    del datax['paciente']['token']
+                    print(datax)
+                    pdf_name = self.JSONtoPDF(datax)
+                    return (1, pdf_name)
+
+                else:
+                    #print("Return 4")
+                    return (4, response_json)
         else:
             print(response.content)
             #print("Fallo en conexión con la API")
-            return 2
-        
+            return (2, response_json)
+
+    
+    def JSONtoPDF(self, data):
+        #Escribir en un pdf usando FPDF
+        pdfwriter = fpdf.FPDF(orientation= 'P', unit= 'mm', format = 'A4')
+        pdfwriter.add_page()
+        pdfwriter.set_font('arial', size = 12)
+        # centrado de título
+        pdfwriter.cell(w = 80)   
+        #Titulo
+        pdfwriter.cell(20, 10, "Historia Clínica", 0, 2, 'C')
+        pdfwriter.cell(20, 10, "Paciente: " + data['paciente']['nombrePaciente'], 0, 2, 'C')
+        pdfwriter.ln(h='')
+        pdfwriter.cell(100, 10, "Información del paciente: ", 0, 1)
+        contCols = 0
+        print ("Paciente: ")
+        for i in data['paciente']:
+            if contCols == 0:
+                pdfwriter.cell(95, 10, str(i) + ": "+ str(data['paciente'][i]) , 1, 0) 
+                contCols = 1
+            else:
+                if contCols == 1:
+                    pdfwriter.cell(95, 10, str(i) + ": "+ str(data['paciente'][i]) , 1, 1) 
+                    contCols = 0
+            print("     " + i)
+        print ("Antecedentes: ")
+        pdfwriter.ln(h='')
+        pdfwriter.cell(80, 10, "Antecedentes: ", 0, 1)
+        for i in data["antecedentes"]:
+            pdfwriter.multi_cell(190, 10, i+ ": "+ str(data["antecedentes"][i]) , 1, 1) 
+            print("     " + i)
+
+        print ("Fisiologica: ")
+        contCols = 0
+        pdfwriter.ln(h='')
+        pdfwriter.cell(80, 10, "Fisiológica: ", 0, 1)
+        for i in data['fisiologica']:
+            if contCols == 0:
+                pdfwriter.cell(95, 10, i+ ": "+ data['fisiologica'][i] , 1, 0) 
+                contCols = 1
+            else:
+                if contCols == 1:
+                    pdfwriter.cell(95, 10, i+ ": "+ data['fisiologica'][i] , 1, 1) 
+                    contCols = 0
+            print("     " + i)
+        pdfwriter.ln(h='')
+        pdfwriter.ln(h='')
+        pdfwriter.cell(80, 10, "Citas Médicas: ", 0, 1)
+        j = 0
+        contCols = 0
+        if 'citasMedicas' in data:
+            while (j <len (data['citasMedicas'])):
+                pdfwriter.cell(80, 10, "Cita #" + str(j), 0, 1)
+                for x in data['citasMedicas'][j]:
+                    
+                    if x == "medico":
+                        pdfwriter.cell(190, 10, "Médico: ", 1, 1, 'C')
+                        contCols = 0
+                        for m in data['citasMedicas'][j][x]:
+                            if contCols == 0:
+                                pdfwriter.cell(95, 10, m+ ": "+ data['citasMedicas'][j][x][m] , 1, 0) 
+                                contCols = 1
+                            else:
+                                if contCols == 1:
+                                    pdfwriter.cell(95, 10, m+ ": "+ data['citasMedicas'][j][x][m] , 1, 1) 
+                                    contCols = 0
+                    elif x == "examenFisico":
+                        pdfwriter.cell(190, 10, "Exámen físico: ", 1, 1, 'C')
+                        contCols = 0
+                        for n in data['citasMedicas'][j][x]:
+                            if contCols == 0:
+                                pdfwriter.cell(95, 10, n+ ": "+ data['citasMedicas'][j][x][n] , 1, 0) 
+                                contCols = 1
+                            else:
+                                if contCols == 1:
+                                    pdfwriter.cell(95, 10, n+ ": "+ data['citasMedicas'][j][x][n] , 1, 1) 
+                                    contCols = 0
+                    elif x == "examenSegmentario":
+                        pdfwriter.ln(h='')
+                        pdfwriter.cell(190, 10, "Exámen segmentario: ", 1, 1, 'C')
+                        contCols = 0
+                        for o in data['citasMedicas'][j][x]:
+                            if contCols == 0:
+                                pdfwriter.cell(95, 10, o+ ": "+ data['citasMedicas'][j][x][o] , 1, 0) 
+                                contCols = 1
+                            else:
+                                if contCols == 1:
+                                    pdfwriter.cell(95, 10, o+ ": "+ data['citasMedicas'][j][x][o] , 1, 1) 
+                                    contCols = 0
+                    elif x == "examenes":
+                        pdfwriter.ln(h='')
+                        if len(data['citasMedicas'][j][x]) == 0:
+                            pdfwriter.cell(190, 10, "Exámenes: No hay exámenes para ver", 1, 1, 'C')
+                        else:
+                            pdfwriter.cell(190, 10, "Exámenes: ", 1, 1, 'C')
+                        contCols = 0
+                        k = 0
+                        while k < len(data['citasMedicas'][j][x]):
+                            
+                            pdfwriter.cell(190, 10, "Exámen #" + str(k), 1, 1)
+                            contCols = 0
+                            for p in data['citasMedicas'][j][x][k]:
+                                if contCols == 0:
+                                    pdfwriter.cell(95, 10, p+ ": "+ str(data['citasMedicas'][j][x][k][p]) , 1, 0) 
+                                    contCols = 1
+                                else:
+                                    if contCols == 1:
+                                        pdfwriter.cell(95, 10, str(p)+ ": "+ str(data['citasMedicas'][j][x][k][p]) , 1, 1) 
+                                        contCols = 0
+                            k += 1
+
+                    elif x == "habitos":
+                        pdfwriter.cell(190, 10, "Habitos:", 1, 1, 'C')
+                        contCols = 0
+                        for o in data['citasMedicas'][j][x]:
+                            if contCols == 0:
+                                pdfwriter.cell(95, 10, o+ ": "+ data['citasMedicas'][j][x][o] , 1, 0) 
+                                contCols = 1
+                            else:
+                                if contCols == 1:
+                                    pdfwriter.cell(95, 10, o+ ": "+ data['citasMedicas'][j][x][o] , 1, 1) 
+                                    contCols = 0
+                    elif x == "diagnostico":
+                        pdfwriter.multi_cell(190, 10, "Diagnóstico: "+ data['citasMedicas'][j][x]["diagnostico"] , 1, 1)
+                        pdfwriter.multi_cell(190, 10, "Tratamientos:", 1, 1, 'C') 
+                        w = 0
+                        while w < len(data['citasMedicas'][j][x]["tratamientos"]):
+                            pdfwriter.cell(190, 10, "Tratamiento #" + str(w), 1, 1, 'C') 
+                            pdfwriter.cell(190, 10, "Concepto" + ": "+ data['citasMedicas'][j][x]["tratamientos"][w]['concepto'] , 1, 1)
+                            pdfwriter.cell(190, 10, "Medicamentos:", 1, 1) 
+                            p = 0
+                            while p < len(data['citasMedicas'][j][x]["tratamientos"][w]['medicamentos']) :
+                                pdfwriter.cell(190, 10, "Medicamento #" + str(p), 1, 1) 
+                                pdfwriter.multi_cell(190, 10, "Nombre" + ": "+ data['citasMedicas'][j][x]["tratamientos"][w]['medicamentos'][p]['nombre'] , 1, 1)
+                                pdfwriter.multi_cell(190, 10, "Contenido" + ": "+ data['citasMedicas'][j][x]["tratamientos"][w]['medicamentos'][p]['contenido'] , 1, 1)
+                                p += 1
+                            w += 1
+                            
+                    else:
+                        pdfwriter.multi_cell(190, 10, x+ ": "+ str(data['citasMedicas'][j][x]) , 1, 1) 
+                        contCols = 1
+                    
+                    print (data['citasMedicas'][j][x])
+                pdfwriter.ln(h='')
+                j +=1 
+            
+        #Crea el nombre de documento con el id del paciente
+        pdfname = "pdfs/"+ str(data['paciente']['identificacion']) +".pdf"
+        pdfwriter.output(pdfname, 'F')
+
+
+        #3print(data)
+        return pdfname

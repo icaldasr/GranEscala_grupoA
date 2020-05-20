@@ -19,15 +19,19 @@
 
 
     <div>
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            {% for message in messages %}
-              <div class = "alert alert-success">
-                {{ message }}</li>
-            {% endfor %}
-          {% endif %}
-        {% endwith %}
-        {% block body %}{% endblock %}  
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category,message in messages %}
+      {% if category == 'success'%}
+        <div class = "alert alert-success mb-3" role="alert">{{ message }}</div>
+      {%endif%}
+      {% if category == 'error'%}
+        <div class = "alert alert-danger mb-3" role="alert">{{ message }}</div>
+      {%endif%}
+      {% endfor %}
+    {% endif %}
+    {% endwith %}
+    {% block body %}{% endblock %}  
       </div>
 
 
@@ -47,7 +51,7 @@
     
     <!--             <div class="col-md-5 inline-block "><a href="index.html"><img src="logo_infree1.png" width="10px" height="50%px" align="left" padding = "0px 0px 0px 0px"></a></div> -->
                 
-                <li class="col-md-11 inline-block espacio-arriba espacio-izq"><h1 align="left">BUSCAR:</h1></li>
+                <li class="col-md-11 inline-block espacio-arriba espacio-izq"><h1 align="left">Buscar historia clínica paciente:</h1></li>
     
                 <!-- <li class="col-md-1 inline-block pacifico margen "><a href="index.html" class="terracota">INICIO</a></li> -->
             <!-- 	<li class="col-md-1 inline-block margen"><a href="contacto.html">NOSOTROS </a></li>
@@ -63,37 +67,23 @@
         </nav>
     </header>
     &ensp;
+    <form action="/mostrarHC" method="POST">
     <div class="agregarEspacioizq espacio-arriba2">
         
-        DOCUMENTO ID:  &emsp; <input type="text" name="DocumentoIdentidad" class=" inline-block espacio-texto2 ">
+        DNI:  &emsp; <input type="number" name="DNI">
         
     </div>
     &ensp;
-
-    <div class="agregarEspacioizq" >
-
-        CODIGO:  &emsp; <input type="text" name="Codigo" class=" inline-block espacio-texto3">
-        
-    </div>
-
-    &ensp;
-
-    <div class="agregarEspacioizq">
-
-        CORREO:  &emsp; <input type="text" name="Correo" class="inline-block espacio-texto3">
-        
-    </div>
+   
 
 
-
-
-    <a href="/Buscar"><button type="submit" class="btn btn-outline-primary agregarEspacioizq espacio-arriba2" value="call_flask_funtion">Buscar</button></a>
-    <a href="/MostrarHC"><button type="submit" class="btn btn-outline-primary espacio-botones espacio-arriba2" value="call_flask_funtion">MostrarHC</button></a>
-    <a href="/Eliminar"><button type="submit" class="btn btn-outline-primary agregarEspacioizq espacio-arriba2" value="call_flask_funtion">Eliminar</button></a>
+  
+    <a href="/mostrarHC"><button type="submit" class="btn btn-outline-primary espacio-botones espacio-arriba2" value="call_flask_funtion">Mostrar Historia Clínica</button></a>
+    <button type="button" class="btn btn-outline-primary agregarEspacioizq espacio-arriba2" value="call_flask_funtion">Limpiar campo</button>
     <a href="/admin"><button type="button" class="btn btn-outline-primary espacio-botones espacio-arriba2" value="call_flask_funtion">Atras</button></a>
 
 
-
+    </form>
 
 
     
