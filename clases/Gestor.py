@@ -53,6 +53,21 @@ class Gestor():
         #return nuevo id para una solicitud de medicamentos
         print ("hola1")
 
+    def pacienteDoctor(self,docDoctor,fecha,fecha2):
+        self.cursor.execute("SELECT nro_cita, documento_paciente, fecha, nro_documento FROM horarios INNER JOIN consultorios ON (horarios.id_consultorio = consultorios.nro_consultorio) INNER JOIN medicos ON (consultorios.id_medico = medicos.nro_documento) WHERE medicos.nro_documento = %s AND fecha BETWEEN (%s - INTERVAL 5 MINUTE) and (%s + INTERVAL 5 MINUTE) ORDER BY fecha DESC",(docDoctor,fecha,fecha2))
+
+        temp = self.cursor.fetchone()
+        #temp = self.cursor.fetchone()[0]
+        if temp == None:
+            
+            return None
+        else:
+            return temp
+
+    def selectNow(self):
+        self.cursor.execute("select NOW()")
+        temp = self.cursor.fetchone()
+        return temp
 
     def buscarCorreo(self,correo):
         self.cursor.execute("SELECT count(*) FROM login where correo = %s",correo)

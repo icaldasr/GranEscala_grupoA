@@ -186,6 +186,37 @@ class Sistema():
         else:
             return None
 
+    def doctorPaciente(self,docDoctor,fecha,fecha2):
+        query = self.dataBase.pacienteDoctor(docDoctor,fecha,fecha2)
+
+        if query != None:
+            docPacienteR = query[1]
+            fechaR = query[2]
+            token = self.recibirTokenHCCORE()
+            #print("HOLAAA")
+            headers = { 'Content-Type' : 'application/json', 'Authorization' : '{}'.format(token) }
+            urlpaciente = 'http://34.95.198.251:3001/eps/getPaciente'
+            body = {
+            "idEntidad" : 1,
+            "DNI" : 987654
+            }
+            body['DNI']=docPacienteR
+
+            responsepac = requests.post(urlpaciente, data = json.dumps(body), headers = headers)
+            #print("responsepac",responsepac)
+            if responsepac.status_code == 200:
+                paciente_json = responsepac.json()
+                print(paciente_json)
+                return (1,docPacienteR,fechaR,paciente_json['data']['nombrePaciente'])
+            else:
+                return (-1, None,None,None)
+
+
+
+            return (1,docPacienteR,fechaR,paciente_json['data']['nombrePaciente'])
+        else:
+            print("SALTO")
+            return (-1,None,None,None)
 
     def tipo_documento(self):
         return self.dataBase.obtener_tipo_documentos()
@@ -359,6 +390,7 @@ class Sistema():
     def getHCPaciente(self, nrodocumento):
         token = self.recibirTokenHCCORE()
         datax = {}
+        print("ANTES TOKEN")
         headers = { 'Content-Type' : 'application/json', 'Authorization' : '{}'.format(token) }
         urlpaciente = 'http://34.95.198.251:3001/eps/getPaciente'
         url = 'http://34.95.198.251:3001/eps/getHC'
