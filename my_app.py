@@ -1,12 +1,11 @@
 #my_app.py
 
 import os
-from flask import Flask, render_template, request, redirect, session, g, url_for, flash, jsonify, make_response
+from flask import Flask, render_template, request, redirect, session, g, url_for, flash, jsonify, make_response, send_from_directory
 from clases.Sistema import Sistema
 import secrets
 from datetime import datetime,date
 import time
-
 import requests
 
 import json
@@ -74,15 +73,6 @@ def admin():
         flash(message,"error")
         return redirect(url_for("login"))
         
-@app.route("/Buscar", methods = ["POST", "GET"])
-def buscar():
-    if "user" in session:
-        usuario = session["user"]
-        return render_template("admin_2.html")
-    else: 
-        message = '¡Primero debes iniciar sesión!'
-        flash(message,"error")
-        return redirect(url_for("login"))
 
 @app.route("/registrarDoctor", methods = ["POST", "GET"])
 def registrarDoctor():
@@ -465,7 +455,7 @@ def citaPaciente():
 
             mensaje = '¡Cita cargada satisfactoriamente!'
             flash(mensaje,"success")
-
+            
             print(partos)
             return redirect(url_for("doctor"))
         return render_template("cita.html")
@@ -474,15 +464,55 @@ def citaPaciente():
         flash(message,"error")
         return redirect(url_for("login"))
 
-@app.route('/mostrarHCPaciente', methods = ['POST', 'GET'])
-def json():
-
+@app.route("/Buscar", methods = ["POST", "GET"])
+def buscar():
+    if "user" in session:
+        usuario = session["user"]
+    
+        return render_template("admin_2.html")
+    else: 
+        message = '¡Primero debes iniciar sesión!'
+        flash(message,"error")
+        return redirect(url_for("login"))
 #        return "JSON recibido"
     
  #   else:
     flash("No se ha recibido la Historia Clínica del paciente","error")
 
     return redirect(url_for("doctor"))
+
+@app.route("/mostrarHC", methods = ['POST', 'GET'])
+def json():
+    if "user" in session:
+        if request.form.get('DNI') != None:
+            dni = request.form.get('DNI')
+            x = sis.getHCPaciente(dni)
+            if(x[0] == 3):
+                flash("Esta historia clínica no existe", "error")
+                return redirect(url_for("buscar"))
+            elif (x[0] == 1):
+                #pdfname = sis.JSONtoPDF(x[1])
+                print (str(x[1]))
+                return redirect("mostrarHC/{}".format(str(x[1])))  #"<h1>El dni es: " + str(dni) + "y el mensaje de retorno es: "+ str(x)+ " </h1>"
+            else:
+                flash("¡Ha ocurrido un error vuelva a intentarlo!", "error")
+                return redirect(url_for("buscar"))
+            #return redirect(url_for("mostrarpdf"))
+        
+        else:
+            flash("¡Debe introducir un número de documento de un paciente!", "error")
+            return redirect(url_for('buscar'))
+    
+    else:
+        message = '¡Primero debes iniciar sesión!'
+        flash(message,"error")
+        return redirect(url_for("login"))
+
+
+@app.route('/mostrarHC/<dire>/<pdfname>')
+def open(dire, pdfname):    
+    print ("NombrePDF = {}".format(pdfname))
+    return send_from_directory(directory = dire, filename=pdfname, mimetype='application/pdf')
 
 @app.route("/logout")
 def logout():
