@@ -573,7 +573,7 @@ class Sistema():
                 j +=1 
             
         #Crea el nombre de documento con el id del paciente
-        pdfname = "pdfs/"+ str(data['paciente']['identificacion']) +".pdf"
+        pdfname = str(data['paciente']['identificacion']) +".pdf"
         pdfwriter.output(pdfname, 'F')
 
 

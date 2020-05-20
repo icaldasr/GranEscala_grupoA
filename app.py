@@ -512,10 +512,10 @@ def json():
         return redirect(url_for("login"))
 
 
-@app.route('/mostrarHC/<dire>/<pdfname>')
-def open(dire, pdfname):    
+@app.route('/mostrarHC/<pdfname>')
+def open(pdfname):    
     print ("NombrePDF = {}".format(pdfname))
-    return send_from_directory(directory = dire, filename=pdfname, mimetype='application/pdf')
+    return send_from_directory(directory ='', filename=pdfname, mimetype='application/pdf')
 
 @app.route("/logout")
 def logout():
