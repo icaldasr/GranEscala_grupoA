@@ -459,7 +459,7 @@ class Sistema():
         if responsepac.status_code == 200:
             paciente_json = responsepac.json()
             print (paciente_json)
-            datax['paciente'] = paciente_json['data']
+            datax['paciente'] = paciente_json
 
         else:
             return (3, responsepac)
