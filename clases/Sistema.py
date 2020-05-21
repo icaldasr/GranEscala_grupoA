@@ -207,13 +207,13 @@ class Sistema():
             if responsepac.status_code == 200:
                 paciente_json = responsepac.json()
                 print(paciente_json)
-                return (1,docPacienteR,fechaR,paciente_json['nombreCliente'])
+                return (1,docPacienteR,fechaR,paciente_json['data']['nombrePaciente']])
             else:
                 return (-1, None,None,None)
 
 
 
-            return (1,docPacienteR,fechaR,paciente_json['nombreCliente'])
+            return (1,docPacienteR,fechaR,paciente_json['data']['nombrePaciente'])
         else:
             print("SALTO")
             return (-1,None,None,None)
