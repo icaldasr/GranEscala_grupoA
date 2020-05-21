@@ -526,7 +526,7 @@ class Sistema():
         pdfwriter.cell(w = 80)   
         #Titulo
         pdfwriter.cell(20, 10, "Historia Clínica", 0, 2, 'C')
-        pdfwriter.cell(20, 10, "Paciente: " + data['paciente']['nombrePaciente'], 0, 2, 'C')
+        pdfwriter.cell(20, 10, "Paciente: " + data['paciente']['nombreCliente'], 0, 2, 'C')
         pdfwriter.ln(h='')
         pdfwriter.cell(100, 10, "Información del paciente: ", 0, 1)
         contCols = 0
