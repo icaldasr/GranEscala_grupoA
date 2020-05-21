@@ -207,13 +207,13 @@ class Sistema():
             if responsepac.status_code == 200:
                 paciente_json = responsepac.json()
                 print(paciente_json)
-                return (1,docPacienteR,fechaR,paciente_json['data']['nombrePaciente'])
+                return (1,docPacienteR,fechaR,paciente_json['nombreCliente'])
             else:
                 return (-1, None,None,None)
 
 
 
-            return (1,docPacienteR,fechaR,paciente_json['data']['nombrePaciente'])
+            return (1,docPacienteR,fechaR,paciente_json['nombreCliente'])
         else:
             print("SALTO")
             return (-1,None,None,None)
@@ -386,6 +386,60 @@ class Sistema():
     def actualizarSolicitud(self,idSolicitud,nuevoEstado,justificacion):
         solicitudes = self.dataBase.actualizarSolicitudes(idSolicitud,nuevoEstado,justificacion)
         return solicitudes
+
+    def crearCita(self,motivo,idHClinica,fecha,idMedico):
+        token = self.recibirTokenHCCORE()
+        url = 'http://34.95.198.251:3001/eps/createCita' 
+        headers = { 'Content-Type' : 'application/json', 'Authorization' : '{}'.format(token) }
+
+        body = {
+            "idEntidad" : 1,
+            'idHistorioClinica': '',
+            'fecha': "string",
+            'motivo' : "string",
+            'epsAgenda' : '',
+            'idMedico' : '',
+            'examenFisico' : {
+                'estadoConciencia' : "string",
+                'lenguaje' : "string",
+                'auditivo' : "string",
+                'agudezaVisual' : "string",
+                'peso' : '',
+                'estatura' : '',
+                'facie' : "string",
+                'edadRealAparente' : "string",
+                'temperatura' : '',
+                'actitud' : "string",
+            },
+            'habitos' : {
+                'alimentacion' : "string",
+                'apetito' : "string",
+                'sed' : "string",
+                'diuresis' : "string",
+                'catarsisIntestinal' : "string",
+                'sueno' : "string",
+                'relacionesSexuales' : "string",
+                'alcohol' : "string",
+                'tabaco' : "string",
+                'drogas' : "string",
+                'medicacion' : "string",
+            },
+            'diagnostico' :{
+                'diagnostico' : "",
+                'examenes': {},
+                'tratamientos':{}
+                }
+            }
+
+        body['idHistorioClinica']=idHClinica
+        body['fecha']=fecha
+        body['motivo']=motivo
+        body['idMedico']=idMedico
+
+        responsepac = requests.post(url, data = json.dumps(body), headers = headers)
+
+
+
 
     def getHCPaciente(self, nrodocumento):
         token = self.recibirTokenHCCORE()

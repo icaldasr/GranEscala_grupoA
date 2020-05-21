@@ -4,7 +4,7 @@ import os
 from flask import Flask, render_template, request, redirect, session, g, url_for, flash, jsonify, make_response, send_from_directory
 from clases.Sistema import Sistema
 import secrets
-from datetime import datetime,date
+from datetime import datetime,date,timedelta
 import time
 import requests
 import sys
@@ -318,7 +318,8 @@ def citaPaciente():
         doc = sis.cargarDoctor(session["user"])
         hora = time.localtime()
         now = datetime.now()
-        actFechaHora = now.strftime("%Y-%m-%d %H:%M:%S")
+        nueva = now - timedelta(hours=5)
+        actFechaHora = nueva.strftime("%Y-%m-%d %H:%M:%S")
         print(actFechaHora)
 
         horaActual = time.strftime("%H:%M:%S", hora)
@@ -471,6 +472,8 @@ def citaPaciente():
                 if cb20 != None:
                     print(cb20)
                     sis.insertarSolicitud(cb20,"Pendiente",idDoctor,idPaciente)
+
+                sis.crearCita(motivo,idPaciente,str(fechaAct),idDoctor)
 
                 mensaje = '¡Cita cargada satisfactoriamente!'
                 flash(mensaje,"success")
