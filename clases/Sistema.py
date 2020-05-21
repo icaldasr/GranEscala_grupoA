@@ -458,6 +458,7 @@ class Sistema():
         responsepac = requests.post(urlpaciente, data = json.dumps(body), headers = headers)
         if responsepac.status_code == 200:
             paciente_json = responsepac.json()
+            print (paciente_json)
             datax['paciente'] = paciente_json['data']
 
         else:
