@@ -499,11 +499,11 @@ class Sistema():
                 elif (responsecitas_json['status'] == "ERROR") and (responsecitas_json['message'] == "No hay citas"):
                     print(response_json)
                     datay = response_json
-                    del datay['antecedentes']['id']
-                    del datay['fisiologica']['id']
+                    del datay['antecedentes']['idAntecedente']
+                    del datay['fisiologica']['idFisiologica']
                     datax['antecedentes'] = datay['antecedentes']
                     datax['fisiologica'] = datay['fisiologica']
-                    del datax['paciente']['token']
+                    #del datax['paciente']['token']
                     print(datax)
                     pdf_name = self.JSONtoPDF(datax)
                     return (1, pdf_name)
