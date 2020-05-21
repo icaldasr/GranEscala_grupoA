@@ -473,9 +473,10 @@ class Sistema():
         print("Primer response: {}".format(response_json) )
         print("response: {}".format(response))
         if response.status_code == 200:
-            if (response_json['status'] == "DECLINED"):
-                if response_json['message'] == "Historia clinica no existe":
-                    return (3, response_json)
+            if 'status' in response_json:
+                if (response_json['status'] == "DECLINED"):
+                    if response_json['message'] == "Historia clinica no existe":
+                        return (3, response_json)
             else:
                 
                 citas = []
