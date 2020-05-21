@@ -498,7 +498,7 @@ class Sistema():
                     return (1, response_json)
                 elif (responsecitas_json['status'] == "ERROR") and (responsecitas_json['message'] == "No hay citas"):
                     print(response_json)
-                    datay = response_json['data']
+                    datay = response_json
                     del datay['antecedentes']['id']
                     del datay['fisiologica']['id']
                     datax['antecedentes'] = datay['antecedentes']
