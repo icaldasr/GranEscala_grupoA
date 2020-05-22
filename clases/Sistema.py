@@ -594,11 +594,11 @@ class Sistema():
                         contCols = 0
                         for n in data['citasMedicas'][j][x]:
                             if contCols == 0:
-                                pdfwriter.cell(95, 10, n+ ": "+ data['citasMedicas'][j][x][n] , 1, 0) 
+                                pdfwriter.cell(95, 10, str(n)+ ": "+ str(data['citasMedicas'][j][x][n]) , 1, 0) 
                                 contCols = 1
                             else:
                                 if contCols == 1:
-                                    pdfwriter.cell(95, 10, n+ ": "+ data['citasMedicas'][j][x][n] , 1, 1) 
+                                    pdfwriter.cell(95, 10, str(n)+ ": "+ str(data['citasMedicas'][j][x][n]) , 1, 1) 
                                     contCols = 0
                     elif x == "examenSegmentario":
                         pdfwriter.ln(h='')
@@ -606,11 +606,11 @@ class Sistema():
                         contCols = 0
                         for o in data['citasMedicas'][j][x]:
                             if contCols == 0:
-                                pdfwriter.cell(95, 10, o+ ": "+ data['citasMedicas'][j][x][o] , 1, 0) 
+                                pdfwriter.cell(95, 10, str(o)+ ": "+ str(data['citasMedicas'][j][x][o]) , 1, 0) 
                                 contCols = 1
                             else:
                                 if contCols == 1:
-                                    pdfwriter.cell(95, 10, o+ ": "+ data['citasMedicas'][j][x][o] , 1, 1) 
+                                    pdfwriter.cell(95, 10, str(o)+ ": "+ str(data['citasMedicas'][j][x][o]) , 1, 1) 
                                     contCols = 0
                     elif x == "examenes":
                         pdfwriter.ln(h='')
