@@ -490,12 +490,26 @@ class Sistema():
                 if (responsecitas_json['status'] == "OK"):
                     for i in responsecitas_json['data']:
                         urlcita = 'http://34.95.198.251:3001/eps/getCitaMedica'
-                        body2 = {"idEntidad" : 1,"idCitaMedica" : i["idConsulta"] }
+                        body2 = {"idEntidad" : 1, "idConsulta" : i["idConsulta"] }
                         responsecita = requests.post(urlcita, data = json.dumps(bodycitas), headers = headers)
                         responsecita_json = responsecita.json()
+                        print (responsecita_json)
                         citas.append(responsecita_json)
-    
-                    return (1, response_json)
+
+                    if len(citas) != 0:
+                        datay = response_json
+                        del datay['antecedentes']['idAntecedente']
+                        del datay['fisiologica']['idFisiologica']
+                        datax['antecedentes'] = datay['antecedentes']
+                        datax['fisiologica'] = datay['fisiologica']
+                        datax['paciente']['identificacion'] = nrodocumento}
+                        datax['citasMedicas'] = citas
+                        print(datax)
+                        pdf_name = self.JSONtoPDF(datax)
+                        return (1, pdf_name)
+                    else:
+                        return (2, response_json)
+                    
                 elif (responsecitas_json['status'] == "ERROR") and (responsecitas_json['message'] == "No hay citas"):
                     print(response_json)
                     datay = response_json
