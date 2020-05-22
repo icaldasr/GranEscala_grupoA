@@ -485,7 +485,7 @@ class Sistema():
                 responsecitas = requests.post(urlcitas, data = json.dumps(bodycitas), headers = headers)
                 responsecitas_json = responsecitas.json()
                 
-                #print("segundo response: {}".format(responsecitas_json) )
+                print("segundo response: {}".format(responsecitas_json) )
             
                 if (responsecitas_json['status'] == "OK"):
                     for i in responsecitas_json['data']:
