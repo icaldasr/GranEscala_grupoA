@@ -502,7 +502,7 @@ class Sistema():
                         del datay['fisiologica']['idFisiologica']
                         datax['antecedentes'] = datay['antecedentes']
                         datax['fisiologica'] = datay['fisiologica']
-                        datax['paciente']['identificacion'] = nrodocumento}
+                        datax['paciente']['identificacion'] = nrodocumento
                         datax['citasMedicas'] = citas
                         print(datax)
                         pdf_name = self.JSONtoPDF(datax)
