@@ -489,10 +489,11 @@ class Sistema():
             
                 if (responsecitas_json['status'] == "OK"):
                     print("Prueba1")
+                    urlcita = 'http://34.95.198.251:3001/eps/getCitaMedica'
+                    print("Prueba2")
+                    
                     for i in responsecitas_json['data']:
-                        print("Prueba2")
-                        urlcita = 'http://34.95.198.251:3001/eps/getCitaMedica'
-                        body2 = {"idEntidad" : 1, "idConsulta" : '{}'.format(i["idConsulta"]) }
+                        body2 = {"idEntidad" : 1, "idCitaMedica" : i["idConsulta"] }
                         responsecita = requests.post(urlcita, data = json.dumps(body2), headers = headers)
                         print("Prueba3")
                         responsecita_json = responsecita.json()
