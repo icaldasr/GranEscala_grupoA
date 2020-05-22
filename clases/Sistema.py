@@ -588,18 +588,8 @@ class Sistema():
                 pdfwriter.cell(80, 10, "Cita #" + str(j), 0, 1)
                 for x in data['citasMedicas'][j]:
                     
-                    if x == "medico":
-                        pdfwriter.cell(190, 10, "Médico: ", 1, 1, 'C')
-                        contCols = 0
-                        for m in data['citasMedicas'][j][x]:
-                            if contCols == 0:
-                                pdfwriter.cell(95, 10, m+ ": "+ data['citasMedicas'][j][x][m] , 1, 0) 
-                                contCols = 1
-                            else:
-                                if contCols == 1:
-                                    pdfwriter.cell(95, 10, m+ ": "+ data['citasMedicas'][j][x][m] , 1, 1) 
-                                    contCols = 0
-                    elif x == "examenFisico":
+                    
+                    if x == "examenFisico":
                         pdfwriter.cell(190, 10, "Exámen físico: ", 1, 1, 'C')
                         contCols = 0
                         for n in data['citasMedicas'][j][x]:
