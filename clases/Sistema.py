@@ -498,7 +498,7 @@ class Sistema():
                         print("Prueba3")
                         responsecita_json = responsecita.json()
                         print (responsecita_json)
-                        citas.append(responsecita_json)
+                        citas.append(responsecita_json['data'])
 
                     if len(citas) != 0:
                         datay = response_json
