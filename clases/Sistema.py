@@ -626,7 +626,7 @@ class Sistema():
                             contCols = 0
                             for p in data['citasMedicas'][j][x][k]:
                                 if contCols == 0:
-                                    pdfwriter.cell(95, 10, p+ ": "+ str(data['citasMedicas'][j][x][k][p]) , 1, 0) 
+                                    pdfwriter.cell(95, 10, str(p)+ ": "+ str(data['citasMedicas'][j][x][k][p]) , 1, 0) 
                                     contCols = 1
                                 else:
                                     if contCols == 1:
@@ -639,11 +639,11 @@ class Sistema():
                         contCols = 0
                         for o in data['citasMedicas'][j][x]:
                             if contCols == 0:
-                                pdfwriter.cell(95, 10, o+ ": "+ data['citasMedicas'][j][x][o] , 1, 0) 
+                                pdfwriter.cell(95, 10, str(o)+ ": "+ str(data['citasMedicas'][j][x][o]) , 1, 0) 
                                 contCols = 1
                             else:
                                 if contCols == 1:
-                                    pdfwriter.cell(95, 10, o+ ": "+ data['citasMedicas'][j][x][o] , 1, 1) 
+                                    pdfwriter.cell(95, 10, str(o)+ ": "+ str(data['citasMedicas'][j][x][o]) , 1, 1) 
                                     contCols = 0
                     elif x == "diagnostico":
                         pdfwriter.multi_cell(190, 10, "Diagnóstico: "+ data['citasMedicas'][j][x]["diagnostico"] , 1, 1)
